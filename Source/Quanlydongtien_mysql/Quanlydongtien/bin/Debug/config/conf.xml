@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <dbFile>Quanlydongtien</dbFile>
+  <dbuser>root</dbuser>
+  <dbport>3306</dbport>
+</config>

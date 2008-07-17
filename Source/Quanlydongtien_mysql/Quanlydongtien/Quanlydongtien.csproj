@@ -1,0 +1,173 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D44AAFB3-D9F3-4ADC-95AB-DD4942406EA8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Quanlydongtien</RootNamespace>
+    <AssemblyName>Quanlydongtien</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePass.Designer.cs">
+      <DependentUpon>ChangePass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeRole.Designer.cs">
+      <DependentUpon>ChangeRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateCash.Designer.cs">
+      <DependentUpon>CreateCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateUser.Designer.cs">
+      <DependentUpon>CreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="db.cs" />
+    <Compile Include="FillContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FillContract.Designer.cs">
+      <DependentUpon>FillContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainPoint.Designer.cs">
+      <DependentUpon>MainPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChangePass.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangePass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeRole.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateCash.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CreateCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateUser.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FillContract.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FillContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainPoint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanlykhachhang.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Quanlykhachhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Quanlydongtien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlydongtien.Designer.cs">
+      <DependentUpon>Quanlydongtien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanlyhopdong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlyhopdong.Designer.cs">
+      <DependentUpon>Quanlyhopdong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanlykhachhang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlykhachhang.Designer.cs">
+      <DependentUpon>Quanlykhachhang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanlylaisuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlylaisuat.Designer.cs">
+      <DependentUpon>Quanlylaisuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanlynguoidung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlynguoidung.Designer.cs">
+      <DependentUpon>Quanlynguoidung.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

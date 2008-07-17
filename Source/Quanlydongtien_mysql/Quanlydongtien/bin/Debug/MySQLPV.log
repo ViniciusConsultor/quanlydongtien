@@ -1,0 +1,5 @@
+2008-07-16 21:34:16.000--MySQL OLE DB Provider has not been activated.Error code: 800410FF
+2008-07-16 21:36:16.000--[1]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[Username], [Password]) VALUES ('admin', 'dABoAGEAbgBnAHQAYwA=')' at line 1Error code: 80040101
+2008-07-16 21:37:08.000--[1]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[Username], [Password]) VALUES ('admin', 'dABoAGEAbgBnAHQAYwA=')' at line 1Error code: 80040101
+2008-07-16 21:37:50.000--[1]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[Username], [Password]) VALUES ('admin', 'dABoAGEAbgBnAHQAYwA=')' at line 1Error code: 80040101
+2008-07-16 21:57:26.000--[1]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[Username] = 'admin' AND[RoleID] = 8' at line 1Error code: 80040101
