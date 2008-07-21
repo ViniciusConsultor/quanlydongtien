@@ -89,11 +89,12 @@ namespace Quanlydongtien
             DataSet ds;
             DataGridViewButtonColumn dtGridBt = new DataGridViewButtonColumn();
             int i, cullCount;
-            dtGridUser.AllowUserToAddRows = true;           
+        //    dtGridUser.AllowUserToAddRows = true;           
             while (dtGridUser.Rows.Count > 0)
                 dtGridUser.Rows.RemoveAt(dtGridUser.Rows.Count - 1);
             while (dtGridUser.Columns.Count > 0)
                 dtGridUser.Columns.RemoveAt(dtGridUser.Columns.Count - 1);
+            dtGridUser.AllowUserToAddRows = true;           
             sqlString = "SELECT [Username] AS [Ten nguoi dung], [Locked] AS [Khoa] FROM [QUANLYUSER]";
             ds = dbUser.genDataset(sqlString);
             dtGridUser.DataSource = ds.Tables[0];
@@ -107,10 +108,11 @@ namespace Quanlydongtien
             dtGridBt.Text = "Cap nhat";
             dtGridBt.Name = "capnhat";
             dtGridBt.UseColumnTextForButtonValue = true;
+            dtGridUser.Columns.Add(dtGridBt);
             cullCount = dtGridUser.Columns.Count;
             for (i = 0; i < dtGridUser.Rows.Count; i++)
             {
-                dtGridUser.Rows[i].Cells[cullCount - 1].Value = "Cap nhat";
+                dtGridUser.Rows[i].Cells["capnhat"].Value = "Cap nhat";
             }
             dtGridUser.AllowUserToAddRows = false;
         }
