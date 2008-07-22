@@ -20,6 +20,7 @@ namespace Quanlydongtien
         Boolean initfrm = true;
         db QlkhDb;
         ArrayList LoaiKHList;
+        string dbname;
         public Quanlykhachhang()
         {
             InitializeComponent();
@@ -39,10 +40,12 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             string LoaiKH;
             int MaLoaiKH, i;
+            DataGridViewButtonColumn dtGridBt = new DataGridViewButtonColumn();
             LoaiKHList = new ArrayList();            
             QlkhDb = new db(dbFile);
-            sqlString = "SELECT [MaLoaiKH], [LoaiKH] FROM [LOAIKH]";
-            
+            dbname = dbFile;
+            sqlString = "SELECT [MaLoaiKH], [TenLoaiKH] FROM [LOAIKH]";
+            dtGridKH.AllowUserToAddRows = true;            
             try
             {
                 oleReader = QlkhDb.genDataReader(sqlString);
@@ -50,6 +53,7 @@ namespace Quanlydongtien
                 {
                     MessageBox.Show("Loi ket noi den database!");
                     this.Close();
+                    return;
                 }
                 while(oleReader.Read())
                 {
@@ -69,6 +73,13 @@ namespace Quanlydongtien
                     else dtGridKH.Rows[i].DefaultCellStyle.BackColor = NegativeC;
                     rowColor = !rowColor;
                 }
+                dtGridBt.Text = "...";
+                dtGridBt.Name = "Capnhat";
+                dtGridBt.Width = 60;
+                dtGridBt.HeaderText = "Cap nhat";
+                dtGridBt.UseColumnTextForButtonValue = true;
+                dtGridKH.Columns.Add(dtGridBt);
+                dtGridKH.AllowUserToAddRows = false;
             }
             catch (Exception ex)
             {
@@ -124,6 +135,28 @@ namespace Quanlydongtien
         {
             QlkhDb.close();
             this.Close();
+        }
+
+        private void cmdAdd_Click(object sender, EventArgs e)
+        {
+            NhapthongtinKH frmCreateNewCus = new NhapthongtinKH();
+            frmCreateNewCus.init(dbname);
+            frmCreateNewCus.ShowDialog();
+        }
+
+        private void dtGridKH_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow dtGridRow;
+            DataGridViewCell dtGridCel;
+            NhapthongtinKH frmEditUser = new NhapthongtinKH();
+            string makh;
+            dtGridCel = dtGridKH.SelectedCells[0];
+            if (dtGridCel.Value.ToString() != "...")
+                return;
+            dtGridRow = dtGridKH.Rows[e.RowIndex];
+            makh = dtGridRow.Cells["MaKH"].Value.ToString();
+            frmEditUser.init(dbname, makh);
+            frmEditUser.ShowDialog();
         }
     }
 }
