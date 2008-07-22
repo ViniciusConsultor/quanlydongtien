@@ -29,7 +29,6 @@ namespace Quanlydongtien
         private void InitializeComponent()
         {
             this.dtGridKH = new System.Windows.Forms.DataGridView();
-            this.cmdEdit = new System.Windows.Forms.Button();
             this.cmdAdd = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,31 +40,25 @@ namespace Quanlydongtien
             // 
             this.dtGridKH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGridKH.Location = new System.Drawing.Point(0, 52);
+            this.dtGridKH.MultiSelect = false;
             this.dtGridKH.Name = "dtGridKH";
             this.dtGridKH.Size = new System.Drawing.Size(559, 269);
             this.dtGridKH.TabIndex = 0;
-            // 
-            // cmdEdit
-            // 
-            this.cmdEdit.Location = new System.Drawing.Point(169, 327);
-            this.cmdEdit.Name = "cmdEdit";
-            this.cmdEdit.Size = new System.Drawing.Size(75, 23);
-            this.cmdEdit.TabIndex = 1;
-            this.cmdEdit.Text = "Chinh sua";
-            this.cmdEdit.UseVisualStyleBackColor = true;
+            this.dtGridKH.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridKH_CellContentClick);
             // 
             // cmdAdd
             // 
-            this.cmdAdd.Location = new System.Drawing.Point(250, 327);
+            this.cmdAdd.Location = new System.Drawing.Point(222, 327);
             this.cmdAdd.Name = "cmdAdd";
             this.cmdAdd.Size = new System.Drawing.Size(75, 23);
             this.cmdAdd.TabIndex = 2;
             this.cmdAdd.Text = "Them moi";
             this.cmdAdd.UseVisualStyleBackColor = true;
+            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(331, 327);
+            this.cmdClose.Location = new System.Drawing.Point(303, 327);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 3;
@@ -100,7 +93,6 @@ namespace Quanlydongtien
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdAdd);
-            this.Controls.Add(this.cmdEdit);
             this.Controls.Add(this.dtGridKH);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -116,7 +108,6 @@ namespace Quanlydongtien
         #endregion
 
         private System.Windows.Forms.DataGridView dtGridKH;
-        private System.Windows.Forms.Button cmdEdit;
         private System.Windows.Forms.Button cmdAdd;
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Label label1;

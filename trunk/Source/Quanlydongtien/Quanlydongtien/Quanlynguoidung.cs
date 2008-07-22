@@ -122,7 +122,6 @@ namespace Quanlydongtien
             string sqlStr;
             DataGridViewRow dtGridRow;
             DataGridViewCell dtGridCel;
-            int i;
             dtGridCel = dtGridUser.SelectedCells[0];
             if (dtGridCel.Value.ToString() != "Cap nhat")
                 return;            

@@ -79,11 +79,11 @@
     <Compile Include="MainPoint.Designer.cs">
       <DependentUpon>MainPoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhapthongitnKH.cs">
+    <Compile Include="NhapthongtinKH.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NhapthongitnKH.Designer.cs">
-      <DependentUpon>NhapthongitnKH.cs</DependentUpon>
+    <Compile Include="NhapthongtinKH.Designer.cs">
+      <DependentUpon>NhapthongtinKH.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,9 +115,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainPoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhapthongitnKH.resx">
+    <EmbeddedResource Include="NhapthongtinKH.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NhapthongitnKH.cs</DependentUpon>
+      <DependentUpon>NhapthongtinKH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
