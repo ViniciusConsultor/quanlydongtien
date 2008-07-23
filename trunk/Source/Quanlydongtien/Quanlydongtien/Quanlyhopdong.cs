@@ -18,6 +18,7 @@ namespace Quanlydongtien
         Color activeC = Color.Yellow;
         Color NegativeC = Color.Pink;
         Boolean rowColor = true;
+        Boolean nhapdulieu;
         public Quanlyhopdong()
         {
             InitializeComponent();
@@ -29,14 +30,14 @@ namespace Quanlydongtien
             ContractDB.close();
         }
 
-        public void init(string dbfile)
+        public void init(string dbfile, Boolean edit)
         {
             string sqlStr;
             OleDbDataReader oleReader;
             lstMaKH = new ArrayList();
             dbname = dbfile;
             ContractDB = new db(dbfile);
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG]";
+            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] ORDER BY [MaHD]";
             FillDG(sqlStr);
             dtGridContracts.AllowUserToAddRows = false;
             sqlStr = "SELECT [MaKH], [TenKH] FROM [KHACHHANG]";
@@ -53,6 +54,10 @@ namespace Quanlydongtien
             }
             cbxCusName.Items.Add("All");
             cbxCusName.Text = "All";
+            nhapdulieu = edit;
+            if (nhapdulieu == false)
+                cmdAdd.Enabled = false;
+            else cmdAdd.Enabled = true;
         }
         private void FillDG(string sqlStr)
         {
