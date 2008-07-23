@@ -41,6 +41,7 @@ namespace Quanlydongtien
             {
                 dtGridUser.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dtGridUser.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                
             }            
             dtGridUser.Columns.Add(dtGridBt);
             cullCount = dtGridUser.Columns.Count;

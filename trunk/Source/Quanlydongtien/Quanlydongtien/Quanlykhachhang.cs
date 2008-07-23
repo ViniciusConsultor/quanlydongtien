@@ -66,6 +66,10 @@ namespace Quanlydongtien
                 cbxLoaiKH.Text = cbxLoaiKH.Items[0].ToString();
                 sqlString = "SELECT [MAKH], [TenKH], [TaikhoanNH], [TenNH], [DinhDanh],[SoDT], [Diachi] FROM [KHACHHANG]";
                 QlkhDb.fillDtGridView(sqlString, dtGridKH);
+                for (i =0; i < dtGridKH.Columns.Count; i++)
+                {
+                    dtGridKH.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
                 for (i = 0; i < dtGridKH.Rows.Count; i++)
                 {
                     if (rowColor)
@@ -94,6 +98,7 @@ namespace Quanlydongtien
             int index, i;
             string sqlString;
             string loaiKH;
+            DataGridViewButtonColumn dtGridBt = new DataGridViewButtonColumn();
             if (initfrm == true)
             {
                 initfrm = false;
@@ -112,6 +117,12 @@ namespace Quanlydongtien
             }
             clear();
             QlkhDb.fillDtGridView(sqlString, dtGridKH);
+            if (dtGridKH.Columns.Count == 0)
+                return;
+            for (i = 0; i < dtGridKH.Columns.Count; i++)
+            {
+                dtGridKH.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
             for (i = 0; i < dtGridKH.Rows.Count; i++)
             {
                 if (rowColor)
@@ -119,6 +130,12 @@ namespace Quanlydongtien
                 else dtGridKH.Rows[i].DefaultCellStyle.BackColor = NegativeC;
                 rowColor = !rowColor;
             }
+            dtGridBt.Text = "...";
+            dtGridBt.Name = "Capnhat";
+            dtGridBt.Width = 60;
+            dtGridBt.HeaderText = "Cap nhat";
+            dtGridBt.UseColumnTextForButtonValue = true;
+            dtGridKH.Columns.Add(dtGridBt);
         }
         private void clear()
         {

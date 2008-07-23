@@ -79,6 +79,12 @@
     <Compile Include="MainPoint.Designer.cs">
       <DependentUpon>MainPoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhapthongtinHD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhapthongtinHD.Designer.cs">
+      <DependentUpon>NhapthongtinHD.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhapthongtinKH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainPoint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhapthongtinHD.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NhapthongtinHD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhapthongtinKH.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NhapthongtinKH.cs</DependentUpon>
@@ -123,6 +133,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanlyhopdong.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Quanlyhopdong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanlykhachhang.resx">
       <SubType>Designer</SubType>
