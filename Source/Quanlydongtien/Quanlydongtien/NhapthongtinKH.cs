@@ -59,6 +59,8 @@ namespace Quanlydongtien
                     txtIssPlace.Text = noicap;
                 if (SoDT.Length > 0)
                     txtPhoneNum.Text = SoDT;
+                if (Diachi.Length > 0)
+                    txtAddress.Text = Diachi;
                 if (TKNH.Length > 0)
                     txtAccount.Text = TKNH;
                 if (tenKH.Length > 0)

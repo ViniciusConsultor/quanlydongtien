@@ -164,7 +164,7 @@ namespace Quanlydongtien
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(275, 109);
+            this.txtAddress.Location = new System.Drawing.Point(275, 113);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(440, 20);
             this.txtAddress.TabIndex = 15;

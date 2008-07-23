@@ -49,7 +49,9 @@ namespace Quanlydongtien
 
         private void quanLyHopDongToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Quanlyhopdong frmQLHD = new Quanlyhopdong();
+            frmQLHD.init(dbFileName);
+            frmQLHD.ShowDialog();
         }
 
         private void quanLyKhachHangToolStripMenuItem_Click(object sender, EventArgs e)
