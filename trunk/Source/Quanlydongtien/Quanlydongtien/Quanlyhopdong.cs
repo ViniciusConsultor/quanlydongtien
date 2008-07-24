@@ -85,7 +85,7 @@ namespace Quanlydongtien
 
         private void Quanlyhopdong_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void clear()
@@ -139,6 +139,32 @@ namespace Quanlydongtien
 
             sqlStr = sqlStr + " [MaKH] LIKE '%" + makh + "%'";
             FillDG(sqlStr);
+        }
+
+        private void cbxCusName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cmdEdit_Click(object sender, EventArgs e)
+        {
+            string mahd;
+            DataGridViewRow dtGridRow;
+            NhapthongtinHD frmEditContracts = new NhapthongtinHD();
+            if (dtGridContracts.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Ban phai chon hang can sua...");
+                return;
+            }
+            dtGridRow = dtGridContracts.SelectedRows[0];
+            mahd = dtGridRow.Cells["MaHD"].Value.ToString();
+            frmEditContracts.init(dbname);
+
         }
     }
 }

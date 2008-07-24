@@ -39,7 +39,9 @@ namespace Quanlydongtien
 
         private void nhapHopDongMoiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            NhapthongtinHD frmNhapHD = new NhapthongtinHD();
+            frmNhapHD.init(dbFileName);
+            frmNhapHD.ShowDialog();
         }
 
         private void nhapDongTienToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace Quanlydongtien
         private void quanLyHopDongToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Quanlyhopdong frmQLHD = new Quanlyhopdong();
-            frmQLHD.init(dbFileName);
+            frmQLHD.init(dbFileName, true);
             frmQLHD.ShowDialog();
         }
 
