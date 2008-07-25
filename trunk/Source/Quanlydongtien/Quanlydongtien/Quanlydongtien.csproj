@@ -82,6 +82,12 @@
     <Compile Include="MainPoint.Designer.cs">
       <DependentUpon>MainPoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhapKyTraNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhapKyTraNo.Designer.cs">
+      <DependentUpon>NhapKyTraNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhapthongtinHD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,10 @@
     <EmbeddedResource Include="MainPoint.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhapKyTraNo.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NhapKyTraNo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhapthongtinHD.resx">
       <SubType>Designer</SubType>
