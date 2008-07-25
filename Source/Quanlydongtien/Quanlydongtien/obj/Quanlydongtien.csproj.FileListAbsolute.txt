@@ -64,3 +64,4 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.exe
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.pdb
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Quanlyhopdong.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.NhapthongtinHD.resources
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.NhapKyTraNo.resources

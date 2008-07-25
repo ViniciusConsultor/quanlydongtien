@@ -58,7 +58,9 @@ namespace Quanlydongtien
             this.cbxDonvitinh = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbxDateContracts = new System.Windows.Forms.DateTimePicker();
+            this.grKytrano = new System.Windows.Forms.GroupBox();
             this.grBoxKytra.SuspendLayout();
+            this.grKytrano.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxMaKH
@@ -180,25 +182,20 @@ namespace Quanlydongtien
             // 
             // grBoxKytra
             // 
-            this.grBoxKytra.Controls.Add(this.txtDate);
-            this.grBoxKytra.Controls.Add(this.label13);
-            this.grBoxKytra.Controls.Add(this.label12);
-            this.grBoxKytra.Controls.Add(this.label11);
-            this.grBoxKytra.Controls.Add(this.cbxKytra);
-            this.grBoxKytra.Controls.Add(this.cbxDonVi);
+            this.grBoxKytra.Controls.Add(this.grKytrano);
             this.grBoxKytra.Controls.Add(this.radioButton1);
             this.grBoxKytra.Controls.Add(this.optTraNL);
             this.grBoxKytra.Controls.Add(this.optTraDK);
             this.grBoxKytra.Location = new System.Drawing.Point(15, 204);
             this.grBoxKytra.Name = "grBoxKytra";
-            this.grBoxKytra.Size = new System.Drawing.Size(353, 105);
+            this.grBoxKytra.Size = new System.Drawing.Size(353, 120);
             this.grBoxKytra.TabIndex = 17;
             this.grBoxKytra.TabStop = false;
             this.grBoxKytra.Text = "Tra no";
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(230, 50);
+            this.txtDate.Location = new System.Drawing.Point(214, 22);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(96, 20);
             this.txtDate.TabIndex = 25;
@@ -206,7 +203,7 @@ namespace Quanlydongtien
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(168, 50);
+            this.label13.Location = new System.Drawing.Point(152, 22);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(47, 13);
             this.label13.TabIndex = 24;
@@ -215,7 +212,7 @@ namespace Quanlydongtien
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(29, 50);
+            this.label12.Location = new System.Drawing.Point(13, 22);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(58, 13);
             this.label12.TabIndex = 23;
@@ -224,7 +221,7 @@ namespace Quanlydongtien
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(29, 77);
+            this.label11.Location = new System.Drawing.Point(13, 49);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 22;
@@ -233,18 +230,33 @@ namespace Quanlydongtien
             // cbxKytra
             // 
             this.cbxKytra.FormattingEnabled = true;
-            this.cbxKytra.Location = new System.Drawing.Point(91, 74);
+            this.cbxKytra.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.cbxKytra.Location = new System.Drawing.Point(75, 46);
             this.cbxKytra.Name = "cbxKytra";
             this.cbxKytra.Size = new System.Drawing.Size(61, 21);
             this.cbxKytra.TabIndex = 21;
+            this.cbxKytra.Text = "1";
             // 
             // cbxDonVi
             // 
             this.cbxDonVi.FormattingEnabled = true;
-            this.cbxDonVi.Location = new System.Drawing.Point(91, 47);
+            this.cbxDonVi.Location = new System.Drawing.Point(75, 19);
             this.cbxDonVi.Name = "cbxDonVi";
             this.cbxDonVi.Size = new System.Drawing.Size(61, 21);
             this.cbxDonVi.TabIndex = 20;
+            this.cbxDonVi.Text = "Thang";
             // 
             // radioButton1
             // 
@@ -300,7 +312,7 @@ namespace Quanlydongtien
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(47, 318);
+            this.cmdAccept.Location = new System.Drawing.Point(50, 330);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(88, 34);
             this.cmdAccept.TabIndex = 20;
@@ -310,7 +322,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(244, 318);
+            this.cmdClose.Location = new System.Drawing.Point(247, 330);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(88, 34);
             this.cmdClose.TabIndex = 21;
@@ -348,6 +360,21 @@ namespace Quanlydongtien
             this.cbxDateContracts.Size = new System.Drawing.Size(98, 20);
             this.cbxDateContracts.TabIndex = 24;
             // 
+            // grKytrano
+            // 
+            this.grKytrano.Controls.Add(this.txtDate);
+            this.grKytrano.Controls.Add(this.label12);
+            this.grKytrano.Controls.Add(this.label13);
+            this.grKytrano.Controls.Add(this.cbxDonVi);
+            this.grKytrano.Controls.Add(this.cbxKytra);
+            this.grKytrano.Controls.Add(this.label11);
+            this.grKytrano.Location = new System.Drawing.Point(23, 43);
+            this.grKytrano.Name = "grKytrano";
+            this.grKytrano.Size = new System.Drawing.Size(317, 71);
+            this.grKytrano.TabIndex = 26;
+            this.grKytrano.TabStop = false;
+            this.grKytrano.Text = "Thong tin tra no";
+            // 
             // NhapthongtinHD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,6 +410,8 @@ namespace Quanlydongtien
             this.Load += new System.EventHandler(this.NhapthongtinHD_Load);
             this.grBoxKytra.ResumeLayout(false);
             this.grBoxKytra.PerformLayout();
+            this.grKytrano.ResumeLayout(false);
+            this.grKytrano.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,5 +449,6 @@ namespace Quanlydongtien
         private System.Windows.Forms.ComboBox cbxDonvitinh;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker cbxDateContracts;
+        private System.Windows.Forms.GroupBox grKytrano;
     }
 }

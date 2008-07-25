@@ -16,6 +16,7 @@ namespace Quanlydongtien
         const int TraNhieuLan = 2;
         const int TraMotLan = 3;
         db contractDb;
+        string dbfile;
         Boolean edit;
         string MaHD;
         int HTTra;
@@ -28,9 +29,11 @@ namespace Quanlydongtien
         {
             string sqlStr;
             string tongtien;
-            if (cbxLoaiHD.Text == "Cho vay")
+            Boolean real;
+            if (cbxLoaiHD.Text == "Cho Vay")
                 tongtien = "-" + txtTongtien.Text;
             else tongtien = txtTongtien.Text;
+            real = !chkReal.Checked;
             if (edit == true)
             {
                 sqlStr = "UPDATE [HOPDONG] SET [Real] = " + chkReal.Enabled.ToString();
@@ -42,7 +45,7 @@ namespace Quanlydongtien
                 sqlStr = "INSERT INTO [HOPDONG] ([MaKH], [NgayHD], [Tongtien], [Real], [Kyhan], [DonVT], [Laisuat], [Desc]";
                 sqlStr = sqlStr + ", [Hoanthanh], [NoQH], [Tratruoc], [Hinhthuctra]) VALUES ('";
                 sqlStr = sqlStr + cbxMaKH.Text + "', '" + cbxDateContracts.Value.ToShortDateString();
-                sqlStr = sqlStr + "', " + tongtien + ", " + !chkReal.Checked.ToString();
+                sqlStr = sqlStr + "', " + tongtien + ", " + real.ToString();
                 sqlStr = sqlStr + ", " + cbxKyhan.Text + ", '" + cbxDonvitinh.Text;
                 sqlStr = sqlStr + "', " + cbxLaisuat.Text + ", '" + txtDesc.Text;
                 sqlStr = sqlStr + "', No, No, No, " + HTTra + ")";
@@ -65,6 +68,7 @@ namespace Quanlydongtien
             MaHD = "";
             HTTra = TraDinhKy;
             optTraDK.Checked = true;
+            dbfile = dbname;
             if (contractDb == null)
             {
                 MessageBox.Show("Loi ket noi den database");
@@ -95,6 +99,7 @@ namespace Quanlydongtien
             Int64 tongtien = 0;
             MaHD = maHD;
             edit = true;
+            dbfile = dbname;
             if (contractDb == null)
             {
                 MessageBox.Show("Loi ket noi den database");
@@ -150,17 +155,35 @@ namespace Quanlydongtien
         private void optTraDK_CheckedChanged(object sender, EventArgs e)
         {
             HTTra = TraDinhKy;
-            cbxKytra.Enabled = true;
+            grKytrano.Enabled = true;
         }
 
         private void optTraNL_CheckedChanged(object sender, EventArgs e)
         {
+            NhapKyTraNo frmNhapTN = new NhapKyTraNo();
+            DateTime ngayHD = new DateTime();
+            Int64 tongtien;
+            int kyhan;
+            string ngaydaohan;
             HTTra = TraNhieuLan;
+            grKytrano.Enabled = false;
+            kyhan = int.Parse(cbxKyhan.Text);
+            tongtien = Int64.Parse(txtTongtien.Text);
+            ngayHD = cbxDateContracts.Value;
+            if (cbxDonvitinh.Text == "Ngay")
+                ngaydaohan = ngayHD.AddDays(kyhan).ToShortDateString();
+            else if (cbxDonvitinh.Text == "Thang")
+                ngaydaohan = ngayHD.AddMonths(kyhan).ToShortDateString();
+            else
+                ngaydaohan = ngayHD.AddYears(kyhan).ToShortDateString();
+            frmNhapTN.init(dbfile, tongtien, ngaydaohan);
+            frmNhapTN.ShowDialog();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             HTTra = TraMotLan;
+            grKytrano.Enabled = false;
         }
     }
 }

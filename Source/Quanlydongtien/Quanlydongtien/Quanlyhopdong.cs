@@ -156,6 +156,8 @@ namespace Quanlydongtien
             string mahd;
             DataGridViewRow dtGridRow;
             NhapthongtinHD frmEditContracts = new NhapthongtinHD();
+            if (dtGridContracts.RowCount == 0)
+                return;
             if (dtGridContracts.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Ban phai chon hang can sua...");
