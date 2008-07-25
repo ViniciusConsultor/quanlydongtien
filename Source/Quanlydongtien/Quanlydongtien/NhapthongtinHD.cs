@@ -20,6 +20,9 @@ namespace Quanlydongtien
         Boolean edit;
         string MaHD;
         int HTTra;
+        ArrayList LSHuydong;
+        ArrayList LSChovay;
+        ArrayList ListContracts;
         public NhapthongtinHD()
         {
             InitializeComponent();
@@ -83,6 +86,20 @@ namespace Quanlydongtien
                     cbxMaKH.Items.Add(oleReader[0].ToString());
                 }
                 cbxMaKH.Text = cbxMaKH.Items[0].ToString();
+                sqlStr = "SELECT [LaiSuat], [LoaiLS] FROM [LAISUAT]";
+                oleReader = contractDb.genDataReader(sqlStr);
+                LSChovay = new ArrayList();
+                LSHuydong = new ArrayList();
+                while (oleReader.Read())
+                {
+                    if (oleReader["LoaiLS"].ToString() == "1")
+                    {
+                        LSChovay.Add(oleReader["LaiSuat"].ToString());
+                        cbxLaisuat.Items.Add(oleReader["LaiSuat"].ToString());
+                    }
+                    else LSHuydong.Add(oleReader["LaiSuat"].ToString());
+                }
+                Create_List_CT();
             }
             catch (Exception ex)
             {
@@ -97,6 +114,7 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             contractDb = new db(dbname);
             Int64 tongtien = 0;
+            int i;
             MaHD = maHD;
             edit = true;
             dbfile = dbname;
@@ -133,6 +151,20 @@ namespace Quanlydongtien
                 cbxLoaiHD.Enabled = false;
                 cbxMaKH.Text = cbxMaKH.Items[0].ToString();
                 grBoxKytra.Enabled = false;
+                sqlStr = "SELECT [LaiSuat], [LoaiLS] FROM [LAISUAT]";
+                oleReader = contractDb.genDataReader(sqlStr);
+                LSChovay = new ArrayList();
+                LSHuydong = new ArrayList();
+                while (oleReader.Read())
+                {
+                    if (oleReader["LoaiLS"].ToString() == "1")
+                    {
+                        LSChovay.Add(oleReader["LaiSuat"].ToString());
+                        cbxLaisuat.Items.Add(oleReader["LaiSuat"].ToString());
+                    }
+                    else LSHuydong.Add(oleReader["LaiSuat"].ToString());
+                }
+                Create_List_CT();
             }
             catch (Exception ex)
             {
@@ -163,27 +195,82 @@ namespace Quanlydongtien
             NhapKyTraNo frmNhapTN = new NhapKyTraNo();
             DateTime ngayHD = new DateTime();
             Int64 tongtien;
-            int kyhan;
+            int kyhan, laisuat;
             string ngaydaohan;
             HTTra = TraNhieuLan;
             grKytrano.Enabled = false;
+            if (txtMaHD.Text == null)
+            {
+                txtMaHD.Focus();
+                return;
+            }
+            if (cbxKyhan.Text == null)
+            {
+                cbxKyhan.Focus();
+                return;
+            }
             kyhan = int.Parse(cbxKyhan.Text);
+            if (cbxLaisuat.Text == null)
+            {
+                cbxLaisuat.Focus();
+                return;
+            }
+            laisuat = int.Parse(cbxLaisuat.Text);
+            if (txtTongtien.Text == null)
+            {
+                txtTongtien.Focus();
+                return;
+            }
+            if (!Utilities.isInt64(txtTongtien.Text))
+            {
+                txtTongtien.Focus();
+                return;
+            }
             tongtien = Int64.Parse(txtTongtien.Text);
-            ngayHD = cbxDateContracts.Value;
+
             if (cbxDonvitinh.Text == "Ngay")
                 ngaydaohan = ngayHD.AddDays(kyhan).ToShortDateString();
             else if (cbxDonvitinh.Text == "Thang")
                 ngaydaohan = ngayHD.AddMonths(kyhan).ToShortDateString();
             else
                 ngaydaohan = ngayHD.AddYears(kyhan).ToShortDateString();
-            frmNhapTN.init(dbfile, tongtien, ngaydaohan);
+            frmNhapTN.init(dbfile, tongtien, ngaydaohan, MaHD, cbxDateContracts.Value.ToShortDateString(), laisuat);
             frmNhapTN.ShowDialog();
+            if (frmNhapTN.saved == true)
+                grBoxKytra.Enabled = true;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             HTTra = TraMotLan;
             grKytrano.Enabled = false;
+        }
+
+        private void Create_List_CT()
+        {
+            string sqlStr;
+            OleDbDataReader oleReader;
+            sqlStr = "SELECT [MaHD] FROM [HOPDONG]";
+            oleReader = contractDb.genDataReader(sqlStr);
+            ListContracts = new ArrayList();
+            if (oleReader == null)
+            {
+                this.Close();
+                return;
+            }
+            while (oleReader.Read())
+                ListContracts.Add(oleReader[0].ToString());
+        }
+
+        private void txtMaHD_TextChanged(object sender, EventArgs e)
+        {
+            string mahd;
+            int i;
+            if (ListContracts.Count == 0)
+                return;
+            mahd = txtMaHD.Text;
+            i = ListContracts.IndexOf(mahd);
+            lblContractCode.Text = ListContracts[i].ToString();
         }
     }
 }

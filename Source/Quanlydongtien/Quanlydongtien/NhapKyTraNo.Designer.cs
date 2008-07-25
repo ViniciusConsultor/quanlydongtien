@@ -70,16 +70,17 @@ namespace Quanlydongtien
             // 
             this.dtGridCF.AllowUserToAddRows = false;
             this.dtGridCF.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGridCF.Location = new System.Drawing.Point(4, 74);
+            this.dtGridCF.Location = new System.Drawing.Point(4, 79);
             this.dtGridCF.MultiSelect = false;
             this.dtGridCF.Name = "dtGridCF";
-            this.dtGridCF.Size = new System.Drawing.Size(254, 225);
+            this.dtGridCF.Size = new System.Drawing.Size(254, 213);
             this.dtGridCF.TabIndex = 3;
+            this.dtGridCF.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCF_CellEndEdit);
             this.dtGridCF.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCF_CellContentClick_1);
             // 
             // cmdSave
             // 
-            this.cmdSave.Location = new System.Drawing.Point(36, 305);
+            this.cmdSave.Location = new System.Drawing.Point(36, 302);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 30);
             this.cmdSave.TabIndex = 4;
@@ -89,7 +90,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(129, 305);
+            this.cmdClose.Location = new System.Drawing.Point(129, 302);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 30);
             this.cmdClose.TabIndex = 5;
@@ -118,7 +119,7 @@ namespace Quanlydongtien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(263, 337);
+            this.ClientSize = new System.Drawing.Size(263, 338);
             this.Controls.Add(this.txtTong);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdClose);
@@ -128,9 +129,7 @@ namespace Quanlydongtien
             this.Controls.Add(this.txtSolan);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(271, 371);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(271, 371);
             this.Name = "NhapKyTraNo";
             this.Text = "NhapKyTraNo";
             this.Load += new System.EventHandler(this.NhapKyTraNo_Load);

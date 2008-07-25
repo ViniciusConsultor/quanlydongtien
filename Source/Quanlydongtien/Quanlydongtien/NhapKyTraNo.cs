@@ -14,7 +14,12 @@ namespace Quanlydongtien
     {
         db CashDB;
         Int64 tongtien;
+        int laisuat;
         string ngaytra;
+        string ngayvay;
+        string MaHD;
+        Boolean tienra = false;
+        public Boolean saved = false;
         public NhapKyTraNo()
         {
             InitializeComponent();
@@ -36,12 +41,17 @@ namespace Quanlydongtien
             Create_kytra(rows);
         }
 
-        public void init(string dbname, Int64 sotien, string ngaydaohan)
+        public void init(string dbname, Int64 sotien, string ngaydaohan, string mahd, string ngayhd, int laisuatvay)
         {
             CashDB = new db(dbname);
             txtTong.Text = sotien.ToString();
-            tongtien = sotien;
+            tongtien = Math.Abs(sotien);
             ngaytra = ngaydaohan;
+            ngayvay = ngayhd;
+            this.laisuat = laisuatvay;
+            if (sotien < 0)
+                tienra = false;
+            else tienra = true;
             Create_kytra(1);
         }
 
@@ -60,10 +70,18 @@ namespace Quanlydongtien
             texboxCol.HeaderText = "So tien tra goc";
             texboxCol.Name = "Sotien";
             dtGridCF.Columns.Add(texboxCol);
+            texboxCol = new DataGridViewTextBoxColumn();
+            texboxCol.HeaderText = "Tien lai";
+            texboxCol.Name = "Tienlai";
+            texboxCol.ReadOnly = true;
+            dtGridCF.Columns.Add(texboxCol);
             for (i = 0; i < rows - 1; i++)
             {
                 dtGridRow = new DataGridViewRow();
                 dtGridCF.Rows.Add(dtGridRow);
+                dtGridCF.Rows[i].Cells["Ngaytra"].Value = "";
+                dtGridCF.Rows[i].Cells["Sotien"].Value = "";
+                dtGridCF.Rows[i].Cells["Tienlai"].Value = "";
             }
             dtGridRow = new DataGridViewRow();
             texboxCel = new DataGridViewTextBoxCell();
@@ -116,18 +134,88 @@ namespace Quanlydongtien
 
         private void cmdSave_Click_1(object sender, EventArgs e)
         {
-
+            saved = true;
         }
 
         private void cmdClose_Click(object sender, EventArgs e)
         {
             CashDB.close();
+            saved = false;
             this.Close();
         }
 
         private void dtGridCF_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
              
+        }
+
+        private void dtGridCF_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCell dtGridCell;
+            Int64 sotien = 0;
+            int i;
+            if (dtGridCF.SelectedCells.Count == 0)
+                return;
+            if (dtGridCF.Columns[e.ColumnIndex].Name != "Sotien")
+            {
+                dtGridCell = dtGridCF.Rows[e.RowIndex].Cells["Ngaytra"];
+                if (dtGridCell.Value == null)
+                    return;
+                if (!Utilities.isDateTime(dtGridCell.Value.ToString()))
+                {
+                    dtGridCell.Value = "";
+                    dtGridCF.CurrentCell = dtGridCell;
+                    return;
+                }                
+            }
+            dtGridCell = dtGridCF.Rows[e.RowIndex].Cells["Sotien"];
+            if (dtGridCell.Value != null)
+            {
+                if (!Utilities.isInt64(dtGridCell.Value.ToString()))
+                {
+                    dtGridCell.Value = "";
+                    dtGridCF.CurrentCell = dtGridCell;
+                    return;
+                }
+            }
+            for (i = 0; i < dtGridCF.Rows.Count - 1; i++)
+            {
+                dtGridCell = dtGridCF.Rows[i].Cells["Sotien"];
+                if (dtGridCell.Value == null)
+                    continue;
+                sotien = sotien + Int64.Parse(dtGridCell.Value.ToString());
+            }
+            dtGridCF.Rows[dtGridCF.Rows.Count - 1].Cells["Sotien"].Value = tongtien - sotien;
+        }
+
+        //Tinh cac ky tra lai cho khach hang
+        private void Tinhlai(int row_i)
+        {
+            Int64 tongtien_i, tienlai;
+            DateTime ngaytra;
+            TimeSpan difference;
+            int ngaychiulai;
+            tongtien_i = TinhtienNrows(row_i - 1);
+            if (dtGridCF.Rows[row_i].Cells["Ngaytra"].Value.ToString() == "")
+                return;
+            ngaytra = DateTime.Parse(dtGridCF.Rows[row_i].Cells["Ngaytra"].Value.ToString());
+            difference = ngaytra.Subtract(DateTime.Parse(ngayvay));
+            ngaychiulai = difference.Days;
+            tienlai = ((tongtien - tongtien_i) * ngaychiulai * laisuat) / 36000;
+            dtGridCF.Rows[row_i].Cells["Tienlai"].Value = tienlai;
+        }
+
+        //Tinh tong so tien cua n hang
+        private Int64 TinhtienNrows(int rows)
+        {
+            int i;
+            Int64 sotien = 0;
+            for (i = 0; i < rows; i++)
+            {
+                if ((dtGridCF.Rows[i].Cells["Sotien"].Value != null))
+                    sotien = sotien + Int64.Parse((dtGridCF.Rows[i].Cells["Sotien"].Value.ToString()));
+            }
+            return sotien;
         }
     }
 }
