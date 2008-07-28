@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>Quanlynguoidung.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tinhlai.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Tinhlai.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -202,6 +206,12 @@
     </Compile>
     <Compile Include="Quanlynguoidung.Designer.cs">
       <DependentUpon>Quanlynguoidung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tinhlai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tinhlai.Designer.cs">
+      <DependentUpon>Tinhlai.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
   </ItemGroup>

@@ -40,7 +40,6 @@ namespace Quanlydongtien
 
             }
             rows = int.Parse(txtSolan.Text);
-            Clear();
             Create_kytra(rows);
         }
 
@@ -188,6 +187,7 @@ namespace Quanlydongtien
             DataGridViewTextBoxCell texboxCel;
             DataGridViewRow dtGridRow;
             int i;
+            Clear();
             texboxCol = new DataGridViewTextBoxColumn();
             texboxCol.HeaderText = "Ngay tra no";
             texboxCol.Name = "Ngaytra";
@@ -407,24 +407,31 @@ namespace Quanlydongtien
         }
 
 
-        public void Save_Data(Boolean real, string MaHD)
+        public void Save_Data(Boolean real, string MaHD, string dbname, Boolean chovay, int laisuat)
         {
             string sqlStrG, sqlStrL;
             string tientraG, tientraL;
             string ngaytra;
-            int i;            
+            int i;
+            CashDB = new db(dbname);
             for (i = 0; i < dtGridCF.Rows.Count; i++)
             {
                 ngaytra = dtGridCF.Rows[i].Cells["Ngaytra"].Value.ToString();
                 tientraG = dtGridCF.Rows[i].Cells["Sotien"].Value.ToString();
                 tientraL = dtGridCF.Rows[i].Cells["Tienlai"].Value.ToString();
-                sqlStrG = "INSERT INTO [DONGTIEN] ([MaHD], [NoQH], [Datra], [Real], [MoTa], [Sotien], [NgayTra])";
-                sqlStrG = sqlStrG + "VALUES ('" + MaHD +"', No, No, " + real.ToString() + ", 'Tra goc ky " + i.ToString();
+                if (chovay == false)
+                {
+                    tientraG = "-" + tientraG;
+                    tientraL = "-" + tientraL;
+                }
+                sqlStrG = "INSERT INTO [DONGTIEN] ([MaHD], [NoQH], [Datra], [Real], [MoTa], [Sotien], [NgayTra]) ";
+                sqlStrG = sqlStrG + "VALUES ('" + MaHD +"', No, No, " + real.ToString() + ", 'Tra goc ky " + (i+1).ToString();
                 sqlStrG = sqlStrG + "', " + tientraG + ", '" + ngaytra + "')";
 
-                sqlStrL = "INSERT INTO [TIENLAI] ([MaHD], [NoQH], [Datra], [Real], [MoTa], [Sotienlai], [NgayTra], [Sotienlai], [Laisuat])";
-                sqlStrL = sqlStrL + "VALUEs ('" + MaHD + "', No, No, " + real.ToString() + ", 'Tra lai ky " + i.ToString();
-                sqlStrL = sqlStrL + "', " + tientraL + ", '" + ngaytra + "')";
+                sqlStrL = "INSERT INTO [TIENLAI] ([MaHD], [NoQH], [Datra], [Real], [MoTa], [Sotienlai], [NgayTra], [Tienchiulai], [Laisuat])";
+                sqlStrL = sqlStrL + "VALUES ('" + MaHD + "', 0, No, " + real.ToString() + ", 'Tra lai ky " + (i+1).ToString();
+                sqlStrL = sqlStrL + "', " + tientraL + ", '" + ngaytra + "', " + dtGridCF.Rows[i].Cells["Duno"].Value.ToString();
+                sqlStrL = sqlStrL + ", " + laisuat + ")";
                 CashDB.runSQLCmd(sqlStrG);
                 CashDB.runSQLCmd(sqlStrL);
             }

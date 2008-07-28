@@ -15,6 +15,7 @@ namespace Quanlydongtien
         const int TraDinhKy = 1;
         const int TraNhieuLan = 2;
         const int TraMotLan = 3;
+        int laisuat;
         db contractDb;
         string dbfile;
         Boolean edit;
@@ -33,28 +34,45 @@ namespace Quanlydongtien
         {
             string sqlStr;
             string tongtien;
-            Boolean real;
+            Boolean real, chovay;
+            chovay = false;
+            if (check_validate() == false)
+                return;
             if (cbxLoaiHD.Text == "Cho Vay")
+            {
                 tongtien = "-" + txtTongtien.Text;
+                chovay = true;
+            }
             else tongtien = txtTongtien.Text;
             real = !chkReal.Checked;
             if (edit == true)
             {
+                
                 sqlStr = "UPDATE [HOPDONG] SET [Real] = " + chkReal.Enabled.ToString();
-                sqlStr = sqlStr + ", [DESC] = '" + txtDesc.Text + "' WHERE [MaHD] = " + MaHD;
+                sqlStr = sqlStr + ", [DESC] = '" + txtDesc.Text + "', [Laisuat] = " + cbxLaisuat.Text + " WHERE [MaHD] = " + MaHD;
                 contractDb.runSQLCmd(sqlStr);
+                contractDb.close();
+                this.Close();
             }
             else
             {
-                sqlStr = "INSERT INTO [HOPDONG] ([MaKH], [NgayHD], [Tongtien], [Real], [Kyhan], [DonVT], [Laisuat], [Desc]";
+                sqlStr = "INSERT INTO [HOPDONG] ([MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Kyhan], [DonVT], [Laisuat], [Desc]";
                 sqlStr = sqlStr + ", [Hoanthanh], [NoQH], [Tratruoc], [Hinhthuctra]) VALUES ('";
-                sqlStr = sqlStr + cbxMaKH.Text + "', '" + cbxDateContracts.Value.ToShortDateString();
+                sqlStr = sqlStr + txtMaHD.Text + "', '" + cbxMaKH.Text + "', '" + cbxDateContracts.Value.ToShortDateString();
                 sqlStr = sqlStr + "', " + tongtien + ", " + real.ToString();
                 sqlStr = sqlStr + ", " + cbxKyhan.Text + ", '" + cbxDonvitinh.Text;
                 sqlStr = sqlStr + "', " + cbxLaisuat.Text + ", '" + txtDesc.Text;
                 sqlStr = sqlStr + "', No, No, No, " + HTTra + ")";
-                contractDb.runSQLCmd(sqlStr);
-                frmNhapTN.Save_Data(real, MaHD);
+                if (contractDb.runSQLCmd(sqlStr) == false)
+                    return;
+                sqlStr = "INSERT INTO [DONGTIEN] ([MaHD], [NoQH], [Datra], [Real], [MoTa], [Sotien], [NgayTra]) VALUES (";
+                sqlStr = sqlStr + "'" + txtMaHD.Text + "', No, No, " + real.ToString() + ", '" + txtDesc.Text + "', ";
+                sqlStr = sqlStr + tongtien + ", '" + cbxDateContracts.Value.ToShortDateString() + "')";
+                if (contractDb.runSQLCmd(sqlStr) == false)
+                    return;
+                frmNhapTN.Save_Data(real, txtMaHD.Text, dbfile, chovay, int.Parse(cbxLaisuat.Text));
+                contractDb.close();
+                this.Close();
             }
         }
 
@@ -70,6 +88,7 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             contractDb = new db(dbname);
             edit = false;
+            laisuat = 0;
             MaHD = "";
             HTTra = TraDinhKy;
             optTraDK.Checked = true;
@@ -122,6 +141,8 @@ namespace Quanlydongtien
             MaHD = maHD;
             edit = true;
             dbfile = dbname;
+            txtMaHD.Text = maHD;
+            txtMaHD.Enabled = false;
             frmNhapTN = new NhapKyTraNo(dbname);
             frmNhapTN.saved = false;
             if (contractDb == null)
@@ -130,8 +151,15 @@ namespace Quanlydongtien
                 this.Close();
             }
 
-            sqlStr = "SELECE [MaKH], [NgayHD], [Tongtien], [Real], [Kyhan], [DonVT], [Laisuat], [Desc] FROM [HOPDONG]";
-            sqlStr = sqlStr + "[MaHD] = " + maHD;
+            sqlStr = "SELECT [MaKH] FROM [KHACHHANG] ORDER BY [MaKH]";
+            oleReader = contractDb.genDataReader(sqlStr);
+            while (oleReader.Read())
+            {
+                cbxMaKH.Items.Add(oleReader[0].ToString());
+            }
+            
+            sqlStr = "SELECT [MaKH], [NgayHD], [Tongtien], [Real], [Kyhan], [DonVT], [Laisuat], [Desc] FROM [HOPDONG]";
+            sqlStr = sqlStr + " WHERE [MaHD] = '" + maHD + "'";
             try
             {
                 oleReader = contractDb.genDataReader(sqlStr);
@@ -144,16 +172,27 @@ namespace Quanlydongtien
                     cbxKyhan.Enabled = false;
                     cbxDonvitinh.Text = oleReader["DonVT"].ToString();
                     cbxDonvitinh.Enabled = false;
-                    chkReal.Checked = Boolean.Parse(oleReader["Real"].ToString());
-                    cbxDateContracts.Value = DateTime.ParseExact(oleReader["NgayHD"].ToString(), "dd-MM-yyyy", null);
+                    chkReal.Checked = !(Boolean.Parse(oleReader["Real"].ToString()));                    
+                    cbxDateContracts.Value = DateTime.Parse(oleReader["NgayHD"].ToString());
                     cbxDateContracts.Enabled = false;
                     txtDesc.Text = oleReader["Desc"].ToString();
                     cbxLaisuat.Text = oleReader["Laisuat"].ToString();
-                    cbxLaisuat.Enabled = false;
+//                    cbxLaisuat.Enabled = false;
                 }
+
+                laisuat = int.Parse(cbxLaisuat.Text);
                 if (tongtien > 0)
+                {
+                    cbxLoaiHD.Text = cbxLoaiHD.Items[1].ToString();
+                    txtTongtien.Text = tongtien.ToString();
+                }
+                else
+                {
                     cbxLoaiHD.Text = cbxLoaiHD.Items[0].ToString();
-                else cbxLoaiHD.Text = cbxLoaiHD.Items[1].ToString();
+                    tongtien = Math.Abs(tongtien);
+                    txtTongtien.Text = tongtien.ToString();
+                }
+                txtTongtien.Enabled = false;
                 cbxLoaiHD.Enabled = false;
                 cbxMaKH.Text = cbxMaKH.Items[0].ToString();
                 grBoxKytra.Enabled = false;
@@ -192,6 +231,8 @@ namespace Quanlydongtien
 
         private void optTraDK_CheckedChanged(object sender, EventArgs e)
         {
+            if (optTraDK.Checked == false)
+                return;
             HTTra = TraDinhKy;
             grKytrano.Enabled = true;
         }
@@ -251,7 +292,8 @@ namespace Quanlydongtien
             Int64 tongtien;
             int kyhan, laisuat;
             string ngaydaohan;
-
+            if (radioButton1.Checked == false)
+                return;
             if (txtMaHD.Text == null)
             {
                 txtMaHD.Focus();
@@ -316,6 +358,8 @@ namespace Quanlydongtien
         {
             string mahd;
             int i;
+            if (edit == true)
+                return;
             if (ListContracts.Count == 0)
                 return;
             mahd = txtMaHD.Text;
@@ -413,7 +457,10 @@ namespace Quanlydongtien
                 kytrano = int.Parse(cbxKytra.Text) * 30;  //Trung binh mot thang co 30 ngay
             else kytrano = int.Parse(cbxKytra.Text) * 365; //Mot nam co 365 ngay
             
-            solantra = difference.Days / kytrano + 1;
+            solantra = difference.Days / kytrano;
+            if ((solantra * kytrano) < difference.Days)
+                solantra = solantra + 2;
+            else solantra = solantra + 1;
             
             if (cbxLaisuat.Text == "")
             {
@@ -448,10 +495,29 @@ namespace Quanlydongtien
 
         private void cmdKytraShow_Click(object sender, EventArgs e)
         {
-            if (frmNhapTN.saved == false)
+            if (edit == false)
+            {
+                if (frmNhapTN.saved == false)
+                    return;
+                frmNhapTN.Set_Readonly();
+                frmNhapTN.ShowDialog();
+            }
+        }
+
+        private void cbxLaisuat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Tinhlai frmTinhLai = new Tinhlai();
+            if (edit == false)
                 return;
-            frmNhapTN.Set_Readonly();
-            frmNhapTN.ShowDialog();
+            else
+            {
+                if (cbxLaisuat.Text == laisuat.ToString())
+                    return;
+                frmTinhLai.init(dbfile, txtMaHD.Text, int.Parse(cbxLaisuat.Text));
+                frmTinhLai.ShowDialog();
+                if (frmTinhLai.saved == false)
+                    cbxLaisuat.Text = laisuat.ToString();
+            }
         }
     }
 }
