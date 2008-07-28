@@ -36,6 +36,9 @@ namespace Quanlydongtien
             this.cmdClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTong = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblLaisuat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCF)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,14 +76,14 @@ namespace Quanlydongtien
             this.dtGridCF.Location = new System.Drawing.Point(4, 79);
             this.dtGridCF.MultiSelect = false;
             this.dtGridCF.Name = "dtGridCF";
-            this.dtGridCF.Size = new System.Drawing.Size(254, 213);
+            this.dtGridCF.Size = new System.Drawing.Size(462, 213);
             this.dtGridCF.TabIndex = 3;
             this.dtGridCF.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCF_CellEndEdit);
             this.dtGridCF.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCF_CellContentClick_1);
             // 
             // cmdSave
             // 
-            this.cmdSave.Location = new System.Drawing.Point(36, 302);
+            this.cmdSave.Location = new System.Drawing.Point(141, 298);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 30);
             this.cmdSave.TabIndex = 4;
@@ -90,7 +93,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(129, 302);
+            this.cmdClose.Location = new System.Drawing.Point(234, 298);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 30);
             this.cmdClose.TabIndex = 5;
@@ -115,11 +118,40 @@ namespace Quanlydongtien
             this.txtTong.Size = new System.Drawing.Size(159, 20);
             this.txtTong.TabIndex = 7;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(263, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "VND";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(309, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Lai suat:";
+            // 
+            // lblLaisuat
+            // 
+            this.lblLaisuat.AutoSize = true;
+            this.lblLaisuat.Location = new System.Drawing.Point(362, 18);
+            this.lblLaisuat.Name = "lblLaisuat";
+            this.lblLaisuat.Size = new System.Drawing.Size(0, 13);
+            this.lblLaisuat.TabIndex = 10;
+            // 
             // NhapKyTraNo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(263, 338);
+            this.ClientSize = new System.Drawing.Size(470, 338);
+            this.Controls.Add(this.lblLaisuat);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTong);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdClose);
@@ -149,5 +181,8 @@ namespace Quanlydongtien
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTong;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblLaisuat;
     }
 }

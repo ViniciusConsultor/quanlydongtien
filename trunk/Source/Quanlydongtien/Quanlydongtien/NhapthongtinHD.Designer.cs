@@ -43,6 +43,7 @@ namespace Quanlydongtien
             this.cbxLoaiHD = new System.Windows.Forms.ComboBox();
             this.grBoxKytra = new System.Windows.Forms.GroupBox();
             this.grKytrano = new System.Windows.Forms.GroupBox();
+            this.cmdPreview = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -62,6 +63,7 @@ namespace Quanlydongtien
             this.label3 = new System.Windows.Forms.Label();
             this.txtMaHD = new System.Windows.Forms.TextBox();
             this.lblContractCode = new System.Windows.Forms.Label();
+            this.cmdKytraShow = new System.Windows.Forms.Button();
             this.grBoxKytra.SuspendLayout();
             this.grKytrano.SuspendLayout();
             this.SuspendLayout();
@@ -141,6 +143,7 @@ namespace Quanlydongtien
             this.cbxLaisuat.Name = "cbxLaisuat";
             this.cbxLaisuat.Size = new System.Drawing.Size(62, 21);
             this.cbxLaisuat.TabIndex = 11;
+            this.cbxLaisuat.Text = "0";
             // 
             // chkReal
             // 
@@ -155,7 +158,7 @@ namespace Quanlydongtien
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(346, 160);
+            this.label8.Location = new System.Drawing.Point(347, 160);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 14;
@@ -198,6 +201,7 @@ namespace Quanlydongtien
             // 
             // grKytrano
             // 
+            this.grKytrano.Controls.Add(this.cmdPreview);
             this.grKytrano.Controls.Add(this.txtDate);
             this.grKytrano.Controls.Add(this.label12);
             this.grKytrano.Controls.Add(this.label13);
@@ -210,6 +214,16 @@ namespace Quanlydongtien
             this.grKytrano.TabIndex = 26;
             this.grKytrano.TabStop = false;
             this.grKytrano.Text = "Thong tin tra no";
+            // 
+            // cmdPreview
+            // 
+            this.cmdPreview.Location = new System.Drawing.Point(155, 43);
+            this.cmdPreview.Name = "cmdPreview";
+            this.cmdPreview.Size = new System.Drawing.Size(153, 23);
+            this.cmdPreview.TabIndex = 26;
+            this.cmdPreview.Text = "Xem thong tin tra no";
+            this.cmdPreview.UseVisualStyleBackColor = true;
+            this.cmdPreview.Click += new System.EventHandler(this.cmdPreview_Click);
             // 
             // txtDate
             // 
@@ -238,12 +252,18 @@ namespace Quanlydongtien
             // 
             // cbxDonVi
             // 
+            this.cbxDonVi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxDonVi.FormattingEnabled = true;
+            this.cbxDonVi.Items.AddRange(new object[] {
+            "Ngay",
+            "Thang",
+            "Quy",
+            "Nam"});
             this.cbxDonVi.Location = new System.Drawing.Point(75, 19);
             this.cbxDonVi.Name = "cbxDonVi";
             this.cbxDonVi.Size = new System.Drawing.Size(61, 21);
             this.cbxDonVi.TabIndex = 20;
-            this.cbxDonVi.Text = "Thang";
+            this.cbxDonVi.SelectedIndexChanged += new System.EventHandler(this.cbxDonVi_SelectedIndexChanged);
             // 
             // cbxKytra
             // 
@@ -266,6 +286,7 @@ namespace Quanlydongtien
             this.cbxKytra.Size = new System.Drawing.Size(61, 21);
             this.cbxKytra.TabIndex = 21;
             this.cbxKytra.Text = "1";
+            this.cbxKytra.SelectedIndexChanged += new System.EventHandler(this.cbxKytra_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -281,10 +302,10 @@ namespace Quanlydongtien
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(230, 19);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(87, 17);
+            this.radioButton1.Size = new System.Drawing.Size(75, 17);
             this.radioButton1.TabIndex = 2;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Tra nhieu lan";
+            this.radioButton1.Text = "Tra mo lan";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -330,7 +351,7 @@ namespace Quanlydongtien
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(50, 362);
+            this.cmdAccept.Location = new System.Drawing.Point(153, 362);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(88, 34);
             this.cmdAccept.TabIndex = 20;
@@ -350,6 +371,7 @@ namespace Quanlydongtien
             // 
             // cbxDonvitinh
             // 
+            this.cbxDonvitinh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxDonvitinh.FormattingEnabled = true;
             this.cbxDonvitinh.Items.AddRange(new object[] {
             "Ngay",
@@ -359,7 +381,7 @@ namespace Quanlydongtien
             this.cbxDonvitinh.Name = "cbxDonvitinh";
             this.cbxDonvitinh.Size = new System.Drawing.Size(55, 21);
             this.cbxDonvitinh.TabIndex = 22;
-            this.cbxDonvitinh.Text = "Ngay";
+            this.cbxDonvitinh.SelectedIndexChanged += new System.EventHandler(this.cbxDonvitinh_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -406,11 +428,22 @@ namespace Quanlydongtien
             this.lblContractCode.TabIndex = 27;
             this.lblContractCode.Text = "Ho dong da co";
             // 
+            // cmdKytraShow
+            // 
+            this.cmdKytraShow.Location = new System.Drawing.Point(59, 362);
+            this.cmdKytraShow.Name = "cmdKytraShow";
+            this.cmdKytraShow.Size = new System.Drawing.Size(88, 34);
+            this.cmdKytraShow.TabIndex = 28;
+            this.cmdKytraShow.Text = "Xem ky tra no";
+            this.cmdKytraShow.UseVisualStyleBackColor = true;
+            this.cmdKytraShow.Click += new System.EventHandler(this.cmdKytraShow_Click);
+            // 
             // NhapthongtinHD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 402);
+            this.Controls.Add(this.cmdKytraShow);
             this.Controls.Add(this.lblContractCode);
             this.Controls.Add(this.txtMaHD);
             this.Controls.Add(this.label3);
@@ -487,5 +520,7 @@ namespace Quanlydongtien
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMaHD;
         private System.Windows.Forms.Label lblContractCode;
+        private System.Windows.Forms.Button cmdPreview;
+        private System.Windows.Forms.Button cmdKytraShow;
     }
 }
