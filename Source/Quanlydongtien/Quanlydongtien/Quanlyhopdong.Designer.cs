@@ -42,7 +42,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(524, 392);
+            this.cmdClose.Location = new System.Drawing.Point(461, 392);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(150, 35);
             this.cmdClose.TabIndex = 6;
@@ -52,7 +52,7 @@ namespace Quanlydongtien
             // 
             // cmdAdd
             // 
-            this.cmdAdd.Location = new System.Drawing.Point(368, 392);
+            this.cmdAdd.Location = new System.Drawing.Point(305, 392);
             this.cmdAdd.Name = "cmdAdd";
             this.cmdAdd.Size = new System.Drawing.Size(150, 35);
             this.cmdAdd.TabIndex = 5;
@@ -66,7 +66,8 @@ namespace Quanlydongtien
             this.dtGridContracts.Location = new System.Drawing.Point(1, 54);
             this.dtGridContracts.MultiSelect = false;
             this.dtGridContracts.Name = "dtGridContracts";
-            this.dtGridContracts.Size = new System.Drawing.Size(676, 332);
+            this.dtGridContracts.ReadOnly = true;
+            this.dtGridContracts.Size = new System.Drawing.Size(609, 332);
             this.dtGridContracts.TabIndex = 4;
             this.dtGridContracts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridContracts_CellContentClick);
             // 
@@ -128,7 +129,7 @@ namespace Quanlydongtien
             // 
             // cmdEdit
             // 
-            this.cmdEdit.Location = new System.Drawing.Point(214, 392);
+            this.cmdEdit.Location = new System.Drawing.Point(151, 392);
             this.cmdEdit.Name = "cmdEdit";
             this.cmdEdit.Size = new System.Drawing.Size(150, 35);
             this.cmdEdit.TabIndex = 14;
@@ -140,7 +141,7 @@ namespace Quanlydongtien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 429);
+            this.ClientSize = new System.Drawing.Size(615, 429);
             this.Controls.Add(this.cmdEdit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cbxMoney);
@@ -150,6 +151,10 @@ namespace Quanlydongtien
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdAdd);
             this.Controls.Add(this.dtGridContracts);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(623, 463);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(623, 463);
             this.Name = "Quanlyhopdong";
             this.Text = "Quanlyhopdong";
             this.Load += new System.EventHandler(this.Quanlyhopdong_Load);

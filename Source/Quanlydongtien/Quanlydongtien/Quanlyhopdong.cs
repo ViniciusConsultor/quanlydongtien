@@ -108,27 +108,6 @@ namespace Quanlydongtien
             sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
             if (cbxMoney.Text != "All")
             {
-                
-                sqlStr = sqlStr + " ABS([Tongtien]) > " + cbxMoney.Text + " AND";
-            }
-            i = cbxCusName.Items.IndexOf(cbxCusName.Text);            
-            if (cbxCusName.Text != "All")
-                makh = lstMaKH[i].ToString();
-            else makh = "";
-
-            sqlStr = sqlStr + " [MaKH] LIKE '%" + makh + "%'";
-            FillDG(sqlStr);
-        }
-
-        private void cmdAdd_Click(object sender, EventArgs e)
-        {
-            string sqlStr, makh;
-
-            int i;
-            clear();
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
-            if (cbxMoney.Text != "All")
-            {
 
                 sqlStr = sqlStr + " ABS([Tongtien]) > " + cbxMoney.Text + " AND";
             }
@@ -141,10 +120,21 @@ namespace Quanlydongtien
             FillDG(sqlStr);
         }
 
+        private void cmdAdd_Click(object sender, EventArgs e)
+        {
+            NhapthongtinHD frmNhapHD = new NhapthongtinHD();
+            frmNhapHD.init(dbname);
+            frmNhapHD.ShowDialog();
+            clear();
+            Refresh_Data();
+        }
+
         private void cbxCusName_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        //Khi click vao datagrid se hien thi dong tien chi tiet tuong ung voi hop dong
 
         private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -165,8 +155,29 @@ namespace Quanlydongtien
             }
             dtGridRow = dtGridContracts.SelectedRows[0];
             mahd = dtGridRow.Cells["MaHD"].Value.ToString();
-            frmEditContracts.init(dbname);
+            frmEditContracts.init(dbname, mahd);
+            frmEditContracts.ShowDialog();
 
+        }
+
+        private void Refresh_Data()
+        {
+            string sqlStr, makh;
+            int i;
+            clear();
+            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
+            if (cbxMoney.Text != "All")
+            {
+
+                sqlStr = sqlStr + " ABS([Tongtien]) > " + cbxMoney.Text + " AND";
+            }
+            i = cbxCusName.Items.IndexOf(cbxCusName.Text);
+            if (cbxCusName.Text != "All")
+                makh = lstMaKH[i].ToString();
+            else makh = "";
+
+            sqlStr = sqlStr + " [MaKH] LIKE '%" + makh + "%'";
+            FillDG(sqlStr);
         }
     }
 }

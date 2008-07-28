@@ -144,6 +144,7 @@ namespace Quanlydongtien
             this.cbxLaisuat.Size = new System.Drawing.Size(62, 21);
             this.cbxLaisuat.TabIndex = 11;
             this.cbxLaisuat.Text = "0";
+            this.cbxLaisuat.SelectedIndexChanged += new System.EventHandler(this.cbxLaisuat_SelectedIndexChanged);
             // 
             // chkReal
             // 
