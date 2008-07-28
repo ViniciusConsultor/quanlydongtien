@@ -14,3 +14,7 @@ bin\Debug\Quanlydongtien.exe
 bin\Debug\Quanlydongtien.pdb
 obj\Debug\Quanlydongtien.Quanlykhachhang.resources
 obj\Debug\Quanlydongtien.Quanlynguoidung.resources
+obj\Debug\Quanlydongtien.NhapKyTraNo.resources
+obj\Debug\Quanlydongtien.NhapthongtinHD.resources
+obj\Debug\Quanlydongtien.NhapthongtinKH.resources
+obj\Debug\Quanlydongtien.Quanlyhopdong.resources
