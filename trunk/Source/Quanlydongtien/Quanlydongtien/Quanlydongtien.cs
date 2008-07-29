@@ -14,5 +14,20 @@ namespace Quanlydongtien
         {
             InitializeComponent();
         }
+
+        private void Quanlydongtien_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void init(string mahd, string dbname)
+        {
+
+        }
+
+        public void init(string ngayhd, string dbname)
+        {
+
+        }
     }
 }

@@ -43,6 +43,12 @@ namespace Quanlydongtien
             Create_kytra(rows);
         }
 
+        public void init(string mahd, Boolean tienvay)
+        {
+            string sqlStrG, sqlStrL;
+
+        }
+
         public void init(Int64 sotien, string ngaydaohan, string ngayhd, int laisuatvay)
         {
             txtTong.Text = sotien.ToString();

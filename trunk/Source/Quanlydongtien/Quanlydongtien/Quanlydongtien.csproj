@@ -147,6 +147,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quanlydongtien.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Quanlydongtien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quanlyhopdong.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Quanlyhopdong.cs</DependentUpon>

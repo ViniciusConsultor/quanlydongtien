@@ -176,6 +176,7 @@ namespace Quanlydongtien
                     cbxDateContracts.Value = DateTime.Parse(oleReader["NgayHD"].ToString());
                     cbxDateContracts.Enabled = false;
                     txtDesc.Text = oleReader["Desc"].ToString();
+                    laisuat = int.Parse(oleReader["Laisuat"].ToString());
                     cbxLaisuat.Text = oleReader["Laisuat"].ToString();
 //                    cbxLaisuat.Enabled = false;
                 }
@@ -358,12 +359,22 @@ namespace Quanlydongtien
         {
             string mahd;
             int i;
+            Boolean found = false;
             if (edit == true)
                 return;
             if (ListContracts.Count == 0)
                 return;
             mahd = txtMaHD.Text;
-            i = ListContracts.IndexOf(mahd);
+            for (i = 0; i < ListContracts.Count; i++)
+            {
+                if (ListContracts[i].ToString().Contains(mahd))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+                return;
             lblContractCode.Text = ListContracts[i].ToString();
         }
 
@@ -519,5 +530,6 @@ namespace Quanlydongtien
                     cbxLaisuat.Text = laisuat.ToString();
             }
         }
+    
     }
 }

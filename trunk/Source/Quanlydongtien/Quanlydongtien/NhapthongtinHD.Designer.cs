@@ -88,7 +88,7 @@ namespace Quanlydongtien
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 121);
+            this.label4.Location = new System.Drawing.Point(12, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 6;
@@ -96,7 +96,7 @@ namespace Quanlydongtien
             // 
             // txtTongtien
             // 
-            this.txtTongtien.Location = new System.Drawing.Point(107, 118);
+            this.txtTongtien.Location = new System.Drawing.Point(107, 125);
             this.txtTongtien.Name = "txtTongtien";
             this.txtTongtien.Size = new System.Drawing.Size(121, 20);
             this.txtTongtien.TabIndex = 7;
@@ -104,7 +104,7 @@ namespace Quanlydongtien
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(235, 121);
+            this.label5.Location = new System.Drawing.Point(235, 128);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 8;
@@ -113,7 +113,7 @@ namespace Quanlydongtien
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 159);
+            this.label6.Location = new System.Drawing.Point(11, 166);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 10;
@@ -122,7 +122,7 @@ namespace Quanlydongtien
             // cbxKyhan
             // 
             this.cbxKyhan.FormattingEnabled = true;
-            this.cbxKyhan.Location = new System.Drawing.Point(107, 156);
+            this.cbxKyhan.Location = new System.Drawing.Point(107, 163);
             this.cbxKyhan.Name = "cbxKyhan";
             this.cbxKyhan.Size = new System.Drawing.Size(60, 21);
             this.cbxKyhan.TabIndex = 9;
@@ -130,7 +130,7 @@ namespace Quanlydongtien
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(235, 159);
+            this.label7.Location = new System.Drawing.Point(235, 166);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 12;
@@ -139,7 +139,7 @@ namespace Quanlydongtien
             // cbxLaisuat
             // 
             this.cbxLaisuat.FormattingEnabled = true;
-            this.cbxLaisuat.Location = new System.Drawing.Point(285, 156);
+            this.cbxLaisuat.Location = new System.Drawing.Point(285, 163);
             this.cbxLaisuat.Name = "cbxLaisuat";
             this.cbxLaisuat.Size = new System.Drawing.Size(62, 21);
             this.cbxLaisuat.TabIndex = 11;
@@ -159,7 +159,7 @@ namespace Quanlydongtien
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(347, 160);
+            this.label8.Location = new System.Drawing.Point(347, 167);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 14;
@@ -193,9 +193,9 @@ namespace Quanlydongtien
             this.grBoxKytra.Controls.Add(this.radioButton1);
             this.grBoxKytra.Controls.Add(this.optTraNL);
             this.grBoxKytra.Controls.Add(this.optTraDK);
-            this.grBoxKytra.Location = new System.Drawing.Point(15, 236);
+            this.grBoxKytra.Location = new System.Drawing.Point(9, 246);
             this.grBoxKytra.Name = "grBoxKytra";
-            this.grBoxKytra.Size = new System.Drawing.Size(353, 120);
+            this.grBoxKytra.Size = new System.Drawing.Size(369, 120);
             this.grBoxKytra.TabIndex = 17;
             this.grBoxKytra.TabStop = false;
             this.grBoxKytra.Text = "Tra no";
@@ -337,7 +337,7 @@ namespace Quanlydongtien
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 202);
+            this.label10.Location = new System.Drawing.Point(12, 209);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(34, 13);
             this.label10.TabIndex = 18;
@@ -345,14 +345,14 @@ namespace Quanlydongtien
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(107, 199);
+            this.txtDesc.Location = new System.Drawing.Point(107, 206);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(271, 20);
             this.txtDesc.TabIndex = 19;
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(153, 362);
+            this.cmdAccept.Location = new System.Drawing.Point(180, 381);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(88, 34);
             this.cmdAccept.TabIndex = 20;
@@ -362,7 +362,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(247, 362);
+            this.cmdClose.Location = new System.Drawing.Point(274, 381);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(88, 34);
             this.cmdClose.TabIndex = 21;
@@ -378,7 +378,7 @@ namespace Quanlydongtien
             "Ngay",
             "Thang",
             "Nam"});
-            this.cbxDonvitinh.Location = new System.Drawing.Point(173, 156);
+            this.cbxDonvitinh.Location = new System.Drawing.Point(173, 163);
             this.cbxDonvitinh.Name = "cbxDonvitinh";
             this.cbxDonvitinh.Size = new System.Drawing.Size(55, 21);
             this.cbxDonvitinh.TabIndex = 22;
@@ -396,7 +396,7 @@ namespace Quanlydongtien
             // cbxDateContracts
             // 
             this.cbxDateContracts.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.cbxDateContracts.Location = new System.Drawing.Point(285, 117);
+            this.cbxDateContracts.Location = new System.Drawing.Point(285, 124);
             this.cbxDateContracts.Name = "cbxDateContracts";
             this.cbxDateContracts.Size = new System.Drawing.Size(98, 20);
             this.cbxDateContracts.TabIndex = 24;
@@ -431,7 +431,7 @@ namespace Quanlydongtien
             // 
             // cmdKytraShow
             // 
-            this.cmdKytraShow.Location = new System.Drawing.Point(59, 362);
+            this.cmdKytraShow.Location = new System.Drawing.Point(87, 381);
             this.cmdKytraShow.Name = "cmdKytraShow";
             this.cmdKytraShow.Size = new System.Drawing.Size(88, 34);
             this.cmdKytraShow.TabIndex = 28;
@@ -443,7 +443,7 @@ namespace Quanlydongtien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 402);
+            this.ClientSize = new System.Drawing.Size(390, 425);
             this.Controls.Add(this.cmdKytraShow);
             this.Controls.Add(this.lblContractCode);
             this.Controls.Add(this.txtMaHD);
@@ -470,9 +470,7 @@ namespace Quanlydongtien
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbxMaKH);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(398, 436);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(398, 436);
             this.Name = "NhapthongtinHD";
             this.Text = "NhapthongtinHD";
             this.Load += new System.EventHandler(this.NhapthongtinHD_Load);

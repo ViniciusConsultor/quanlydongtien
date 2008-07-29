@@ -37,6 +37,7 @@ namespace Quanlydongtien
             this.txtLaisuat = new System.Windows.Forms.TextBox();
             this.MaDongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ngaytra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienlai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCF)).BeginInit();
             this.SuspendLayout();
@@ -68,6 +69,7 @@ namespace Quanlydongtien
             this.dtGridCF.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaDongTien,
             this.Ngaytra,
+            this.Duno,
             this.Tienlai});
             this.dtGridCF.Location = new System.Drawing.Point(2, 73);
             this.dtGridCF.MultiSelect = false;
@@ -119,6 +121,11 @@ namespace Quanlydongtien
             this.Ngaytra.HeaderText = "Ngay tra";
             this.Ngaytra.Name = "Ngaytra";
             // 
+            // Duno
+            // 
+            this.Duno.HeaderText = "Du no goc";
+            this.Duno.Name = "Duno";
+            // 
             // Tienlai
             // 
             this.Tienlai.HeaderText = "Tien lai";
@@ -156,6 +163,7 @@ namespace Quanlydongtien
         private System.Windows.Forms.TextBox txtLaisuat;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaDongTien;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ngaytra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Duno;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tienlai;
     }
 }
