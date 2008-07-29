@@ -12,7 +12,7 @@ namespace Quanlydongtien
     public partial class Quanlynguoidung : Form
     {
         db dbUser;
-        string datafile;
+        string datafile;        
         public Quanlynguoidung()
         {
             InitializeComponent();

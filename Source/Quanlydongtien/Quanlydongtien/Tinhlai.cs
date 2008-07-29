@@ -40,8 +40,8 @@ namespace Quanlydongtien
             Int64 tienchiulai, sotienlai;
             OleDbDataReader oleReader;
             int rows;
-            sqlStr = "SELECT [MaDT], [Sotienlai], [NgayTra], [Tienchiulai], [Laisuat] FROM [TIENLAI] WHERE";
-            sqlStr = sqlStr + "[MaHD] = '" + txtMaHD.Text + "' AND [Datra] = No AND [Noquahan] = 0";
+            sqlStr = "SELECT [MaDT], [Sotienlai], Format([NgayTra], 'dd/mm/yyyy') AS Ngaytra, [Tienchiulai], [Laisuat] FROM [TIENLAI] WHERE";
+            sqlStr = sqlStr + "[MaHD] = '" + txtMaHD.Text + "' AND [Datra] = No AND [NoQH] = 0";
             oleReader = CashDB.genDataReader(sqlStr);
             if (oleReader == null)
                 this.Close();
@@ -55,8 +55,9 @@ namespace Quanlydongtien
                 laicu = Int64.Parse(oleReader["Laisuat"].ToString());
                 tienchiulai = Int64.Parse(oleReader["Tienchiulai"].ToString());
                 sotienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
-                ngaychiulai = (sotienlai * 360 * 100) / (tienchiulai * laicu);
-                sotienlai = (tienchiulai * laimoi) / (360 * 100);
+                ngaychiulai = ((sotienlai * 360 * 100) / (tienchiulai * laicu));
+                sotienlai = (tienchiulai * laimoi * ngaychiulai) / (360 * 100);
+                dtGridCF.Rows[rows].Cells["Duno"].Value = tienchiulai;
                 dtGridCF.Rows[rows].Cells["Tienlai"].Value = sotienlai;
                 rows++;
             }
