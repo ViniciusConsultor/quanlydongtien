@@ -64,6 +64,12 @@
       <DependentUpon>CreateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="db.cs" />
+    <Compile Include="Dongtiennam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dongtiennam.Designer.cs">
+      <DependentUpon>Dongtiennam.cs</DependentUpon>
+    </Compile>
     <Compile Include="FillContract.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,10 @@
     <EmbeddedResource Include="CreateUser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dongtiennam.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Dongtiennam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FillContract.resx">
       <SubType>Designer</SubType>
