@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Collections;
 
 namespace Quanlydongtien
 {
@@ -15,7 +16,9 @@ namespace Quanlydongtien
         string Mahd;
         Color activeC = Color.Yellow;
         Color NegativeC = Color.Pink;
-        Boolean rowColor = true;
+        Boolean rowColor = true; 
+        ArrayList DatraG, DatraL;
+        Int64 tienmat;
         public Quanlydongtien()
         {
             InitializeComponent();
@@ -28,13 +31,20 @@ namespace Quanlydongtien
 
         public void init(string mahd, string dbname)
         {
-            string sqlStrG, sqlStrL;
+            string sqlStrG, sqlStrL, sqlStr;
+            OleDbDataReader oleReader;
             Mahd = mahd;
             int i;
             try
             {
                 CashDB = new db(dbname);
+                DatraG = new ArrayList();
+                DatraL = new ArrayList();
                 txtMaHD.Text = mahd;
+                sqlStr = "SELECT [SoLuong] FROM [TIEN] WHERE [MaTien] = 'TongTien'";
+                oleReader = CashDB.genDataReader(sqlStr);
+                if (oleReader.Read())
+                    tienmat = Int64.Parse(oleReader[0].ToString());
                 sqlStrG = "SELECT [MaDT], [Sotien], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [DONGTIEN] WHERE [MaHD] ='" + mahd + "'";
                 sqlStrL = "SELECT [MaDT], [Sotienlai], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [TIENLAI] WHERE [MaHD] ='" + mahd + "'";
                 FillDG(sqlStrG, dtGridCFG);
@@ -60,8 +70,9 @@ namespace Quanlydongtien
                 {
                     if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True")
                     {
-                        dtGridCFL.Rows[i].Cells["Datra"].ReadOnly = true;
+                        DatraL.Add("True");
                     }
+                    else DatraL.Add("False");
 
                 }
 
@@ -69,8 +80,9 @@ namespace Quanlydongtien
                 {
                     if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True")
                     {
-                        dtGridCFG.Rows[i].Cells["Datra"].ReadOnly = true;
+                        DatraG.Add("True");
                     }
+                    else DatraG.Add("False");
                 }
 
                 for (i = 0; i < dtGridCFG.Rows.Count; i++)
@@ -87,6 +99,7 @@ namespace Quanlydongtien
                     }
                     rowColor = !rowColor;
                 }
+                this.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -97,16 +110,18 @@ namespace Quanlydongtien
 
         private void cmdUpadate_Click(object sender, EventArgs e)
         {
-            string sqlStrL, sqlStrG;
+            string sqlStrL, sqlStrG, sqlStr;
             int i;
             string Datra;
+            Int64 tientra = 0;
             for (i = 0; i < dtGridCFG.Rows.Count; i++)
             {
-                if (dtGridCFG.Rows[i].Cells["Datra"].ReadOnly == true)
+                if (DatraG[i].ToString() == "True")
                     continue;
-                if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True")
-                    Datra = "Yes";
-                else Datra = "No";
+                if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "False")
+                    continue;
+                Datra = "Yes";
+                tientra = tientra + Int64.Parse(dtGridCFG.Rows[i].Cells["Sotien"].ToString());
                 sqlStrG = "UPDATE [DONGTIEN] SET [Datra] = " + Datra;
                 sqlStrG = sqlStrG + " WHERE [MaDT] = " + dtGridCFG.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrG);
@@ -114,15 +129,19 @@ namespace Quanlydongtien
 
             for (i = 0; i < dtGridCFL.Rows.Count; i++)
             {
-                if (dtGridCFL.Rows[i].ReadOnly == true)
+                if (DatraL[i].ToString() == "True")
                     continue;
-                if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True")
-                    Datra = "Yes";
-                else Datra = "No";
+                if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "False")
+                    continue;
+                Datra = "Yes";
+                tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].ToString());
                 sqlStrL = "UPDATE [TIENLAI] SET [Datra] = " + Datra;
                 sqlStrL = sqlStrL + " WHERE [MaDT] = " + dtGridCFL.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrL);
             }
+            tienmat = tienmat + tientra;
+            sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
+            CashDB.runSQLCmd(sqlStr);
             CashDB.close();
             this.Close();
         }
@@ -166,6 +185,29 @@ namespace Quanlydongtien
         {
             CashDB.close();
             this.Close();
+        }
+
+        private void dtGridCFG_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (dtGridCFG.Columns[e.ColumnIndex].Name != "Datra")
+            //    return;
+            //if ((dtGridCFG.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "False") && (DatraG[e.RowIndex].ToString() == "True"))
+            //    dtGridCFG.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = true;
+        }
+
+        private void dtGridCFL_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dtGridCFG_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dtGridCFG_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }
