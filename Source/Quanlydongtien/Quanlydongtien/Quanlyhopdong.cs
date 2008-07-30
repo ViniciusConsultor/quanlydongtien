@@ -190,7 +190,7 @@ namespace Quanlydongtien
             Quanlydongtien frmQLDT = new Quanlydongtien();
             mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
             frmQLDT.init(mahd, dbname);
-            frmQLDT.ShowDialog();
+            //frmQLDT.ShowDialog();
         }
     }
 }

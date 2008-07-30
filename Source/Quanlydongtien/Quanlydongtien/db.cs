@@ -222,5 +222,16 @@ namespace Quanlydongtien
             connected = false;
         }
 
+        /*Batch process la chay giao dich cuoi ngay de:
+         *   - Cap nhat lai so tien mat 
+         *   - Cap nhat lai cac no qua han:
+         *      + Neu ngay den han ma chua nop tien thi chuyen sang no qua han
+         *      + Chuyen sang no qua han thi so tien se bi loai khoi dong tien 
+         */
+        public static Boolean Batch_Process()
+        {
+            return true;
+        }
+
     }
 }
