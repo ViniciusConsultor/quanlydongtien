@@ -37,7 +37,7 @@ namespace Quanlydongtien
             lstMaKH = new ArrayList();
             dbname = dbfile;
             ContractDB = new db(dbfile);
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] ORDER BY [MaHD]";
+            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat], [Desc] FROM [HOPDONG] ORDER BY [MaHD]";
             FillDG(sqlStr);
             dtGridContracts.AllowUserToAddRows = false;
             sqlStr = "SELECT [MaKH], [TenKH] FROM [KHACHHANG]";
@@ -138,7 +138,11 @@ namespace Quanlydongtien
 
         private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //string mahd;
+            //Quanlydongtien frmQLDT = new Quanlydongtien();
+            //mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
+            //frmQLDT.init(mahd, dbname);
+            //frmQLDT.ShowDialog();
         }
 
         private void cmdEdit_Click(object sender, EventArgs e)
@@ -178,6 +182,15 @@ namespace Quanlydongtien
 
             sqlStr = sqlStr + " [MaKH] LIKE '%" + makh + "%'";
             FillDG(sqlStr);
+        }
+
+        private void dtGridContracts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string mahd;
+            Quanlydongtien frmQLDT = new Quanlydongtien();
+            mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
+            frmQLDT.init(mahd, dbname);
+            frmQLDT.ShowDialog();
         }
     }
 }
