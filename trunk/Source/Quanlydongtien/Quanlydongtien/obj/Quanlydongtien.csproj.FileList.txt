@@ -21,3 +21,4 @@ obj\Debug\Quanlydongtien.Tinhlai.resources
 obj\Debug\Quanlydongtien.csproj.GenerateResource.Cache
 obj\Debug\Quanlydongtien.exe
 obj\Debug\Quanlydongtien.pdb
+obj\Debug\Quanlydongtien.Dongtienthang.resources

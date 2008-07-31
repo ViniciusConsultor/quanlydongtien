@@ -48,6 +48,7 @@ namespace Quanlydongtien
             this.dtGridCFG.Name = "dtGridCFG";
             this.dtGridCFG.Size = new System.Drawing.Size(452, 255);
             this.dtGridCFG.TabIndex = 0;
+
             // 
             // txtMaHD
             // 
@@ -94,6 +95,7 @@ namespace Quanlydongtien
             this.dtGridCFL.Name = "dtGridCFL";
             this.dtGridCFL.Size = new System.Drawing.Size(452, 255);
             this.dtGridCFL.TabIndex = 6;
+
             // 
             // label2
             // 

@@ -189,7 +189,6 @@ namespace Quanlydongtien
         private void Create_kytra(int rows)
         {
             DataGridViewTextBoxColumn texboxCol;
-            CalendarColumn cldCol;
             DataGridViewTextBoxCell texboxCel;
             DataGridViewRow dtGridRow;
             int i;
