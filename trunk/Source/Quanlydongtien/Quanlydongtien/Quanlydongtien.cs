@@ -18,7 +18,7 @@ namespace Quanlydongtien
         Color NegativeC = Color.Pink;
         Boolean rowColor = true; 
         ArrayList DatraG, DatraL;
-        Int64 tienmat;
+        Int64 tienmat, tienlai;
         public Quanlydongtien()
         {
             InitializeComponent();
@@ -32,6 +32,7 @@ namespace Quanlydongtien
         public void init(string mahd, string dbname)
         {
             string sqlStrG, sqlStrL, sqlStr;
+            string matien;
             OleDbDataReader oleReader;
             Mahd = mahd;
             int i;
@@ -41,10 +42,17 @@ namespace Quanlydongtien
                 DatraG = new ArrayList();
                 DatraL = new ArrayList();
                 txtMaHD.Text = mahd;
-                sqlStr = "SELECT [SoLuong] FROM [TIEN] WHERE [MaTien] = 'TongTien'";
+                sqlStr = "SELECT [SoLuong], [MaTien] FROM [TIEN]";
                 oleReader = CashDB.genDataReader(sqlStr);
-                if (oleReader.Read())
-                    tienmat = Int64.Parse(oleReader[0].ToString());
+                if (oleReader == null)
+                    return;
+                while (oleReader.Read())
+                {
+                    matien = oleReader["Matien"].ToString();
+                    if (matien == "TongTien")
+                        tienmat = Int64.Parse(oleReader["SoLuong"].ToString());
+                    if (matien == "Tienlai") tienlai = Int64.Parse(oleReader["SoLuong"].ToString());
+                }
                 sqlStrG = "SELECT [MaDT], [Sotien], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [DONGTIEN] WHERE [MaHD] ='" + mahd + "'";
                 sqlStrL = "SELECT [MaDT], [Sotienlai], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [TIENLAI] WHERE [MaHD] ='" + mahd + "'";
                 FillDG(sqlStrG, dtGridCFG);
@@ -84,21 +92,6 @@ namespace Quanlydongtien
                     }
                     else DatraG.Add("False");
                 }
-
-                for (i = 0; i < dtGridCFG.Rows.Count; i++)
-                {
-                    if (rowColor)
-                    {
-                        dtGridCFL.Rows[i].DefaultCellStyle.BackColor = activeC;
-                        dtGridCFG.Rows[i].DefaultCellStyle.BackColor = activeC;
-                    }
-                    else
-                    {
-                        dtGridCFG.Rows[i].DefaultCellStyle.BackColor = NegativeC;
-                        dtGridCFL.Rows[i].DefaultCellStyle.BackColor = NegativeC;
-                    }
-                    rowColor = !rowColor;
-                }
                 this.ShowDialog();
             }
             catch (Exception ex)
@@ -135,6 +128,7 @@ namespace Quanlydongtien
                     continue;
                 Datra = "Yes";
                 tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].ToString());
+                tienlai = tienlai + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].ToString());
                 sqlStrL = "UPDATE [TIENLAI] SET [Datra] = " + Datra;
                 sqlStrL = sqlStrL + " WHERE [MaDT] = " + dtGridCFL.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrL);
@@ -142,6 +136,7 @@ namespace Quanlydongtien
             tienmat = tienmat + tientra;
             sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
             CashDB.runSQLCmd(sqlStr);
+            sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienlai + " WHERE [Matien] = 'Tienlai'";
             CashDB.close();
             this.Close();
         }
@@ -186,29 +181,5 @@ namespace Quanlydongtien
             CashDB.close();
             this.Close();
         }
-
-        private void dtGridCFG_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (dtGridCFG.Columns[e.ColumnIndex].Name != "Datra")
-            //    return;
-            //if ((dtGridCFG.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "False") && (DatraG[e.RowIndex].ToString() == "True"))
-            //    dtGridCFG.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = true;
-        }
-
-        private void dtGridCFL_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dtGridCFG_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dtGridCFG_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
     }
 }

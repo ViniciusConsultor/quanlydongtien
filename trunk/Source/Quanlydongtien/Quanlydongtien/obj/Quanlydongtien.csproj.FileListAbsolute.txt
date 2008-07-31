@@ -67,3 +67,5 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Nha
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.NhapKyTraNo.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Tinhlai.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Quanlydongtien.resources
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Dongtiennam.resources
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Dongtienthang.resources

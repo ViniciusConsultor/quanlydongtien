@@ -61,8 +61,9 @@ namespace Quanlydongtien
             this.Ducuoi});
             this.dtGridCash.Location = new System.Drawing.Point(-2, 33);
             this.dtGridCash.Name = "dtGridCash";
-            this.dtGridCash.Size = new System.Drawing.Size(457, 442);
+            this.dtGridCash.Size = new System.Drawing.Size(396, 442);
             this.dtGridCash.TabIndex = 1;
+            this.dtGridCash.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentDoubleClick);
             // 
             // Nam
             // 
@@ -92,7 +93,7 @@ namespace Quanlydongtien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 477);
+            this.ClientSize = new System.Drawing.Size(394, 477);
             this.Controls.Add(this.dtGridCash);
             this.Controls.Add(this.chkReal);
             this.MaximizeBox = false;

@@ -136,15 +136,6 @@ namespace Quanlydongtien
 
         //Khi click vao datagrid se hien thi dong tien chi tiet tuong ung voi hop dong
 
-        private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //string mahd;
-            //Quanlydongtien frmQLDT = new Quanlydongtien();
-            //mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
-            //frmQLDT.init(mahd, dbname);
-            //frmQLDT.ShowDialog();
-        }
-
         private void cmdEdit_Click(object sender, EventArgs e)
         {
             string mahd;

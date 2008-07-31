@@ -70,6 +70,12 @@
     <Compile Include="Dongtiennam.Designer.cs">
       <DependentUpon>Dongtiennam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dongtienthang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dongtienthang.Designer.cs">
+      <DependentUpon>Dongtienthang.cs</DependentUpon>
+    </Compile>
     <Compile Include="FillContract.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,10 @@
     <EmbeddedResource Include="Dongtiennam.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dongtiennam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dongtienthang.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Dongtienthang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FillContract.resx">
       <SubType>Designer</SubType>

@@ -48,9 +48,6 @@ namespace Quanlydongtien
             this.dtGridCFG.Name = "dtGridCFG";
             this.dtGridCFG.Size = new System.Drawing.Size(452, 255);
             this.dtGridCFG.TabIndex = 0;
-            this.dtGridCFG.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCFG_CellEndEdit);
-            this.dtGridCFG.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCFG_CellValueChanged);
-            this.dtGridCFG.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCFG_CellContentClick);
             // 
             // txtMaHD
             // 
@@ -97,7 +94,6 @@ namespace Quanlydongtien
             this.dtGridCFL.Name = "dtGridCFL";
             this.dtGridCFL.Size = new System.Drawing.Size(452, 255);
             this.dtGridCFL.TabIndex = 6;
-            this.dtGridCFL.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCFL_CellContentClick);
             // 
             // label2
             // 
