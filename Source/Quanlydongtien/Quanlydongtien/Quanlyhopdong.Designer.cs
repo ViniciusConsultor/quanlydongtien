@@ -70,7 +70,6 @@ namespace Quanlydongtien
             this.dtGridContracts.Size = new System.Drawing.Size(609, 332);
             this.dtGridContracts.TabIndex = 4;
             this.dtGridContracts.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridContracts_CellContentDoubleClick);
-            this.dtGridContracts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridContracts_CellContentClick);
             // 
             // cbxCusName
             // 

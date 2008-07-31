@@ -5,49 +5,41 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OleDb;
 using System.Collections;
+using System.Data.OleDb;
+
 namespace Quanlydongtien
 {
-    public partial class Dongtiennam : Form
+    public partial class Dongtienthang : Form
     {
         db CashDB;
         Boolean realdata;
-        string dbfile;
-        public Dongtiennam()
+        int nam;
+        public Dongtienthang()
         {
             InitializeComponent();
         }
 
-        private void Dongtiennam_Load(object sender, EventArgs e)
+        private void Dongtienthang_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-        public void init(string dbname)
+        public void init(string dbname, Boolean real, int namtien)
         {
             int i;
-            Int64 tiendu;
             CashDB = new db(dbname);
+            nam = namtien;
+            realdata = real;
             create_dtGrid();
             FillDG();
-            dbfile = dbname;
-            realdata = true;
+            lblNam.Text = namtien.ToString();
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
-                tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
-                if (dtGridCash.Rows[i].Cells["Tienra"].Value != null)
-                    tiendu = tiendu - Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
-                dtGridCash.Rows[i].Cells["Ducuoi"].Value = tiendu;
+                dtGridCash.Rows[i].Cells["Ducuoi"].Value = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString()) - Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
             }
             Tinh_So_Du();
             this.ShowDialog();
-        }
-
-        private void chkReal_CheckedChanged(object sender, EventArgs e)
-        {
-            realdata = false;
-            Clear();
         }
 
         private Boolean FillDG()
@@ -65,8 +57,14 @@ namespace Quanlydongtien
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
-                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
-                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) ";
+                if (realdata)
+                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') GROUP BY FORMAT([Ngaytra], 'mm')";
+                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                if (realdata)
+                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = " +  realdata.ToString() +") GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -74,48 +72,13 @@ namespace Quanlydongtien
                 while (oleReaderG.Read())
                 {
                     tiengoc.Add(oleReaderG["Tien"].ToString());
-                    namtragoc.Add(oleReaderG["Nam"].ToString());
+                    namtragoc.Add(oleReaderG["Thang"].ToString());
                 }
 
                 while (oleReaderL.Read())
                 {
                     tienlai.Add(oleReaderL["Tien"].ToString());
-                    namtralai.Add(oleReaderL["Nam"].ToString());
-                }
-
-                for (i = 0; i < tiengoc.Count;  i++)
-                {
-                    tientragoc = Int64.Parse(tiengoc[i].ToString());
-                    for (j = 0; j < tienlai.Count; j++)
-                    {
-                        if (namtralai[j].ToString() == namtragoc[i].ToString())
-                            tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
-                    }
-                    dtGridCash.Rows[i].Cells["Tienvao"].Value = tientragoc;
-                }
-
-                //Add to tienra column
-
-                tiengoc = new ArrayList();
-                tienlai = new ArrayList();
-                namtragoc = new ArrayList();
-                namtralai = new ArrayList();
-                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
-                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
-                oleReaderG = CashDB.genDataReader(sqlStrVG);
-                oleReaderL = CashDB.genDataReader(sqlStrVL);
-                if (oleReaderG == null || oleReaderL == null)
-                    return false;
-                while (oleReaderG.Read())
-                {
-                    tiengoc.Add(oleReaderG["Tien"].ToString());
-                    namtragoc.Add(oleReaderG["Nam"].ToString());
-                }
-
-                while (oleReaderL.Read())
-                {
-                    tienlai.Add(oleReaderL["Tien"].ToString());
-                    namtralai.Add(oleReaderL["Nam"].ToString());
+                    namtralai.Add(oleReaderL["Thang"].ToString());
                 }
 
                 for (i = 0; i < tiengoc.Count; i++)
@@ -126,7 +89,54 @@ namespace Quanlydongtien
                         if (namtralai[j].ToString() == namtragoc[i].ToString())
                             tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
                     }
-                    dtGridCash.Rows[i].Cells["Tienra"].Value = Math.Abs(tientragoc);
+                    for (j = 0; j < dtGridCash.Rows.Count; j++)
+                        if (("0" + dtGridCash.Rows[j].Cells["Thang"].Value.ToString()) == namtragoc[i].ToString())
+                            dtGridCash.Rows[j].Cells["Tienvao"].Value = tientragoc;
+                }
+
+                //Add to tienra column
+
+                tiengoc = new ArrayList();
+                tienlai = new ArrayList();
+                namtragoc = new ArrayList();
+                namtralai = new ArrayList();
+                sqlStrRG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                if (realdata)
+                    sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = " + realdata.ToString() +") GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                sqlStrRL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                if (realdata)
+                    sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam +"')) AND ([Real] = " + realdata.ToString() +")GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                oleReaderG = CashDB.genDataReader(sqlStrRG);
+                oleReaderL = CashDB.genDataReader(sqlStrRL);
+                if (oleReaderG == null || oleReaderL == null)
+                    return false;
+                while (oleReaderG.Read())
+                {
+                    tiengoc.Add(oleReaderG["Tien"].ToString());
+                    namtragoc.Add(oleReaderG["Thang"].ToString());
+                }
+
+                while (oleReaderL.Read())
+                {
+                    tienlai.Add(oleReaderL["Tien"].ToString());
+                    namtralai.Add(oleReaderL["Thang"].ToString());
+                }
+
+                for (i = 0; i < tiengoc.Count; i++)
+                {
+                    tientragoc = Int64.Parse(tiengoc[i].ToString());
+                    for (j = 0; j < tienlai.Count; j++)
+                    {
+                        if (namtralai[j].ToString() == namtragoc[i].ToString())
+                            tientragoc = tientragoc + Int64.Parse(tienlai[j].ToString());
+                    }
+                    for (j = 0; j < dtGridCash.Rows.Count; j++)
+                    {
+                        if (("0" + dtGridCash.Rows[j].Cells["Thang"].Value.ToString()) == namtragoc[i].ToString())
+                            dtGridCash.Rows[j].Cells["Tienra"].Value = Math.Abs(tientragoc);
+                    }
                 }
 
                 return true;
@@ -139,36 +149,23 @@ namespace Quanlydongtien
 
         private Boolean create_dtGrid()
         {
-            string sqlStr;
-            int minyear, maxyear;
-            string fieldname;
             int i;
-            OleDbDataReader oleReader;
-            sqlStr = "SELECT Min(Format(NgayTra,'yyyy')) AS Minyear, Max(Format(NgayTra,'yyyy')) AS Maxyear FROM Dongtien";
-            oleReader = CashDB.genDataReader(sqlStr);
-            if (oleReader == null)
-                return false;
-            else
+            try
             {
-                if (oleReader.Read())
-                {
-                    minyear = int.Parse(oleReader["Minyear"].ToString());
-                    maxyear = int.Parse(oleReader["Maxyear"].ToString());
-                }
-                else return false;
-                i = minyear;
-                while (i <= maxyear)
+                for (i = 1; i <= 12; i++)
                 {
                     dtGridCash.Rows.Add();
-                    dtGridCash.Rows[i - minyear].Cells["Nam"].Value = i.ToString();
-                    dtGridCash.Rows[i - minyear].Cells["Tienvao"].Value = "0";
-                    dtGridCash.Rows[i - minyear].Cells["Tienra"].Value = "0";
-                    dtGridCash.Rows[i - minyear].Cells["Ducuoi"].Value = "0";
-                    i++;
+                    dtGridCash.Rows[i - 1].Cells["Thang"].Value = i.ToString();
+                    dtGridCash.Rows[i - 1].Cells["Tienvao"].Value = "0";
+                    dtGridCash.Rows[i - 1].Cells["Tienra"].Value = "0";
+                    dtGridCash.Rows[i - 1].Cells["Ducuoi"].Value = "0";
                 }
                 return true;
             }
-
+            catch
+            {
+                return false;
+            }
         }
 
         private void Clear()
@@ -177,14 +174,6 @@ namespace Quanlydongtien
             {
                 dtGridCash.Rows.RemoveAt(dtGridCash.Rows.Count - 1);
             }
-        }
-
-        private void dtGridCash_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int nam;
-            Dongtienthang frmDongTienThang = new Dongtienthang();
-            nam = int.Parse(dtGridCash.Rows[e.RowIndex].Cells["Nam"].Value.ToString());
-            frmDongTienThang.init(dbfile, realdata, nam);
         }
 
         private void Tinh_So_Du()
@@ -211,6 +200,7 @@ namespace Quanlydongtien
                 sodu_i = sodu_i_1 + sodu_i;
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = sodu_i;
             }
-        }
+        }        
+ 
     }
 }
