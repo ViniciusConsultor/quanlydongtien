@@ -181,6 +181,7 @@ namespace Quanlydongtien
             // txtAccount
             // 
             this.txtAccount.Location = new System.Drawing.Point(111, 173);
+            this.txtAccount.MaxLength = 20;
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.Size = new System.Drawing.Size(152, 20);
             this.txtAccount.TabIndex = 17;
@@ -197,6 +198,7 @@ namespace Quanlydongtien
             // txtBank
             // 
             this.txtBank.Location = new System.Drawing.Point(330, 173);
+            this.txtBank.MaxLength = 100;
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(385, 20);
             this.txtBank.TabIndex = 19;
@@ -224,6 +226,7 @@ namespace Quanlydongtien
             // txtIdentCardNum
             // 
             this.txtIdentCardNum.Location = new System.Drawing.Point(111, 55);
+            this.txtIdentCardNum.MaxLength = 15;
             this.txtIdentCardNum.Name = "txtIdentCardNum";
             this.txtIdentCardNum.Size = new System.Drawing.Size(171, 20);
             this.txtIdentCardNum.TabIndex = 22;

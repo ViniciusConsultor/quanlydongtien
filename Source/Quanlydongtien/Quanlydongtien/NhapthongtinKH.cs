@@ -23,6 +23,7 @@ namespace Quanlydongtien
         {
             CusDb = new db(dbname);
             newuser = true;
+            chkPhanloai.Checked = true;
         }
 
         public void init(string dbname, string cusId)
@@ -120,9 +121,16 @@ namespace Quanlydongtien
                         return;
                     }
             }
+            if (Utilities.isDateTime(txtIssDate.Text) == false)
+            {
+                MessageBox.Show("Ban nhap chu dung dinh dang ngay thang!");
+                return;
+            }
             if (newuser == true)
                 Create_New_User();
             else UpdateUser();
+            CusDb.close();
+            this.Close();
         }
 
         private void cmdClose_Click(object sender, EventArgs e)
@@ -186,8 +194,8 @@ namespace Quanlydongtien
             sqlStr = sqlStr + "VALUES ('" + txtCusCode.Text + "', '";
             sqlStr = sqlStr + txtCusName.Text + "', '" + txtIdentCardNum.Text + "', '" + txtIssDate.Text + "', '";
             sqlStr = sqlStr + txtIssPlace.Text + "', '" + txtPhoneNum.Text + "', '";
-            sqlStr = sqlStr + txtAddress + "', '" + txtAccount.Text + "', '";
-            sqlStr = sqlStr + txtBank + "', " + LoaiKH;
+            sqlStr = sqlStr + txtAddress.Text + "', '" + txtAccount.Text + "', '";
+            sqlStr = sqlStr + txtBank.Text + "', " + LoaiKH + ")";
             try
             {
                 CusDb.runSQLCmd(sqlStr);

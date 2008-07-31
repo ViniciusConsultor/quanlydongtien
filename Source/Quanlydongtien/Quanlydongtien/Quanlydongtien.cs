@@ -76,7 +76,9 @@ namespace Quanlydongtien
 
                 for (i = 0; i < dtGridCFL.Rows.Count; i++)
                 {
-                    if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True")
+                    DateTime ngaytralai = DateTime.Parse(dtGridCFL.Rows[i].Cells["Ngaytratien"].Value.ToString());
+                    TimeSpan difDay = ngaytralai.Subtract(DateTime.Today);
+                    if ((dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True") || (difDay.Days > 0))
                     {
                         DatraL.Add("True");
                     }
@@ -86,7 +88,9 @@ namespace Quanlydongtien
 
                 for (i = 0; i < dtGridCFG.Rows.Count; i++)
                 {
-                    if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True")
+                    DateTime ngaytralai = DateTime.Parse(dtGridCFG.Rows[i].Cells["Ngaytratien"].Value.ToString());
+                    TimeSpan difDay = ngaytralai.Subtract(DateTime.Today);
+                    if ((dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True") || (difDay.Days > 0))
                     {
                         DatraG.Add("True");
                     }
@@ -114,7 +118,7 @@ namespace Quanlydongtien
                 if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "False")
                     continue;
                 Datra = "Yes";
-                tientra = tientra + Int64.Parse(dtGridCFG.Rows[i].Cells["Sotien"].ToString());
+                tientra = tientra + Int64.Parse(dtGridCFG.Rows[i].Cells["Sotien"].Value.ToString());
                 sqlStrG = "UPDATE [DONGTIEN] SET [Datra] = " + Datra;
                 sqlStrG = sqlStrG + " WHERE [MaDT] = " + dtGridCFG.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrG);
@@ -127,8 +131,8 @@ namespace Quanlydongtien
                 if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "False")
                     continue;
                 Datra = "Yes";
-                tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].ToString());
-                tienlai = tienlai + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].ToString());
+                tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].Value.ToString());
+                tienlai = tienlai + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].Value.ToString());
                 sqlStrL = "UPDATE [TIENLAI] SET [Datra] = " + Datra;
                 sqlStrL = sqlStrL + " WHERE [MaDT] = " + dtGridCFL.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrL);
