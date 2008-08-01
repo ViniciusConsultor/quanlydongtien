@@ -71,3 +71,4 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Don
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Dongtienthang.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Dongtienngay.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Dongchitiet.resources
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Quanlyvon.resources

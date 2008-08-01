@@ -31,6 +31,8 @@ namespace Quanlydongtien
             this.dtGridCash = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNam = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblDuno = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,8 +41,6 @@ namespace Quanlydongtien
             this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblDuno = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +82,24 @@ namespace Quanlydongtien
             this.lblNam.Size = new System.Drawing.Size(29, 13);
             this.lblNam.TabIndex = 4;
             this.lblNam.Text = "Nam";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(176, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Du no cu:";
+            // 
+            // lblDuno
+            // 
+            this.lblDuno.AutoSize = true;
+            this.lblDuno.Location = new System.Drawing.Point(236, 10);
+            this.lblDuno.Name = "lblDuno";
+            this.lblDuno.Size = new System.Drawing.Size(35, 13);
+            this.lblDuno.TabIndex = 6;
+            this.lblDuno.Text = "label3";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -131,24 +149,6 @@ namespace Quanlydongtien
             this.Ducuoi.Name = "Ducuoi";
             this.Ducuoi.Width = 83;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Du no cu:";
-            // 
-            // lblDuno
-            // 
-            this.lblDuno.AutoSize = true;
-            this.lblDuno.Location = new System.Drawing.Point(236, 10);
-            this.lblDuno.Name = "lblDuno";
-            this.lblDuno.Size = new System.Drawing.Size(35, 13);
-            this.lblDuno.TabIndex = 6;
-            this.lblDuno.Text = "label3";
-            // 
             // Dongtienthang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,6 +159,7 @@ namespace Quanlydongtien
             this.Controls.Add(this.lblNam);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridCash);
+            this.MaximizeBox = false;
             this.Name = "Dongtienthang";
             this.Text = "Dongtienthang";
             this.Load += new System.EventHandler(this.Dongtienthang_Load);

@@ -89,7 +89,7 @@ namespace Quanlydongtien
                     tientragoc = Int64.Parse(tiengoc[i].ToString());
                     for (j = 0; j < tienlai.Count; j++)
                     {
-                        if (namtralai[j].ToString() == namtragoc[i].ToString())
+                        if (namtralai[j].ToString() == namtragoc[j].ToString())
                             tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
                     }
                     for (j = 0; j < dtGridCash.Rows.Count; j++)
@@ -109,11 +109,11 @@ namespace Quanlydongtien
                 sqlStrRG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
                     sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ") GROUP BY FORMAT([Ngaytra], 'dd')";
-                else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 sqlStrRL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
                     sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'dd')";
-                else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 oleReaderG = CashDB.genDataReader(sqlStrRG);
                 oleReaderL = CashDB.genDataReader(sqlStrRL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -175,13 +175,13 @@ namespace Quanlydongtien
                 {
                     tienra_i = Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
                     tienra_i = tienra_i - sodu_i_1;
-                    dtGridCash.Rows[i].Cells["Tienra"].Value = tienra_i;
+//                    dtGridCash.Rows[i].Cells["Tienra"].Value = tienra_i;
                 }
                 else
                 {
                     tienvao_i = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
                     tienvao_i = tienvao_i + sodu_i_1;
-                    dtGridCash.Rows[i].Cells["Tienvao"].Value = tienvao_i;
+  //                  dtGridCash.Rows[i].Cells["Tienvao"].Value = tienvao_i;
                 }
                 sodu_i = sodu_i_1 + sodu_i;
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = sodu_i;

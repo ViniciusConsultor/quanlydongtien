@@ -110,7 +110,13 @@ namespace Quanlydongtien
             string sqlStrL, sqlStrG, sqlStr;
             int i;
             string Datra;
+            Boolean Realdata;
             Int64 tientra = 0;
+            if ((dtGridCFG.Rows.Count == 0) && (dtGridCFL.Rows.Count == 0))
+                return;
+            if (dtGridCFG.Rows[0].Cells["Real"].Value.ToString() == "True")
+                Realdata = true;
+            else Realdata = false;
             for (i = 0; i < dtGridCFG.Rows.Count; i++)
             {
                 if (DatraG[i].ToString() == "True")
@@ -137,10 +143,15 @@ namespace Quanlydongtien
                 sqlStrL = sqlStrL + " WHERE [MaDT] = " + dtGridCFL.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrL);
             }
-            tienmat = tienmat + tientra;
-            sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
-            CashDB.runSQLCmd(sqlStr);
-            sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienlai + " WHERE [Matien] = 'Tienlai'";
+
+            if (Realdata)
+            {
+                tienmat = tienmat + tientra;
+                sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
+                CashDB.runSQLCmd(sqlStr);
+                sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienlai + " WHERE [Matien] = 'Tienlai'";
+            }
+
             CashDB.close();
             this.Close();
         }

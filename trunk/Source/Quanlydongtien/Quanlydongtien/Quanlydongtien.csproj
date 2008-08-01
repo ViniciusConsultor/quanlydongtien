@@ -203,6 +203,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>Quanlynguoidung.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quanlyvon.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Quanlyvon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tinhlai.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Tinhlai.cs</DependentUpon>
@@ -250,6 +254,12 @@
     </Compile>
     <Compile Include="Quanlynguoidung.Designer.cs">
       <DependentUpon>Quanlynguoidung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanlyvon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanlyvon.Designer.cs">
+      <DependentUpon>Quanlyvon.cs</DependentUpon>
     </Compile>
     <Compile Include="Tinhlai.cs">
       <SubType>Form</SubType>

@@ -78,6 +78,7 @@ namespace Quanlydongtien
         {
             string sqlString;
             OleDbDataReader oleReader;
+            Quanlyvon frmQLV;
             config();
             userdb = new db(dbFileName);
             sqlString = "SELECT * FROM QUANLYUSER WHERE [Username] = 'admin'";
@@ -105,6 +106,9 @@ namespace Quanlydongtien
                 this.Close();
             username = frmLogin.user;
             check_role(username);
+            frmQLV = new Quanlyvon();
+            frmQLV.init(dbFileName);
+            frmQLV.ShowDialog();
         }
         private void config()
         {
