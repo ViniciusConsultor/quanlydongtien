@@ -29,16 +29,16 @@ namespace Quanlydongtien
         private void InitializeComponent()
         {
             this.dtGridCash = new System.Windows.Forms.DataGridView();
+            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblthang = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDuno = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).BeginInit();
@@ -61,6 +61,30 @@ namespace Quanlydongtien
             this.dtGridCash.TabIndex = 2;
             this.dtGridCash.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtGridCash_CellMouseDoubleClick);
             this.dtGridCash.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentClick);
+            // 
+            // Ngay
+            // 
+            this.Ngay.HeaderText = "Nam";
+            this.Ngay.Name = "Ngay";
+            this.Ngay.Width = 54;
+            // 
+            // Tienvao
+            // 
+            this.Tienvao.HeaderText = "Tien vao";
+            this.Tienvao.Name = "Tienvao";
+            this.Tienvao.Width = 74;
+            // 
+            // Tienra
+            // 
+            this.Tienra.HeaderText = "Tien ra";
+            this.Tienra.Name = "Tienra";
+            this.Tienra.Width = 65;
+            // 
+            // Ducuoi
+            // 
+            this.Ducuoi.HeaderText = "So du cuoi";
+            this.Ducuoi.Name = "Ducuoi";
+            this.Ducuoi.Width = 83;
             // 
             // lblthang
             // 
@@ -104,30 +128,6 @@ namespace Quanlydongtien
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 83;
             // 
-            // Ngay
-            // 
-            this.Ngay.HeaderText = "Nam";
-            this.Ngay.Name = "Ngay";
-            this.Ngay.Width = 54;
-            // 
-            // Tienvao
-            // 
-            this.Tienvao.HeaderText = "Tien vao";
-            this.Tienvao.Name = "Tienvao";
-            this.Tienvao.Width = 74;
-            // 
-            // Tienra
-            // 
-            this.Tienra.HeaderText = "Tien ra";
-            this.Tienra.Name = "Tienra";
-            this.Tienra.Width = 65;
-            // 
-            // Ducuoi
-            // 
-            this.Ducuoi.HeaderText = "So du cuoi";
-            this.Ducuoi.Name = "Ducuoi";
-            this.Ducuoi.Width = 83;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -156,8 +156,8 @@ namespace Quanlydongtien
             this.Controls.Add(this.lblthang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridCash);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(356, 511);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(356, 511);
             this.Name = "Dongtienngay";
             this.Text = "Dongtienngay";

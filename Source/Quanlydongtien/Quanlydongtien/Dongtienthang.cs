@@ -93,7 +93,7 @@ namespace Quanlydongtien
                     for (j = 0; j < tienlai.Count; j++)
                     {
                         if (namtralai[j].ToString() == namtragoc[i].ToString())
-                            tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
+                            tientragoc = tientragoc + Int64.Parse(tienlai[j].ToString());
                     }
                     for (j = 0; j < dtGridCash.Rows.Count; j++)
                         if ((dtGridCash.Rows[j].Cells["Thang"].Value.ToString()) == namtragoc[i].ToString())
@@ -197,13 +197,13 @@ namespace Quanlydongtien
                 {
                     tienra_i = Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
                     tienra_i = tienra_i - sodu_i_1;
-                    dtGridCash.Rows[i].Cells["Tienra"].Value = tienra_i;
+               //     dtGridCash.Rows[i].Cells["Tienra"].Value = tienra_i;
                 }
                 else
                 {
                     tienvao_i = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
                     tienvao_i = tienvao_i + sodu_i_1;
-                    dtGridCash.Rows[i].Cells["Tienvao"].Value = tienvao_i;
+                   // dtGridCash.Rows[i].Cells["Tienvao"].Value = tienvao_i;
                 }
                 sodu_i = sodu_i_1 + sodu_i;
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = sodu_i;
