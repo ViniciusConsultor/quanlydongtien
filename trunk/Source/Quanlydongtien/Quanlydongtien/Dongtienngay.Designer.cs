@@ -1,6 +1,6 @@
 namespace Quanlydongtien
 {
-    partial class Dongtienthang
+    partial class Dongtienngay
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,13 @@ namespace Quanlydongtien
         private void InitializeComponent()
         {
             this.dtGridCash = new System.Windows.Forms.DataGridView();
+            this.lblthang = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblNam = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Thang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,47 +47,44 @@ namespace Quanlydongtien
             // dtGridCash
             // 
             this.dtGridCash.AllowUserToAddRows = false;
-            this.dtGridCash.AllowUserToDeleteRows = false;
-            this.dtGridCash.AllowUserToResizeColumns = false;
-            this.dtGridCash.AllowUserToResizeRows = false;
             this.dtGridCash.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridCash.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtGridCash.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGridCash.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Thang,
+            this.Ngay,
             this.Tienvao,
             this.Tienra,
             this.Ducuoi});
-            this.dtGridCash.Location = new System.Drawing.Point(0, 41);
+            this.dtGridCash.Location = new System.Drawing.Point(2, 37);
             this.dtGridCash.Name = "dtGridCash";
-            this.dtGridCash.Size = new System.Drawing.Size(343, 292);
+            this.dtGridCash.Size = new System.Drawing.Size(345, 442);
             this.dtGridCash.TabIndex = 2;
-            this.dtGridCash.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentDoubleClick);
+            this.dtGridCash.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtGridCash_CellMouseDoubleClick);
             this.dtGridCash.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentClick);
+            // 
+            // lblthang
+            // 
+            this.lblthang.AutoSize = true;
+            this.lblthang.Location = new System.Drawing.Point(121, 9);
+            this.lblthang.Name = "lblthang";
+            this.lblthang.Size = new System.Drawing.Size(29, 13);
+            this.lblthang.TabIndex = 6;
+            this.lblthang.Text = "Nam";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Location = new System.Drawing.Point(2, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Bao cao dong tien nam:";
-            // 
-            // lblNam
-            // 
-            this.lblNam.AutoSize = true;
-            this.lblNam.Location = new System.Drawing.Point(122, 10);
-            this.lblNam.Name = "lblNam";
-            this.lblNam.Size = new System.Drawing.Size(29, 13);
-            this.lblNam.TabIndex = 4;
-            this.lblNam.Text = "Nam";
+            this.label1.Size = new System.Drawing.Size(123, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Bao cao dong tien ngay:";
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Thang";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nam";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 63;
+            this.dataGridViewTextBoxColumn1.Width = 54;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -107,11 +104,11 @@ namespace Quanlydongtien
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 83;
             // 
-            // Thang
+            // Ngay
             // 
-            this.Thang.HeaderText = "Thang";
-            this.Thang.Name = "Thang";
-            this.Thang.Width = 63;
+            this.Ngay.HeaderText = "Nam";
+            this.Ngay.Name = "Ngay";
+            this.Ngay.Width = 54;
             // 
             // Tienvao
             // 
@@ -134,34 +131,37 @@ namespace Quanlydongtien
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 10);
+            this.label2.Location = new System.Drawing.Point(176, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 7;
             this.label2.Text = "Du no cu:";
             // 
             // lblDuno
             // 
             this.lblDuno.AutoSize = true;
-            this.lblDuno.Location = new System.Drawing.Point(236, 10);
+            this.lblDuno.Location = new System.Drawing.Point(227, 9);
             this.lblDuno.Name = "lblDuno";
-            this.lblDuno.Size = new System.Drawing.Size(35, 13);
-            this.lblDuno.TabIndex = 6;
-            this.lblDuno.Text = "label3";
+            this.lblDuno.Size = new System.Drawing.Size(29, 13);
+            this.lblDuno.TabIndex = 8;
+            this.lblDuno.Text = "Nam";
             // 
-            // Dongtienthang
+            // Dongtienngay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 334);
+            this.ClientSize = new System.Drawing.Size(348, 477);
             this.Controls.Add(this.lblDuno);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblNam);
+            this.Controls.Add(this.lblthang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridCash);
-            this.Name = "Dongtienthang";
-            this.Text = "Dongtienthang";
-            this.Load += new System.EventHandler(this.Dongtienthang_Load);
+            this.MaximumSize = new System.Drawing.Size(356, 511);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(356, 511);
+            this.Name = "Dongtienngay";
+            this.Text = "Dongtienngay";
+            this.Load += new System.EventHandler(this.Dongtienngay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,16 +171,16 @@ namespace Quanlydongtien
         #endregion
 
         private System.Windows.Forms.DataGridView dtGridCash;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Thang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ngay;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tienvao;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tienra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ducuoi;
+        private System.Windows.Forms.Label lblthang;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.Label lblNam;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblDuno;
     }

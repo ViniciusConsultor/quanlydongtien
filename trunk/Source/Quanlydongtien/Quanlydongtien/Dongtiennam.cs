@@ -32,7 +32,7 @@ namespace Quanlydongtien
             create_dtGrid();
             FillDG();
             dbfile = dbname;
-            realdata = true;
+            realdata = false;
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
                 tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
@@ -46,8 +46,20 @@ namespace Quanlydongtien
 
         private void chkReal_CheckedChanged(object sender, EventArgs e)
         {
-            realdata = false;
+            int i;
+            Int64 tiendu;
+            realdata = chkReal.Checked;
             Clear();
+            create_dtGrid();
+            FillDG();
+            for (i = 0; i < dtGridCash.Rows.Count; i++)
+            {
+                tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
+                if (dtGridCash.Rows[i].Cells["Tienra"].Value != null)
+                    tiendu = tiendu - Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
+                dtGridCash.Rows[i].Cells["Ducuoi"].Value = tiendu;
+            }
+            Tinh_So_Du();
         }
 
         private Boolean FillDG()
@@ -65,8 +77,16 @@ namespace Quanlydongtien
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
-                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
-                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                if (realdata == true)
+                {
+                    sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                    sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                }
+                else
+                {
+                    sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE ([SOTIEN] > 0) AND ([Real] = Yes)AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                    sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] > 0 AND ([Real] = Yes)AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                }
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -100,8 +120,16 @@ namespace Quanlydongtien
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
-                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
-                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                if (realdata == false)
+                {
+                    sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                    sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                }
+                else
+                {
+                    sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [DONGTIEN] WHERE [SOTIEN] < 0 AND ([Real] = Yes) AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                    sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'yyyy') AS Nam from [TIENLAI] WHERE [Sotienlai] < 0 AND ([Real] = Yes) AND (([NoQH] = 0) OR ([Datra] = Yes)) GROUP BY FORMAT([Ngaytra], 'yyyy')";
+                }
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -172,7 +200,7 @@ namespace Quanlydongtien
         }
 
         private void Clear()
-        {
+        {            
             while (dtGridCash.Rows.Count > 0)
             {
                 dtGridCash.Rows.RemoveAt(dtGridCash.Rows.Count - 1);
@@ -182,9 +210,13 @@ namespace Quanlydongtien
         private void dtGridCash_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int nam;
+            Int64 sodu;
             Dongtienthang frmDongTienThang = new Dongtienthang();
             nam = int.Parse(dtGridCash.Rows[e.RowIndex].Cells["Nam"].Value.ToString());
-            frmDongTienThang.init(dbfile, realdata, nam);
+            if (e.RowIndex == 0)
+                sodu = 0;
+            else sodu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
+            frmDongTienThang.init(dbfile, realdata, nam, sodu);
         }
 
         private void Tinh_So_Du()

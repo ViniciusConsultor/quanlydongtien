@@ -10,40 +10,37 @@ using System.Data.OleDb;
 
 namespace Quanlydongtien
 {
-    public partial class Dongtienthang : Form
+    public partial class Dongtienngay : Form
     {
         db CashDB;
         Boolean realdata;
-        int nam;
         string dbfile;
-        Int64 dunamtruoc;
-        public Dongtienthang()
+        Int64 duthangtruoc;
+        public Dongtienngay()
         {
             InitializeComponent();
         }
 
-        private void Dongtienthang_Load(object sender, EventArgs e)
+        private void Dongtienngay_Load(object sender, EventArgs e)
         {
 
         }
 
-        public void init(string dbname, Boolean real, int namtien, Int64 sodu)
+        public void init(string dbname, Boolean real, string ngaythang, Int64 sodu)
         {
             int i;
-            CashDB = new db(dbname);
-            nam = namtien;
             realdata = real;
-            create_dtGrid();
-            FillDG();
-            lblNam.Text = namtien.ToString();
+            CashDB = new db(dbname);
             dbfile = dbname;
+            lblthang.Text = ngaythang;
+            create_dtGrid();
+            lblDuno.Text = sodu.ToString();
+            FillDG();
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString()) - Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
             }
             dtGridCash.Rows[0].Cells["Ducuoi"].Value = Int64.Parse(dtGridCash.Rows[0].Cells["Ducuoi"].Value.ToString()) + sodu;
-            dunamtruoc = sodu;
-            lblDuno.Text = dunamtruoc.ToString();
             Tinh_So_Du();
             this.ShowDialog();
         }
@@ -63,14 +60,14 @@ namespace Quanlydongtien
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
-                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) ";
+                sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) ";
                 if (realdata)
-                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'mm')";
-                else sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') GROUP BY FORMAT([Ngaytra], 'mm')";
-                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "') AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'dd')";
+                else sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "') GROUP BY FORMAT([Ngaytra], 'dd')";
+                sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = " +  realdata.ToString() +") GROUP BY FORMAT([Ngaytra], 'mm')";
-                else sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ") GROUP BY FORMAT([Ngaytra], 'dd')";
+                else sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -78,13 +75,13 @@ namespace Quanlydongtien
                 while (oleReaderG.Read())
                 {
                     tiengoc.Add(oleReaderG["Tien"].ToString());
-                    namtragoc.Add(oleReaderG["Thang"].ToString());
+                    namtragoc.Add(oleReaderG["Ngay"].ToString());
                 }
 
                 while (oleReaderL.Read())
                 {
                     tienlai.Add(oleReaderL["Tien"].ToString());
-                    namtralai.Add(oleReaderL["Thang"].ToString());
+                    namtralai.Add(oleReaderL["Ngay"].ToString());
                 }
 
                 for (i = 0; i < tiengoc.Count; i++)
@@ -96,8 +93,11 @@ namespace Quanlydongtien
                             tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
                     }
                     for (j = 0; j < dtGridCash.Rows.Count; j++)
-                        if ((dtGridCash.Rows[j].Cells["Thang"].Value.ToString()) == namtragoc[i].ToString())
+                    {
+                        
+                        if ((dtGridCash.Rows[j].Cells["Ngay"].Value.ToString()) == namtragoc[i].ToString())
                             dtGridCash.Rows[j].Cells["Tienvao"].Value = tientragoc;
+                    }
                 }
 
                 //Add to tienra column
@@ -106,14 +106,14 @@ namespace Quanlydongtien
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
-                sqlStrRG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                sqlStrRG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = " + realdata.ToString() +") GROUP BY FORMAT([Ngaytra], 'mm')";
-                else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
-                sqlStrRL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
+                    sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ") GROUP BY FORMAT([Ngaytra], 'dd')";
+                else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                sqlStrRL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam +"')) AND ([Real] = " + realdata.ToString() +")GROUP BY FORMAT([Ngaytra], 'mm')";
-                else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
+                    sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'dd')";
+                else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
                 oleReaderG = CashDB.genDataReader(sqlStrRG);
                 oleReaderL = CashDB.genDataReader(sqlStrRL);
                 if (oleReaderG == null || oleReaderL == null)
@@ -121,13 +121,13 @@ namespace Quanlydongtien
                 while (oleReaderG.Read())
                 {
                     tiengoc.Add(oleReaderG["Tien"].ToString());
-                    namtragoc.Add(oleReaderG["Thang"].ToString());
+                    namtragoc.Add(oleReaderG["Ngay"].ToString());
                 }
 
                 while (oleReaderL.Read())
                 {
                     tienlai.Add(oleReaderL["Tien"].ToString());
-                    namtralai.Add(oleReaderL["Thang"].ToString());
+                    namtralai.Add(oleReaderL["Ngay"].ToString());
                 }
 
                 for (i = 0; i < tiengoc.Count; i++)
@@ -140,7 +140,7 @@ namespace Quanlydongtien
                     }
                     for (j = 0; j < dtGridCash.Rows.Count; j++)
                     {
-                        if ((dtGridCash.Rows[j].Cells["Thang"].Value.ToString()) == namtragoc[i].ToString())
+                        if ((dtGridCash.Rows[j].Cells["Ngay"].Value.ToString()) == namtragoc[i].ToString())
                             dtGridCash.Rows[j].Cells["Tienra"].Value = Math.Abs(tientragoc);
                     }
                 }
@@ -149,29 +149,7 @@ namespace Quanlydongtien
             }
             catch (Exception ex)
             {
-                return false;
-            }
-        }
-
-        private Boolean create_dtGrid()
-        {
-            int i;
-            try
-            {
-                for (i = 1; i <= 12; i++)
-                {
-                    dtGridCash.Rows.Add();
-                    if (i < 10)
-                        dtGridCash.Rows[i - 1].Cells["Thang"].Value ="0" + i.ToString();
-                    else dtGridCash.Rows[i - 1].Cells["Thang"].Value = i.ToString();
-                    dtGridCash.Rows[i - 1].Cells["Tienvao"].Value = "0";
-                    dtGridCash.Rows[i - 1].Cells["Tienra"].Value = "0";
-                    dtGridCash.Rows[i - 1].Cells["Ducuoi"].Value = "0";
-                }
-                return true;
-            }
-            catch
-            {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -210,26 +188,48 @@ namespace Quanlydongtien
             }
         }
 
-        private void dtGridCash_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private Boolean create_dtGrid()
         {
-            Dongtienngay frmDTN = new Dongtienngay();
-            string thang;
-            int sothang;
-            Int64 sodu;
-            sothang = int.Parse(dtGridCash.Rows[e.RowIndex].Cells["Thang"].Value.ToString());
-            if (sothang < 10)
-                thang = "0" + sothang.ToString();
-            else thang = sothang.ToString();
-            if (e.RowIndex == 0)
-                sodu = dunamtruoc;
-            else sodu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
-            frmDTN.init(dbfile, realdata, thang + "/" + nam.ToString(), sodu);
+            int i;
+            DateTime currMonth = DateTime.Parse(lblthang.Text);
+            DateTime nextMonth = currMonth.AddMonths(1);
+            TimeSpan difDays = nextMonth.Subtract(currMonth);
+            try
+            {
+                for (i = 1; i <= difDays.Days; i++)
+                {
+                    dtGridCash.Rows.Add();
+                    if (i < 10)
+                        dtGridCash.Rows[i - 1].Cells["Ngay"].Value = "0" + i.ToString();
+                    else dtGridCash.Rows[i - 1].Cells["Ngay"].Value = i.ToString();
+                    dtGridCash.Rows[i - 1].Cells["Tienvao"].Value = "0";
+                    dtGridCash.Rows[i - 1].Cells["Tienra"].Value = "0";
+                    dtGridCash.Rows[i - 1].Cells["Ducuoi"].Value = "0";
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void dtGridCash_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }        
- 
+        }
+
+        private void dtGridCash_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Dongchitiet frmDongchitiet = new Dongchitiet();
+            Int64 soducu, duno;
+            string ngay;
+            ngay = dtGridCash.Rows[e.RowIndex].Cells["Ngay"].Value.ToString() + "/" + lblthang.Text;
+            if (e.RowIndex == 0)
+                soducu = duthangtruoc;
+            else soducu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
+            duno = Int64.Parse(dtGridCash.Rows[e.RowIndex].Cells["Ducuoi"].Value.ToString());
+            frmDongchitiet.init(dbfile, ngay, soducu, duno, realdata);
+        }
     }
 }

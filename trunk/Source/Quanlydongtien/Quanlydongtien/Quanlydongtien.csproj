@@ -64,11 +64,23 @@
       <DependentUpon>CreateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="db.cs" />
+    <Compile Include="Dongchitiet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dongchitiet.Designer.cs">
+      <DependentUpon>Dongchitiet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dongtiennam.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dongtiennam.Designer.cs">
       <DependentUpon>Dongtiennam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dongtienngay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dongtienngay.Designer.cs">
+      <DependentUpon>Dongtienngay.cs</DependentUpon>
     </Compile>
     <Compile Include="Dongtienthang.cs">
       <SubType>Form</SubType>
@@ -130,9 +142,17 @@
       <SubType>Designer</SubType>
       <DependentUpon>CreateUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dongchitiet.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Dongchitiet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dongtiennam.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dongtiennam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dongtienngay.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Dongtienngay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dongtienthang.resx">
       <SubType>Designer</SubType>
