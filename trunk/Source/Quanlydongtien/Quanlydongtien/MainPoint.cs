@@ -78,7 +78,6 @@ namespace Quanlydongtien
         {
             string sqlString;
             OleDbDataReader oleReader;
-            Quanlyvon frmQLV;
             config();
             userdb = new db(dbFileName);
             sqlString = "SELECT * FROM QUANLYUSER WHERE [Username] = 'admin'";
@@ -106,9 +105,6 @@ namespace Quanlydongtien
                 this.Close();
             username = frmLogin.user;
             check_role(username);
-            frmQLV = new Quanlyvon();
-            frmQLV.init(dbFileName);
-            frmQLV.ShowDialog();
         }
         private void config()
         {
@@ -139,7 +135,7 @@ namespace Quanlydongtien
                     this.quanLyDongTienToolStripMenuItem.Enabled = true;
                     this.quanLyHopDongToolStripMenuItem.Enabled = true;
                     this.quanLyKhachHangToolStripMenuItem.Enabled = true;
-                    this.quanLyLaiSuatToolStripMenuItem.Enabled = true;
+                    this.quanLyVonToolStripMenuItem.Enabled = true;
                     this.capthuHoiQuyenToolStripMenuItem.Enabled = true;
                 }
                 else
@@ -172,7 +168,7 @@ namespace Quanlydongtien
                                 this.quanLyHopDongToolStripMenuItem.Enabled = false;
                             else if (i == 6)
                                 // Quan ly lai suat
-                                this.quanLyLaiSuatToolStripMenuItem.Enabled = false;
+                                this.quanLyVonToolStripMenuItem.Enabled = false;
                             else if (i == 7)
                                 // Quan ly dong tien
                                 this.quanLyDongTienToolStripMenuItem.Enabled = false;
@@ -193,7 +189,7 @@ namespace Quanlydongtien
                                 this.quanLyHopDongToolStripMenuItem.Enabled = true;
                             else if (i == 6)
                                 // Quan ly lai suat
-                                this.quanLyLaiSuatToolStripMenuItem.Enabled = true;
+                                this.quanLyVonToolStripMenuItem.Enabled = true;
                             else if (i == 7)
                                 // Quan ly dong tien
                                 this.quanLyDongTienToolStripMenuItem.Enabled = true;
@@ -239,6 +235,29 @@ namespace Quanlydongtien
             Quanlynguoidung frmQLND = new Quanlynguoidung();
             frmQLND.init(dbFileName);
             frmQLND.ShowDialog();
+        }
+
+        private void quanLyVonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Quanlyvon frmQLV;
+            frmQLV = new Quanlyvon();
+            frmQLV.init(dbFileName);
+            frmQLV.ShowDialog();
+        }
+
+        private void nhapThongTinKhachHangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NhapthongtinKH frmCreateNewCus = new NhapthongtinKH();
+            frmCreateNewCus.init(dbname);
+            frmCreateNewCus.ShowDialog();
+        }
+
+        private void nhapThongTinNguoiDungToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateUser frmNewuser = new CreateUser();
+            frmNewuser.init(datafile, false);
+            frmNewuser.ShowDialog();
+            refreshdata();
         }
     }
 }
