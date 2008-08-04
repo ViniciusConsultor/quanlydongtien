@@ -29,8 +29,8 @@ namespace Quanlydongtien
             int i;
             Int64 tiendu;
             CashDB = new db(dbname);
-            create_dtGrid();
-            FillDG();
+            if (create_dtGrid() == false) return;
+            if (FillDG() == false) return;
             dbfile = dbname;
             realdata = false;
             for (i = 0; i < dtGridCash.Rows.Count; i++)
@@ -174,27 +174,34 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             sqlStr = "SELECT Min(Format(NgayTra,'yyyy')) AS Minyear, Max(Format(NgayTra,'yyyy')) AS Maxyear FROM Dongtien";
             oleReader = CashDB.genDataReader(sqlStr);
-            if (oleReader == null)
-                return false;
-            else
+            try
             {
-                if (oleReader.Read())
+                if (oleReader == null)
+                    return false;
+                else
                 {
-                    minyear = int.Parse(oleReader["Minyear"].ToString());
-                    maxyear = int.Parse(oleReader["Maxyear"].ToString());
+                    if (oleReader.Read())
+                    {
+                        minyear = int.Parse(oleReader["Minyear"].ToString());
+                        maxyear = int.Parse(oleReader["Maxyear"].ToString());
+                    }
+                    else return false;
+                    i = minyear;
+                    while (i <= maxyear)
+                    {
+                        dtGridCash.Rows.Add();
+                        dtGridCash.Rows[i - minyear].Cells["Nam"].Value = i.ToString();
+                        dtGridCash.Rows[i - minyear].Cells["Tienvao"].Value = "0";
+                        dtGridCash.Rows[i - minyear].Cells["Tienra"].Value = "0";
+                        dtGridCash.Rows[i - minyear].Cells["Ducuoi"].Value = "0";
+                        i++;
+                    }
+                    return true;
                 }
-                else return false;
-                i = minyear;
-                while (i <= maxyear)
-                {
-                    dtGridCash.Rows.Add();
-                    dtGridCash.Rows[i - minyear].Cells["Nam"].Value = i.ToString();
-                    dtGridCash.Rows[i - minyear].Cells["Tienvao"].Value = "0";
-                    dtGridCash.Rows[i - minyear].Cells["Tienra"].Value = "0";
-                    dtGridCash.Rows[i - minyear].Cells["Ducuoi"].Value = "0";
-                    i++;
-                }
-                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
 
         }

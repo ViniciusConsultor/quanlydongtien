@@ -42,7 +42,33 @@ namespace Quanlydongtien
             {
                 return false;
             }
-        }                 
+        }
 
+        public static DateTime minDate(DateTime date1, DateTime date2)
+        {
+            if (date1 > date2)
+                return date1;
+            else return date2;
+
+        }
+
+        public static DateTime maxDate(DateTime date1, DateTime date2)
+        {
+            if (date1 > date2)
+                return date1;
+            else return date2;
+        }
+
+        public static Boolean isFloat(string number)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

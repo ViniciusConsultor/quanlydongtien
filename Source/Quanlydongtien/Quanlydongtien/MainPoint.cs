@@ -105,6 +105,7 @@ namespace Quanlydongtien
                 this.Close();
             username = frmLogin.user;
             check_role(username);
+//            userdb.Batch_Process();
         }
         private void config()
         {
@@ -248,16 +249,15 @@ namespace Quanlydongtien
         private void nhapThongTinKhachHangToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NhapthongtinKH frmCreateNewCus = new NhapthongtinKH();
-            frmCreateNewCus.init(dbname);
+            frmCreateNewCus.init(dbFileName);
             frmCreateNewCus.ShowDialog();
         }
 
         private void nhapThongTinNguoiDungToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateUser frmNewuser = new CreateUser();
-            frmNewuser.init(datafile, false);
+            frmNewuser.init(dbFileName, false);
             frmNewuser.ShowDialog();
-            refreshdata();
         }
     }
 }

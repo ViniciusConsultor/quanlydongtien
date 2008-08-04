@@ -55,8 +55,8 @@ namespace Quanlydongtien
                 laicu = Int64.Parse(oleReader["Laisuat"].ToString());
                 tienchiulai = Int64.Parse(oleReader["Tienchiulai"].ToString());
                 sotienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
-                ngaychiulai = ((sotienlai * 360 * 100) / (tienchiulai * laicu));
-                sotienlai = (tienchiulai * laimoi * ngaychiulai) / (360 * 100);
+                ngaychiulai = ((sotienlai * 360 * 100 * 100) / (tienchiulai * laicu));
+                sotienlai = (tienchiulai * laimoi * ngaychiulai) / (360 * 100 * 100);
                 dtGridCF.Rows[rows].Cells["Duno"].Value = tienchiulai;
                 dtGridCF.Rows[rows].Cells["Tienlai"].Value = sotienlai;
                 rows++;
@@ -69,8 +69,8 @@ namespace Quanlydongtien
             int i;
             for (i = 0; i < dtGridCF.Rows.Count; i++)
             {
-                sqlStr = "UPDATE [LAISUAT] SET [Sotienlai] = " + dtGridCF.Rows[i].Cells["Tienlai"].Value.ToString();
-                sqlStr = ", [Laisuat] = " + txtLaisuat.Text + "WHERE [MaDT] = " + dtGridCF.Rows[i].Cells["MaDongTien"].Value.ToString();
+                sqlStr = "UPDATE [TIENLAI] SET [Sotienlai] = " + dtGridCF.Rows[i].Cells["Tienlai"].Value.ToString();
+                sqlStr = sqlStr + ", [Laisuat] = " + txtLaisuat.Text + " WHERE [MaDT] = " + dtGridCF.Rows[i].Cells["MaDongTien"].Value.ToString();
                 CashDB.runSQLCmd(sqlStr);
             }
             saved = true;

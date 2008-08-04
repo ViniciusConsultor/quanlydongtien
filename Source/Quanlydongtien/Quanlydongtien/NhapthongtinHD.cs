@@ -45,11 +45,12 @@ namespace Quanlydongtien
             }
             else tongtien = txtTongtien.Text;
             real = !chkReal.Checked;
+            laisuat = (int)(float.Parse(cbxLaisuat.Text) * 100);
             if (edit == true)
             {
                 
                 sqlStr = "UPDATE [HOPDONG] SET [Real] = " + chkReal.Enabled.ToString();
-                sqlStr = sqlStr + ", [DESC] = '" + txtDesc.Text + "', [Laisuat] = " + cbxLaisuat.Text + " WHERE [MaHD] = " + MaHD;
+                sqlStr = sqlStr + ", [DESC] = '" + txtDesc.Text + "', [Laisuat] = " + cbxLaisuat.Text + " WHERE [MaHD] = '" + MaHD + "'";
                 contractDb.runSQLCmd(sqlStr);
                 contractDb.close();
                 this.Close();
@@ -61,7 +62,7 @@ namespace Quanlydongtien
                 sqlStr = sqlStr + txtMaHD.Text + "', '" + cbxMaKH.Text + "', '" + cbxDateContracts.Value.ToShortDateString();
                 sqlStr = sqlStr + "', " + tongtien + ", " + real.ToString();
                 sqlStr = sqlStr + ", " + cbxKyhan.Text + ", '" + cbxDonvitinh.Text;
-                sqlStr = sqlStr + "', " + cbxLaisuat.Text + ", '" + txtDesc.Text;
+                sqlStr = sqlStr + "', " + laisuat.ToString() + ", '" + txtDesc.Text;
                 sqlStr = sqlStr + "', No, No, No, " + HTTra + ")";
                 if (contractDb.runSQLCmd(sqlStr) == false)
                     return;
@@ -70,7 +71,7 @@ namespace Quanlydongtien
                 sqlStr = sqlStr + tongtien + ", '" + cbxDateContracts.Value.ToShortDateString() + "')";
                 if (contractDb.runSQLCmd(sqlStr) == false)
                     return;
-                frmNhapTN.Save_Data(real, txtMaHD.Text, dbfile, chovay, int.Parse(cbxLaisuat.Text));
+                frmNhapTN.Save_Data(real, txtMaHD.Text, dbfile, chovay, laisuat);
                 contractDb.close();
                 this.Close();
             }
@@ -143,6 +144,7 @@ namespace Quanlydongtien
             dbfile = dbname;
             txtMaHD.Text = maHD;
             txtMaHD.Enabled = false;
+            cmdKytraShow.Enabled = false;
             frmNhapTN = new NhapKyTraNo(dbname);
             frmNhapTN.saved = false;
             if (contractDb == null)
@@ -182,6 +184,8 @@ namespace Quanlydongtien
                 }
 
                 laisuat = int.Parse(cbxLaisuat.Text);
+                if (chkReal.Checked == false)
+                    chkReal.Enabled = false;
                 if (tongtien > 0)
                 {
                     cbxLoaiHD.Text = cbxLoaiHD.Items[1].ToString();
@@ -251,28 +255,40 @@ namespace Quanlydongtien
             if (txtMaHD.Text == null)
             {
                 txtMaHD.Focus();
+                optTraNL.Checked = false;
                 return;
             }
             if (cbxKyhan.Text == "")
             {
                 cbxKyhan.Focus();
+                optTraNL.Checked = false;
                 return;
             }
             kyhan = int.Parse(cbxKyhan.Text);
             if (cbxLaisuat.Text == "")
             {
                 cbxLaisuat.Focus();
+                optTraNL.Checked = false;
                 return;
             }
-            laisuat = int.Parse(cbxLaisuat.Text);
+
+            if (!Utilities.isFloat(cbxLaisuat.Text))
+            {
+                cbxLaisuat.Focus();
+                optTraNL.Checked = false;
+                return;
+            }
+            laisuat = (int)(double.Parse(cbxLaisuat.Text) * 100);
             if (txtTongtien.Text == "")
             {
                 txtTongtien.Focus();
+                optTraNL.Checked = false;
                 return;
             }
             if (!Utilities.isInt64(txtTongtien.Text))
             {
                 txtTongtien.Focus();
+                optTraNL.Checked = false;
                 return;
             }
             tongtien = Int64.Parse(txtTongtien.Text);
@@ -285,41 +301,56 @@ namespace Quanlydongtien
                 ngaydaohan = ngayHD.AddYears(kyhan).ToShortDateString();
             frmNhapTN.init(tongtien, ngaydaohan, cbxDateContracts.Value.ToShortDateString(), laisuat);
             frmNhapTN.ShowDialog();
+            if (frmNhapTN.saved == true)
+                cmdAccept.Enabled = true;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             DateTime ngayHD;
             Int64 tongtien;
-            int kyhan, laisuat;
+            int kyhan;
+            int laisuat;
             string ngaydaohan;
             if (radioButton1.Checked == false)
                 return;
             if (txtMaHD.Text == null)
             {
                 txtMaHD.Focus();
+                radioButton1.Checked = false;
                 return;
             }
             if (cbxKyhan.Text == "")
             {
                 cbxKyhan.Focus();
+                radioButton1.Checked = false;
                 return;
             }
             kyhan = int.Parse(cbxKyhan.Text);
             if (cbxLaisuat.Text == "")
             {
                 cbxLaisuat.Focus();
+                radioButton1.Checked = false;
                 return;
             }
-            laisuat = int.Parse(cbxLaisuat.Text);
+
+            if (!Utilities.isFloat(cbxLaisuat.Text))
+            {
+                cbxLaisuat.Focus();
+                radioButton1.Checked = false;
+                return;
+            }
+            laisuat = (int)(double.Parse(cbxLaisuat.Text) * 100);
             if (txtTongtien.Text == "")
             {
                 txtTongtien.Focus();
+                radioButton1.Checked = false;
                 return;
             }
             if (!Utilities.isInt64(txtTongtien.Text))
             {
                 txtTongtien.Focus();
+                radioButton1.Checked = false;
                 return;
             }
             ngayHD = cbxDateContracts.Value;            
@@ -337,6 +368,8 @@ namespace Quanlydongtien
             grKytrano.Enabled = false;
             frmNhapTN.init(tongtien, ngaydaohan, ngayHD.ToShortDateString(), laisuat, true);
             frmNhapTN.ShowDialog();
+            if (frmNhapTN.saved == true)
+                cmdAccept.Enabled = true;
         }
 
         private void Create_List_CT()
@@ -478,7 +511,7 @@ namespace Quanlydongtien
                 cbxLaisuat.Focus();
                 return;
             }
-            laisuat = int.Parse(cbxLaisuat.Text);
+            laisuat = (int)(double.Parse(cbxLaisuat.Text) * 100);
             if (!Utilities.isInt64(txtTongtien.Text))
             {
                 txtTongtien.Focus();
@@ -502,6 +535,7 @@ namespace Quanlydongtien
                 frmNhapTN.init(Sotien, ngaydaohan.ToShortDateString(), ngayHD, laisuat, solantra, int.Parse(cbxKyhan.Text), txtDate.Text, true);
             }
             frmNhapTN.ShowDialog();
+            cmdAccept.Enabled = frmNhapTN.saved;
         }
 
         private void cmdKytraShow_Click(object sender, EventArgs e)
@@ -516,6 +550,26 @@ namespace Quanlydongtien
         }
 
         private void cbxLaisuat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Tinhlai frmTinhLai = new Tinhlai();
+            if (edit == false)
+                return;
+            else
+            {
+                if (cbxLaisuat.Text == laisuat.ToString())
+                    return;
+                frmTinhLai.init(dbfile, txtMaHD.Text, int.Parse(cbxLaisuat.Text));
+                frmTinhLai.ShowDialog();
+                if (frmTinhLai.saved == false)
+                    cbxLaisuat.Text = laisuat.ToString();
+                else
+                {
+                    cmdClose.Enabled = false;
+                }
+            }
+        }
+
+        private void cbxLaisuat_Leave(object sender, EventArgs e)
         {
             Tinhlai frmTinhLai = new Tinhlai();
             if (edit == false)

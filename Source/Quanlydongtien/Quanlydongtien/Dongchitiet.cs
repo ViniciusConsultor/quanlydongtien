@@ -46,13 +46,13 @@ namespace Quanlydongtien
                 sqlStrVL = sqlStrVL + "AND [Real] = Yes";
             FillDG(sqlStrVL, dtGridLIn);
 
-            sqlStrRG = "SELECT [MaDT], ABS([Sotien]), [MaHD], [NoQH], [Datra], [Real], [Mota] FROM [DONGTIEN] ";
+            sqlStrRG = "SELECT [MaDT], ABS([Sotien]) AS Tientra, [MaHD], [NoQH], [Datra], [Real], [Mota] FROM [DONGTIEN] ";
             sqlStrRG = sqlStrRG + "WHERE [Sotien] < 0 AND FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + lblNgay.Text + "'";
             if (realdata)
                 sqlStrRG = sqlStrRG + "AND [Real] = Yes";
             FillDG(sqlStrRG, dtGridGOut);
 
-            sqlStrRL = "SELECT [MaDT], ABS([Sotienlai]), [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], [Laisuat] FROM [Tienlai] ";
+            sqlStrRL = "SELECT [MaDT], ABS([Sotienlai]) AS Tienlaitra, [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], [Laisuat] FROM [Tienlai] ";
             sqlStrRL = sqlStrRL + "WHERE [Sotienlai] < 0 AND FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + lblNgay.Text + "'";
             if (realdata)
                 sqlStrRL = sqlStrVL + "AND [Real] = Yes";
