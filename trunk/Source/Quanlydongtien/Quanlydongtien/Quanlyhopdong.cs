@@ -183,5 +183,10 @@ namespace Quanlydongtien
             frmQLDT.init(mahd, dbname);
             //frmQLDT.ShowDialog();
         }
+
+        private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

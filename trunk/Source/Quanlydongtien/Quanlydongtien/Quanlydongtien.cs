@@ -149,7 +149,6 @@ namespace Quanlydongtien
                 tienmat = tienmat + tientra;
                 sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
                 CashDB.runSQLCmd(sqlStr);
-                sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienlai + " WHERE [Matien] = 'Tienlai'";
             }
 
             CashDB.close();

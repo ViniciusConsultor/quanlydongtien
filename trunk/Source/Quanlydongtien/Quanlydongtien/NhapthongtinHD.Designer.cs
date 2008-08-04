@@ -145,6 +145,7 @@ namespace Quanlydongtien
             this.cbxLaisuat.TabIndex = 11;
             this.cbxLaisuat.Text = "0";
             this.cbxLaisuat.SelectedIndexChanged += new System.EventHandler(this.cbxLaisuat_SelectedIndexChanged);
+            this.cbxLaisuat.Leave += new System.EventHandler(this.cbxLaisuat_Leave);
             // 
             // chkReal
             // 
@@ -303,10 +304,10 @@ namespace Quanlydongtien
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(230, 19);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(75, 17);
+            this.radioButton1.Size = new System.Drawing.Size(78, 17);
             this.radioButton1.TabIndex = 2;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Tra mo lan";
+            this.radioButton1.Text = "Tra mot lan";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -352,6 +353,7 @@ namespace Quanlydongtien
             // 
             // cmdAccept
             // 
+            this.cmdAccept.Enabled = false;
             this.cmdAccept.Location = new System.Drawing.Point(180, 381);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(88, 34);

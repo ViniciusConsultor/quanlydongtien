@@ -55,7 +55,7 @@ namespace Quanlydongtien
             tongtien = Math.Abs(sotien);
             ngaytra = ngaydaohan;
             ngayvay = ngayhd;
-            lblLaisuat.Text = laisuatvay.ToString() + " % Nam";
+            lblLaisuat.Text = float.Parse(laisuatvay.ToString())/100 + " % Nam";
             this.laisuat = laisuatvay;
             if (sotien < 0)
                 tienra = false;
@@ -75,7 +75,7 @@ namespace Quanlydongtien
             Int64 tongtientra = 0;
             Int64 duno = 0;
             int i;
-            lblLaisuat.Text = laisuatvay.ToString() + " % Nam";
+            lblLaisuat.Text = float.Parse(laisuatvay.ToString()) / 100 + " % Nam";
             txtTong.Text = sotien.ToString();
             tongtien = Math.Abs(sotien);
             ngaytra = ngaydaohan;
@@ -124,7 +124,7 @@ namespace Quanlydongtien
             Int64 tongtientra = 0;
             Int64 duno = 0;
             int i;
-            lblLaisuat.Text = laisuatvay.ToString() + " % Nam";
+            lblLaisuat.Text = float.Parse(laisuatvay.ToString()) / 100 + " % Nam";
             txtTong.Text = sotien.ToString();
             tongtien = Math.Abs(sotien);
             ngaytra = ngaydaohan;
@@ -172,7 +172,7 @@ namespace Quanlydongtien
             tongtien = Math.Abs(sotien);
             ngaytra = ngaydaohan;
             ngayvay = ngayhd;
-            lblLaisuat.Text = laisuatvay.ToString() + " % Nam";
+            lblLaisuat.Text = float.Parse(laisuatvay.ToString()) / 100 + " % Nam";
             txtSolan.Text = "1";
             this.laisuat = laisuatvay;
             if (sotien < 0)
@@ -385,7 +385,7 @@ namespace Quanlydongtien
             ngaytra = DateTime.Parse(dtGridCF.Rows[row_i].Cells["Ngaytra"].Value.ToString());
             difference = ngaytra.Subtract(DateTime.Parse(ngayvay));
             ngaychiulai = difference.Days;
-            tienlai = ((tongtien - tongtien_i) * ngaychiulai * laisuat) / 36000;
+            tienlai = ((tongtien - tongtien_i) * ngaychiulai * laisuat) / (360 * 100 *100);
             dtGridCF.Rows[row_i].Cells["Tienlai"].Value = tienlai;
         }
 
