@@ -233,6 +233,8 @@ namespace Quanlydongtien
             try
             {
                 Tinhloinhuan();
+                Delete_Un_Real_Data();
+                Update_Overdue_Debt();
                 return true;
             }
             catch
@@ -294,11 +296,11 @@ namespace Quanlydongtien
                 ngaytra = DateTime.Parse(oleReader["Ngaytratien"].ToString());
                 tienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
                 laisuat = Int64.Parse(oleReader["Laisuat"].ToString());
-                ngaychiulai = (tienlai * 360 * 100) / (tienchiulai * laisuat);
-                ngayvay = ngaytra.AddDays(ngaychiulai);
+                ngaychiulai = (Int64)Math.Round((decimal)(tienlai * 360 * 100 * 100) / (tienchiulai * laisuat));
+                ngayvay = ngaytra.AddDays(0 - Math.Abs(ngaychiulai));
                 if (ngayvay > nextMonth.AddDays(-1))
                     continue;
-                diffDays = Utilities.maxDate(nextMonth.AddDays(-1), ngaytra) - Utilities.minDate(ngayvay, nextMonth.AddMonths(-1));
+                diffDays = Utilities.minDate(nextMonth.AddDays(-1), ngaytra) - Utilities.maxDate(ngayvay, nextMonth.AddMonths(-1));
                 laithuc = (tienchiulai * laisuat * diffDays.Days) / (360 * 100 * 100);
                 if (tienlai >= 0)
                     Loinhuan = Loinhuan + laithuc;
@@ -324,6 +326,90 @@ namespace Quanlydongtien
                     sqlStr = sqlStr + "'" + month + "', " + nam.ToString() + "," + Loinhuan.ToString() + ")"; 
                 }
                 runSQLCmd(sqlStr);
+            }
+        }
+        private void Delete_Un_Real_Data()
+        {
+            string crrDay;
+            string sqlStr;
+            string mahd;
+            int year, month, day;
+            DateTime today;
+            OleDbDataReader oleReader;
+            today = DateTime.Today;
+            year = today.Year;
+            month = today.Month;
+            day = today.Day;
+            crrDay = month.ToString() + "/" + day.ToString() + "/" + year.ToString();
+            sqlStr = "SELECT [MaHD] FROM [HOPDONG] WHERE [Real] = No AND [NgayHD] < #" + crrDay + "#";
+            oleReader = genDataReader(sqlStr);
+            while (oleReader.Read())
+            {
+                mahd = oleReader["MaHD"].ToString();
+                sqlStr = "DELETE FROM [HOPDONG] WHERE [MaHD] = '" + mahd + "'";
+                runSQLCmd(sqlStr);
+                sqlStr = "DELETE FROM [DONGTIEN] WHERE [MaHD] = '" + mahd + "'";
+                runSQLCmd(sqlStr);
+                sqlStr = "DELETE FROM [TIENLAI] WHERE [MaHD] = '" + mahd + "'";
+                runSQLCmd(sqlStr);
+            }
+        }
+        private void Update_Overdue_Debt()
+        {
+            OleDbDataReader oleReader;
+            DateTime today = DateTime.Today;
+            DateTime ngaytratien;
+            TimeSpan diffDay;
+            string crrDay, mahd, madt;
+            int year, month, day, noqh;
+            string ngaytra;
+            string sqlStr;
+            year = today.Year;
+            month = today.Month;
+            day = today.Day;
+            try
+            {
+                crrDay = month.ToString() + "/" + day.ToString() + "/" + year.ToString();
+                sqlStr = "SELECT [MaDT], [MaHD], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien FROM [DONGTIEN] ";
+                sqlStr = sqlStr + "WHERE [Datra] = No AND [Real] = True AND [NgayTra] < #" + crrDay + "#";
+                oleReader = genDataReader(sqlStr);
+                while (oleReader.Read())
+                {
+                    madt = oleReader["MaDT"].ToString();
+                    mahd = oleReader["MaHD"].ToString();
+                    ngaytra = oleReader["Ngaytratien"].ToString();
+                    ngaytratien = DateTime.Parse(ngaytra);
+                    diffDay = today.Subtract(ngaytratien);
+                    noqh = diffDay.Days;
+                    sqlStr = "UPDATE [HOPDONG] SET [NoQH] = Yes WHER [MaHD] = '" + mahd + "'";
+                    runSQLCmd(sqlStr);
+                    sqlStr = "UPDATE [DONGTIEN] SET [NoQH] = " + noqh.ToString() + "WHERE [MaDT] = " + madt.ToString();
+                    runSQLCmd(sqlStr);
+                }
+
+                //Update to [Tienlai] Table when one overdue debt appear
+                sqlStr = "SELECT [MaDT], [MaHD], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien FROM [TIENLAI] ";
+                sqlStr = sqlStr + "WHERE [Datra] = No AND [Real] = True AND [NgayTra] < #" + crrDay + "#";
+                oleReader = genDataReader(sqlStr);
+                while (oleReader.Read())
+                {
+                    madt = oleReader["MaDT"].ToString();
+                    mahd = oleReader["MaHD"].ToString();
+                    ngaytra = oleReader["Ngaytratien"].ToString();
+                    ngaytratien = DateTime.Parse(ngaytra);
+                    diffDay = today.Subtract(ngaytratien);
+                    noqh = diffDay.Days;
+                    sqlStr = "UPDATE [HOPDONG] SET [NoQH] = Yes WHER [MaHD] = '" + mahd + "'";
+                    runSQLCmd(sqlStr);
+                    sqlStr = "UPDATE [TIENLAI] SET [NoQH] = " + noqh.ToString() + "WHERE [MaDT] = " + madt.ToString();
+                    runSQLCmd(sqlStr);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
             }
         }
     }

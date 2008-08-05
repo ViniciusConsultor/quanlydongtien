@@ -46,7 +46,7 @@ namespace Quanlydongtien
 
         public static DateTime minDate(DateTime date1, DateTime date2)
         {
-            if (date1 > date2)
+            if (date1 < date2)
                 return date1;
             else return date2;
 

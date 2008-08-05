@@ -28,6 +28,7 @@ namespace Quanlydongtien
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.thoatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,6 +37,8 @@ namespace Quanlydongtien
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nhapDuLieuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nhapHopDongMoiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nhapThongTinKhachHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nhapThongTinNguoiDungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quanLyHopDongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quanLyKhachHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,8 +48,8 @@ namespace Quanlydongtien
             this.capthuHoiQuyenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nhapThongTinKhachHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nhapThongTinNguoiDungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.chayBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +110,8 @@ namespace Quanlydongtien
             this.nhapDuLieuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nhapHopDongMoiToolStripMenuItem,
             this.nhapThongTinKhachHangToolStripMenuItem,
-            this.nhapThongTinNguoiDungToolStripMenuItem});
+            this.nhapThongTinNguoiDungToolStripMenuItem,
+            this.chayBatchToolStripMenuItem});
             this.nhapDuLieuToolStripMenuItem.Name = "nhapDuLieuToolStripMenuItem";
             this.nhapDuLieuToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.nhapDuLieuToolStripMenuItem.Text = "Nhap du lieu";
@@ -115,9 +119,23 @@ namespace Quanlydongtien
             // nhapHopDongMoiToolStripMenuItem
             // 
             this.nhapHopDongMoiToolStripMenuItem.Name = "nhapHopDongMoiToolStripMenuItem";
-            this.nhapHopDongMoiToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.nhapHopDongMoiToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.nhapHopDongMoiToolStripMenuItem.Text = "Nhap hop dong moi";
             this.nhapHopDongMoiToolStripMenuItem.Click += new System.EventHandler(this.nhapHopDongMoiToolStripMenuItem_Click);
+            // 
+            // nhapThongTinKhachHangToolStripMenuItem
+            // 
+            this.nhapThongTinKhachHangToolStripMenuItem.Name = "nhapThongTinKhachHangToolStripMenuItem";
+            this.nhapThongTinKhachHangToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.nhapThongTinKhachHangToolStripMenuItem.Text = "Nhap thong tin khach hang";
+            this.nhapThongTinKhachHangToolStripMenuItem.Click += new System.EventHandler(this.nhapThongTinKhachHangToolStripMenuItem_Click);
+            // 
+            // nhapThongTinNguoiDungToolStripMenuItem
+            // 
+            this.nhapThongTinNguoiDungToolStripMenuItem.Name = "nhapThongTinNguoiDungToolStripMenuItem";
+            this.nhapThongTinNguoiDungToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.nhapThongTinNguoiDungToolStripMenuItem.Text = "Nhap thong tin nguoi dung";
+            this.nhapThongTinNguoiDungToolStripMenuItem.Click += new System.EventHandler(this.nhapThongTinNguoiDungToolStripMenuItem_Click);
             // 
             // quaToolStripMenuItem
             // 
@@ -189,19 +207,13 @@ namespace Quanlydongtien
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // nhapThongTinKhachHangToolStripMenuItem
+            // chayBatchToolStripMenuItem
             // 
-            this.nhapThongTinKhachHangToolStripMenuItem.Name = "nhapThongTinKhachHangToolStripMenuItem";
-            this.nhapThongTinKhachHangToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.nhapThongTinKhachHangToolStripMenuItem.Text = "Nhap thong tin khach hang";
-            this.nhapThongTinKhachHangToolStripMenuItem.Click += new System.EventHandler(this.nhapThongTinKhachHangToolStripMenuItem_Click);
-            // 
-            // nhapThongTinNguoiDungToolStripMenuItem
-            // 
-            this.nhapThongTinNguoiDungToolStripMenuItem.Name = "nhapThongTinNguoiDungToolStripMenuItem";
-            this.nhapThongTinNguoiDungToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.nhapThongTinNguoiDungToolStripMenuItem.Text = "Nhap thong tin nguoi dung";
-            this.nhapThongTinNguoiDungToolStripMenuItem.Click += new System.EventHandler(this.nhapThongTinNguoiDungToolStripMenuItem_Click);
+            this.chayBatchToolStripMenuItem.Enabled = false;
+            this.chayBatchToolStripMenuItem.Name = "chayBatchToolStripMenuItem";
+            this.chayBatchToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.chayBatchToolStripMenuItem.Text = "Chay batch";
+            this.chayBatchToolStripMenuItem.Click += new System.EventHandler(this.chayBatchToolStripMenuItem_Click);
             // 
             // MainPoint
             // 
@@ -245,6 +257,8 @@ namespace Quanlydongtien
         private System.Windows.Forms.ToolStripMenuItem quanLyVonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nhapThongTinKhachHangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nhapThongTinNguoiDungToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chayBatchToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -259,5 +259,10 @@ namespace Quanlydongtien
             frmNewuser.init(dbFileName, false);
             frmNewuser.ShowDialog();
         }
+
+        private void chayBatchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            userdb.Batch_Process();
+        }
     }
 }

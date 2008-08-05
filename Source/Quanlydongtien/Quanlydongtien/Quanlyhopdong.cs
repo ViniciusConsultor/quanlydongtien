@@ -37,7 +37,7 @@ namespace Quanlydongtien
             lstMaKH = new ArrayList();
             dbname = dbfile;
             ContractDB = new db(dbfile);
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat], [Desc] FROM [HOPDONG] ORDER BY [MaHD]";
+            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat, [Desc] FROM [HOPDONG] ORDER BY [MaHD]";
             FillDG(sqlStr);
             dtGridContracts.AllowUserToAddRows = false;
             sqlStr = "SELECT [MaKH], [TenKH] FROM [KHACHHANG]";
@@ -105,7 +105,7 @@ namespace Quanlydongtien
             string sqlStr, makh;
             int i;
             clear();
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
+            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat FROM [HOPDONG] WHERE";
             if (cbxMoney.Text != "All")
             {
 
