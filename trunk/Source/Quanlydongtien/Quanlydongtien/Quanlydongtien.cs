@@ -18,6 +18,7 @@ namespace Quanlydongtien
         Color NegativeC = Color.Pink;
         Boolean rowColor = true; 
         ArrayList DatraG, DatraL;
+        ArrayList KytraG, KytraL;
         Int64 tienmat, tienlai;
         public Quanlydongtien()
         {
@@ -41,6 +42,8 @@ namespace Quanlydongtien
                 CashDB = new db(dbname);
                 DatraG = new ArrayList();
                 DatraL = new ArrayList();
+                KytraG = new ArrayList();
+                KytraL = new ArrayList();
                 txtMaHD.Text = mahd;
                 sqlStr = "SELECT [SoLuong], [MaTien] FROM [TIEN]";
                 oleReader = CashDB.genDataReader(sqlStr);
@@ -80,8 +83,12 @@ namespace Quanlydongtien
                     TimeSpan difDay = ngaytralai.Subtract(DateTime.Today);
                     if ((dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True") || (difDay.Days > 0))
                     {
-                        DatraL.Add("True");
+                        KytraL.Add("False");
                     }
+                    else KytraL.Add("True");
+
+                    if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "True")
+                        DatraL.Add("True");
                     else DatraL.Add("False");
 
                 }
@@ -91,6 +98,15 @@ namespace Quanlydongtien
                     DateTime ngaytralai = DateTime.Parse(dtGridCFG.Rows[i].Cells["Ngaytratien"].Value.ToString());
                     TimeSpan difDay = ngaytralai.Subtract(DateTime.Today);
                     if ((dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True") || (difDay.Days > 0))
+                    {
+                        KytraG.Add("False");                          
+                    }
+                    else
+                    {
+                        KytraG.Add("True");                        
+                    }
+
+                    if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "True")
                     {
                         DatraG.Add("True");
                     }
@@ -119,11 +135,17 @@ namespace Quanlydongtien
             else Realdata = false;
             for (i = 0; i < dtGridCFG.Rows.Count; i++)
             {
-                if (DatraG[i].ToString() == "True")
+                if (KytraG[i].ToString() == "False")
+                {
                     continue;
+                }
                 if (dtGridCFG.Rows[i].Cells["Datra"].Value.ToString() == "False")
+                {
                     continue;
+                }
                 Datra = "Yes";
+                DatraG.RemoveAt(i);
+                DatraG.Insert(i, "True");
                 tientra = tientra + Int64.Parse(dtGridCFG.Rows[i].Cells["Sotien"].Value.ToString());
                 sqlStrG = "UPDATE [DONGTIEN] SET [Datra] = " + Datra;
                 sqlStrG = sqlStrG + " WHERE [MaDT] = " + dtGridCFG.Rows[i].Cells["MaDT"].Value.ToString() + "";
@@ -132,13 +154,15 @@ namespace Quanlydongtien
 
             for (i = 0; i < dtGridCFL.Rows.Count; i++)
             {
-                if (DatraL[i].ToString() == "True")
+                if (KytraL[i].ToString() == "False")
                     continue;
                 if (dtGridCFL.Rows[i].Cells["Datra"].Value.ToString() == "False")
                     continue;
                 Datra = "Yes";
-                tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].Value.ToString());
-                tienlai = tienlai + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotien"].Value.ToString());
+                DatraL.RemoveAt(i);
+                DatraL.Insert(i, "True");
+                tientra = tientra + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotienlai"].Value.ToString());
+                tienlai = tienlai + Int64.Parse(dtGridCFL.Rows[i].Cells["Sotienlai"].Value.ToString());
                 sqlStrL = "UPDATE [TIENLAI] SET [Datra] = " + Datra;
                 sqlStrL = sqlStrL + " WHERE [MaDT] = " + dtGridCFL.Rows[i].Cells["MaDT"].Value.ToString() + "";
                 CashDB.runSQLCmd(sqlStrL);
@@ -150,7 +174,11 @@ namespace Quanlydongtien
                 sqlStr = "UPDATE [TIEN] SET [SoLuong] = " + tienmat + " WHERE [Matien] = 'TongTien'";
                 CashDB.runSQLCmd(sqlStr);
             }
-
+            if (traxong())
+            {
+                sqlStr = "UPDATE [HOPDONG] SET [Hoanthanh] = True WHERE [MaHD] = '" + txtMaHD.Text + "'";
+                CashDB.runSQLCmd(sqlStr);
+            }
             CashDB.close();
             this.Close();
         }
@@ -194,6 +222,22 @@ namespace Quanlydongtien
         {
             CashDB.close();
             this.Close();
+        }
+
+        private Boolean traxong()
+        {         
+            int i;
+            for (i = 0; i < DatraG.Count; i++)
+            {
+                if (DatraG[i].ToString() == "False")
+                    return false;
+            }
+            for (i = 0; i < DatraL.Count; i++)
+            {
+                if (DatraL[i].ToString() == "False")
+                    return false;
+            }
+            return true;
         }
     }
 }

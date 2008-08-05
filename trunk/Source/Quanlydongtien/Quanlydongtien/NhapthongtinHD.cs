@@ -49,9 +49,13 @@ namespace Quanlydongtien
             if (edit == true)
             {
                 
-                sqlStr = "UPDATE [HOPDONG] SET [Real] = " + chkReal.Enabled.ToString();
+                sqlStr = "UPDATE [HOPDONG] SET [Real] = " + real.ToString();
                 sqlStr = sqlStr + ", [DESC] = '" + txtDesc.Text + "', [Laisuat] = " + cbxLaisuat.Text + " WHERE [MaHD] = '" + MaHD + "'";
                 contractDb.runSQLCmd(sqlStr);
+                sqlStr = "UPDATE [DONGTIEN] SET [Real] = " + real.ToString() + "WHERE [MaHD] ='" + MaHD + "'";
+                contractDb.runSQLCmd(sqlStr);
+                
+                sqlStr = "UPDATE [TIENLAI] SET [Real] = " + real.ToString() + "WHERE [MaHD] ='" + MaHD + "'";
                 contractDb.close();
                 this.Close();
             }

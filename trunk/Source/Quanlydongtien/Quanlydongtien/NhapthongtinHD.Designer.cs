@@ -70,6 +70,7 @@ namespace Quanlydongtien
             // 
             // cbxMaKH
             // 
+            this.cbxMaKH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMaKH.FormattingEnabled = true;
             this.cbxMaKH.Location = new System.Drawing.Point(107, 44);
             this.cbxMaKH.Name = "cbxMaKH";
