@@ -60,7 +60,6 @@ namespace Quanlydongtien
             this.dtGridCash.Size = new System.Drawing.Size(345, 442);
             this.dtGridCash.TabIndex = 2;
             this.dtGridCash.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtGridCash_CellMouseDoubleClick);
-            this.dtGridCash.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentClick);
             // 
             // Ngay
             // 

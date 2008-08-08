@@ -85,7 +85,8 @@ namespace Quanlydongtien
 
         private void Quanlyhopdong_Load(object sender, EventArgs e)
         {
-            
+            cbxCusName.Text = "All";
+            cbxMoney.Text = "All";
         }
 
         private void clear()
@@ -111,7 +112,7 @@ namespace Quanlydongtien
 
                 sqlStr = sqlStr + " ABS([Tongtien]) > " + cbxMoney.Text + " AND";
             }
-            i = cbxCusName.Items.IndexOf(cbxCusName.Text);
+            i = cbxCusName.Items.IndexOf(cbxCusName.Text);            
             if (cbxCusName.Text != "All")
                 makh = lstMaKH[i].ToString();
             else makh = "";

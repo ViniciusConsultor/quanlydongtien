@@ -63,6 +63,20 @@ namespace Quanlydongtien
         {
             try
             {
+                float.Parse(number);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static Boolean isDouble(string number)
+        {
+            try
+            {
+                double.Parse(number);
                 return true;
             }
             catch (Exception ex)

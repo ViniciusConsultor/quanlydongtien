@@ -37,13 +37,13 @@ namespace Quanlydongtien
             this.lblNgay = new System.Windows.Forms.Label();
             this.dtGridGIn = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtGridGOut = new System.Windows.Forms.DataGridView();
-            this.dtGridLOut = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtGridGOut = new System.Windows.Forms.DataGridView();
+            this.dtGridLOut = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridLIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridGIn)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -139,6 +139,24 @@ namespace Quanlydongtien
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tien vao";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(450, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Tien lai";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Tien goc";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label2);
@@ -151,6 +169,24 @@ namespace Quanlydongtien
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tien ra";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(448, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tien lai";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Tien goc";
             // 
             // dtGridGOut
             // 
@@ -172,42 +208,6 @@ namespace Quanlydongtien
             this.dtGridLOut.Size = new System.Drawing.Size(449, 311);
             this.dtGridLOut.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Tien goc";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(448, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Tien lai";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(450, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Tien lai";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Tien goc";
-            // 
             // Dongchitiet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,6 +221,9 @@ namespace Quanlydongtien
             this.Controls.Add(this.lblDunocu);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(926, 789);
+            this.MinimumSize = new System.Drawing.Size(926, 789);
             this.Name = "Dongchitiet";
             this.Text = "Dongchitiet";
             this.Load += new System.EventHandler(this.Dongchitiet_Load);

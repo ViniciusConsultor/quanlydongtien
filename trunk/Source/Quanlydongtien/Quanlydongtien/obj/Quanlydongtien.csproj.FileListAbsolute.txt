@@ -52,7 +52,6 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Cha
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.ChangeRole.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.CreateCash.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.CreateUser.resources
-D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.FillContract.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Login.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.MainPoint.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.NhapthongtinKH.resources
