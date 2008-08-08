@@ -155,5 +155,10 @@ namespace Quanlyloinhuan
                 else dtGridProMonth.Rows[i].DefaultCellStyle.ForeColor = Color.Blue;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Utilities.Export_To_Excel(dtGridProfit);
+        }
     }
 }
