@@ -40,7 +40,7 @@ namespace Quanlydongtien
                 sqlStrVG = sqlStrVG + "AND [Real] = Yes";
             FillDG(sqlStrVG, dtGridGIn);
 
-            sqlStrVL = "SELECT [MaDT], [Sotienlai], [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], [Laisuat] FROM [Tienlai] ";
+            sqlStrVL = "SELECT [MaDT], [Sotienlai], [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], ([Laisuat] / 100) AS LaiSuat FROM [Tienlai] ";
             sqlStrVL = sqlStrVL + "WHERE [Sotienlai] > 0 AND FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + lblNgay.Text + "'";
             if (realdata)
                 sqlStrVL = sqlStrVL + "AND [Real] = Yes";
@@ -52,7 +52,7 @@ namespace Quanlydongtien
                 sqlStrRG = sqlStrRG + "AND [Real] = Yes";
             FillDG(sqlStrRG, dtGridGOut);
 
-            sqlStrRL = "SELECT [MaDT], ABS([Sotienlai]) AS Tienlaitra, [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], [Laisuat] FROM [Tienlai] ";
+            sqlStrRL = "SELECT [MaDT], ABS([Sotienlai]) AS Tienlaitra, [MaHD], [NoQH], [Datra], [Real], [Mota], [Tienchiulai], ([Laisuat] / 100) AS LaiSuat FROM [Tienlai] ";
             sqlStrRL = sqlStrRL + "WHERE [Sotienlai] < 0 AND FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + lblNgay.Text + "'";
             if (realdata)
                 sqlStrRL = sqlStrVL + "AND [Real] = Yes";

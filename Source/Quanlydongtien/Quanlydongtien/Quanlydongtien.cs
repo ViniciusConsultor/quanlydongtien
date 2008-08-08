@@ -58,8 +58,8 @@ namespace Quanlydongtien
                 }
                 sqlStrG = "SELECT [MaDT], [Sotien], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [DONGTIEN] WHERE [MaHD] ='" + mahd + "'";
                 sqlStrL = "SELECT [MaDT], [Sotienlai], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [NoQH], [Datra], [Real] FROM [TIENLAI] WHERE [MaHD] ='" + mahd + "'";
-                FillDG(sqlStrG, dtGridCFG);
-                FillDG(sqlStrL, dtGridCFL);
+                FillDG(sqlStrG, ref dtGridCFG);
+                FillDG(sqlStrL, ref dtGridCFL);
 
                 if (dtGridCFL.Rows.Count == 0)
                     return;
@@ -183,7 +183,7 @@ namespace Quanlydongtien
             this.Close();
         }
 
-        private void FillDG(string sqlStr, DataGridView dtGrid)
+        private void FillDG(string sqlStr, ref DataGridView dtGrid)
         {
             //string sqlStr;
             DataSet ds;
@@ -194,9 +194,24 @@ namespace Quanlydongtien
                 dtGrid.DataSource = ds.Tables[0];
             else
                 return;
+         
             for (i = 0; i < dtGridCFG.Columns.Count; i++)
             {
                 dtGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            for (i = 0; i < dtGrid.Rows.Count; i++)
+            {
+                if (rowColor)
+                {
+                    dtGrid.Rows[i].DefaultCellStyle.BackColor = activeC;
+                    rowColor = !rowColor;
+                }
+                else
+                {
+                    dtGrid.Rows[i].DefaultCellStyle.BackColor = NegativeC;
+                    rowColor = !rowColor;
+                }
             }
         }
 

@@ -74,6 +74,7 @@ namespace Quanlydongtien
             // 
             // cbxCusName
             // 
+            this.cbxCusName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCusName.FormattingEnabled = true;
             this.cbxCusName.Location = new System.Drawing.Point(118, 12);
             this.cbxCusName.Name = "cbxCusName";
@@ -92,6 +93,7 @@ namespace Quanlydongtien
             // 
             // cbxMoney
             // 
+            this.cbxMoney.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMoney.FormattingEnabled = true;
             this.cbxMoney.Items.AddRange(new object[] {
             "50000000",
@@ -107,7 +109,6 @@ namespace Quanlydongtien
             this.cbxMoney.Name = "cbxMoney";
             this.cbxMoney.Size = new System.Drawing.Size(121, 21);
             this.cbxMoney.TabIndex = 12;
-            this.cbxMoney.Text = "All";
             // 
             // label2
             // 

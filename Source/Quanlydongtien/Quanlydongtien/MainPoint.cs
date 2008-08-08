@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Data.OleDb;
+using System.Diagnostics;
 
 namespace Quanlydongtien
 {
@@ -15,6 +16,8 @@ namespace Quanlydongtien
         string dbFileName; //Path to datafile
         db userdb;
         string username;
+        string workingDir;
+        Process Proc;
         public MainPoint()
         {
             InitializeComponent();
@@ -40,8 +43,8 @@ namespace Quanlydongtien
         private void nhapHopDongMoiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NhapthongtinHD frmNhapHD = new NhapthongtinHD();
-            frmNhapHD.init(dbFileName);
-            frmNhapHD.ShowDialog();
+            if (frmNhapHD.init(dbFileName))
+                frmNhapHD.ShowDialog();
         }
 
         private void nhapDongTienToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,6 +82,7 @@ namespace Quanlydongtien
             string sqlString;
             OleDbDataReader oleReader;
             config();
+            Proc = new Process();
             userdb = new db(dbFileName);
             sqlString = "SELECT * FROM QUANLYUSER WHERE [Username] = 'admin'";
             oleReader = userdb.genDataReader(sqlString);
@@ -104,6 +108,8 @@ namespace Quanlydongtien
             if (frmLogin.logined == false)
                 this.Close();
             username = frmLogin.user;
+          //  Proc.StartInfo.FileName = @workingDir + "\\Quanlyloinhuan.exe";
+           // Proc.Start();
             check_role(username);
 //            userdb.Batch_Process();
         }
@@ -112,11 +118,13 @@ namespace Quanlydongtien
             XmlDocument xmldoc = new XmlDocument();
             XmlElement root;
             XmlNode xNode;
-            xmldoc.Load("config\\conf.xml");
+            xmldoc.Load("..\\config\\conf.xml");
             root = xmldoc.DocumentElement;
             xNode = root.SelectSingleNode("/config/dbFile").FirstChild;
-
             dbFileName = xNode.OuterXml.Trim();
+
+            xNode = root.SelectSingleNode("/config/workingdir").FirstChild;
+            workingDir = xNode.OuterXml.Trim();
         }
         private void check_role(string username)
         {

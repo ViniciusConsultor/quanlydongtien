@@ -29,6 +29,7 @@ namespace Quanlydongtien
         public void init(string dbname, Boolean real, string ngaythang, Int64 sodu)
         {
             int i;
+            Int64 tiendu;
             realdata = real;
             CashDB = new db(dbname);
             dbfile = dbname;
@@ -42,6 +43,20 @@ namespace Quanlydongtien
             }
             dtGridCash.Rows[0].Cells["Ducuoi"].Value = Int64.Parse(dtGridCash.Rows[0].Cells["Ducuoi"].Value.ToString()) + sodu;
             Tinh_So_Du();
+
+            //Dua ra canh bao voi dong tien
+            for (i = 0; i < dtGridCash.Rows.Count; i++)
+            {
+                tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Ducuoi"].Value.ToString());
+                if (tiendu < 0)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+                if (tiendu > 1000000000)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
             this.ShowDialog();
         }
 
@@ -84,25 +99,36 @@ namespace Quanlydongtien
                     namtralai.Add(oleReaderL["Ngay"].ToString());
                 }
 
-                for (i = 0; i < tiengoc.Count; i++)
+                for (i = 0; i < dtGridCash.Rows.Count; i++)
                 {
-                    tientragoc = Int64.Parse(tiengoc[i].ToString());
+                    tientragoc = 0;
+                    //Cong so tien goc vao tien ra
+                    for (j = 0; j < tiengoc.Count; j++)
+                    {
+                        if (namtragoc[j].ToString() == dtGridCash.Rows[i].Cells["Ngay"].Value.ToString())
+                        {
+                            tientragoc = tientragoc + Int64.Parse(tiengoc[j].ToString());
+                            break;
+                        }
+                    }
+
+                    //Cong tien lai vao tien ra
                     for (j = 0; j < tienlai.Count; j++)
                     {
-                        if (namtralai[j].ToString() == namtragoc[j].ToString())
-                            tientragoc = tientragoc + Int64.Parse(tienlai[i].ToString());
+                        if (namtralai[j].ToString() == dtGridCash.Rows[i].Cells["Ngay"].Value.ToString())
+                        {
+                            tientragoc = tientragoc + Int64.Parse(tienlai[j].ToString());
+                            break;
+                        }
                     }
-                    for (j = 0; j < dtGridCash.Rows.Count; j++)
-                    {
-                        
-                        if ((dtGridCash.Rows[j].Cells["Ngay"].Value.ToString()) == namtragoc[i].ToString())
-                            dtGridCash.Rows[j].Cells["Tienvao"].Value = tientragoc;
-                    }
+
+                    dtGridCash.Rows[i].Cells["Tienvao"].Value = tientragoc;
                 }
 
-                //Add to tienra column
 
-                tiengoc = new ArrayList();
+                    //Add to tienra column
+
+                    tiengoc = new ArrayList();
                 tienlai = new ArrayList();
                 namtragoc = new ArrayList();
                 namtralai = new ArrayList();
@@ -130,19 +156,45 @@ namespace Quanlydongtien
                     namtralai.Add(oleReaderL["Ngay"].ToString());
                 }
 
-                for (i = 0; i < tiengoc.Count; i++)
+                //for (i = 0; i < tiengoc.Count; i++)
+                //{
+                //    tientragoc = Int64.Parse(tiengoc[i].ToString());
+                //    for (j = 0; j < tienlai.Count; j++)
+                //    {
+                //        if (namtralai[j].ToString() == namtragoc[i].ToString())
+                //            tientragoc = tientragoc + Int64.Parse(tienlai[j].ToString());
+                //    }
+                //    for (j = 0; j < dtGridCash.Rows.Count; j++)
+                //    {
+                //        if ((dtGridCash.Rows[j].Cells["Ngay"].Value.ToString()) == namtragoc[i].ToString())
+                //            dtGridCash.Rows[j].Cells["Tienra"].Value = Math.Abs(tientragoc);
+                //    }
+                //}
+
+                for (i = 0; i < dtGridCash.Rows.Count; i++)
                 {
-                    tientragoc = Int64.Parse(tiengoc[i].ToString());
+                    tientragoc = 0;
+
+                    //Them tra goc vao tien ra 
+                    for (j = 0; j < tiengoc.Count; j++)
+                    {
+                        if (namtragoc[j].ToString() == dtGridCash.Rows[i].Cells["Ngay"].Value.ToString())
+                        {
+                            tientragoc = tientragoc + Int64.Parse(tiengoc[j].ToString());
+                            break;
+                        }
+                    }
+
+                    //Them tien tra lai vao dong tien ra
                     for (j = 0; j < tienlai.Count; j++)
                     {
-                        if (namtralai[j].ToString() == namtragoc[i].ToString())
+                        if (namtralai[j].ToString() == dtGridCash.Rows[i].Cells["Ngay"].Value.ToString())
+                        {
                             tientragoc = tientragoc + Int64.Parse(tienlai[j].ToString());
+                            break;
+                        }
                     }
-                    for (j = 0; j < dtGridCash.Rows.Count; j++)
-                    {
-                        if ((dtGridCash.Rows[j].Cells["Ngay"].Value.ToString()) == namtragoc[i].ToString())
-                            dtGridCash.Rows[j].Cells["Tienra"].Value = Math.Abs(tientragoc);
-                    }
+                    dtGridCash.Rows[i].Cells["Tienra"].Value = Math.Abs(tientragoc);
                 }
 
                 return true;
@@ -212,11 +264,6 @@ namespace Quanlydongtien
             {
                 return false;
             }
-        }
-
-        private void dtGridCash_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void dtGridCash_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

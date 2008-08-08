@@ -209,7 +209,7 @@ namespace Quanlydongtien
             // 
             // chayBatchToolStripMenuItem
             // 
-            this.chayBatchToolStripMenuItem.Enabled = false;
+            this.chayBatchToolStripMenuItem.Enabled = true;
             this.chayBatchToolStripMenuItem.Name = "chayBatchToolStripMenuItem";
             this.chayBatchToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.chayBatchToolStripMenuItem.Text = "Chay batch";

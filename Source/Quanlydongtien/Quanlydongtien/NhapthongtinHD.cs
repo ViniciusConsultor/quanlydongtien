@@ -16,6 +16,7 @@ namespace Quanlydongtien
         const int TraNhieuLan = 2;
         const int TraMotLan = 3;
         int laisuat;
+        string oldLS;
         db contractDb;
         string dbfile;
         Boolean edit;
@@ -24,7 +25,7 @@ namespace Quanlydongtien
         ArrayList LSHuydong;
         ArrayList LSChovay;
         ArrayList ListContracts;
-        NhapKyTraNo frmNhapTN;
+        NhapKyTraNo frmNhapTN;        
         public NhapthongtinHD()
         {
             InitializeComponent();
@@ -35,7 +36,10 @@ namespace Quanlydongtien
             string sqlStr;
             string tongtien;
             Boolean real, chovay;
+            double phiuythac;
             chovay = false;
+            if (Check_Data() == false)
+                return;
             if (check_validate() == false)
                 return;
             if (cbxLoaiHD.Text == "Cho Vay")
@@ -75,7 +79,14 @@ namespace Quanlydongtien
                 sqlStr = sqlStr + tongtien + ", '" + cbxDateContracts.Value.ToShortDateString() + "')";
                 if (contractDb.runSQLCmd(sqlStr) == false)
                     return;
-                frmNhapTN.Save_Data(real, txtMaHD.Text, dbfile, chovay, laisuat);
+                if (!Utilities.isDouble(txtPhiUT.Text))
+                {
+                    MessageBox.Show("Ban phai nhap lai thong tin ve " + lblUythac.Text);
+                    txtPhiUT.Focus();
+                    return;
+                }
+                phiuythac = double.Parse(txtPhiUT.Text);
+                frmNhapTN.Save_Data(real, txtMaHD.Text, dbfile, chovay, laisuat, phiuythac);                
                 contractDb.close();
                 this.Close();
             }
@@ -87,7 +98,7 @@ namespace Quanlydongtien
             contractDb.close();
         }
 
-        public void init(string dbname)
+        public Boolean init(string dbname)
         {
             string sqlStr;
             OleDbDataReader oleReader;
@@ -128,12 +139,14 @@ namespace Quanlydongtien
                     else LSHuydong.Add(oleReader["LaiSuat"].ToString());
                 }
                 Create_List_CT();
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
                 contractDb.close();
                 this.Close();
+                return false;
             }
         }
         public void init(string dbname, string maHD)
@@ -183,11 +196,10 @@ namespace Quanlydongtien
                     cbxDateContracts.Enabled = false;
                     txtDesc.Text = oleReader["Desc"].ToString();
                     laisuat = int.Parse(oleReader["Laisuat"].ToString());
-                    cbxLaisuat.Text = oleReader["Laisuat"].ToString();
+                    cbxLaisuat.Text = float.Parse(laisuat.ToString()) / 100 + "";
+                    oldLS = cbxLaisuat.Text;
 //                    cbxLaisuat.Enabled = false;
-                }
-
-                laisuat = int.Parse(cbxLaisuat.Text);
+                }             
                 if (chkReal.Checked == false)
                     chkReal.Enabled = false;
                 if (tongtien > 0)
@@ -230,7 +242,9 @@ namespace Quanlydongtien
 
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cbxLoaiHD.Text == "Cho vay")
+                lblUythac.Text = "Phi cho vay";
+            else lblUythac.Text = "Phi uy thac";
         }
 
         private void NhapthongtinHD_Load(object sender, EventArgs e)
@@ -462,7 +476,9 @@ namespace Quanlydongtien
                 tralandau = ngayHD.AddMonths(int.Parse(cbxKytra.Text));
             else tralandau = tralandau = ngayHD.AddYears(int.Parse(cbxKytra.Text));
             if (tralandau > ngaydaohan)
+            {                
                 return false;
+            }
             else return true;
         }
 
@@ -576,16 +592,45 @@ namespace Quanlydongtien
         private void cbxLaisuat_Leave(object sender, EventArgs e)
         {
             Tinhlai frmTinhLai = new Tinhlai();
+            int laimoi;
             if (edit == false)
                 return;
             else
             {
-                if (cbxLaisuat.Text == laisuat.ToString())
+                if (cbxLaisuat.Text == oldLS)
                     return;
-                frmTinhLai.init(dbfile, txtMaHD.Text, int.Parse(cbxLaisuat.Text));
+                laimoi = (int)(double.Parse(cbxLaisuat.Text) * 100);
+                frmTinhLai.init(dbfile, txtMaHD.Text, laimoi);
                 frmTinhLai.ShowDialog();
                 if (frmTinhLai.saved == false)
                     cbxLaisuat.Text = laisuat.ToString();
+            }
+        }
+
+        private Boolean Check_Data()
+        {
+            try
+            {
+                if (txtMaHD.Text.Length == 0)
+                {
+                    MessageBox.Show("Ban phai nhap ma hop dong!");
+                    txtMaHD.Focus();
+                    return false;
+                }
+
+                if (cbxLoaiHD.Text.Length == 0)
+                {
+                    MessageBox.Show("Ban phai nhap loai hop dong");
+                    cbxLoaiHD.Focus();
+                    return false;
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     

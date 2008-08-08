@@ -13,6 +13,7 @@ namespace Quanlydongtien
     {
         db CashDB;
         public Boolean saved = false;
+        int laisuat;
         public Tinhlai()
         {
             InitializeComponent();
@@ -23,11 +24,12 @@ namespace Quanlydongtien
 
         }
 
-        public void init(string dbname, string mahd, int laisuat)
+        public void init(string dbname, string mahd, int intlaisuat)
         {
             CashDB = new db(dbname);
             txtMaHD.Text = mahd;
-            txtLaisuat.Text = laisuat.ToString();
+            laisuat = intlaisuat;
+            txtLaisuat.Text = float.Parse(laisuat.ToString()) / 100 + "";
             dtGridCF.AllowUserToAddRows = false;
             Tinhlailai();
             dtGridCF.ReadOnly = true;
@@ -41,21 +43,26 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             int rows;
             sqlStr = "SELECT [MaDT], [Sotienlai], Format([NgayTra], 'dd/mm/yyyy') AS Ngaytra, [Tienchiulai], [Laisuat] FROM [TIENLAI] WHERE";
-            sqlStr = sqlStr + "[MaHD] = '" + txtMaHD.Text + "' AND [Datra] = No AND [NoQH] = 0";
+            sqlStr = sqlStr + "[MaHD] = '" + txtMaHD.Text + "' AND [Datra] = No AND [NoQH] = 0 AND[Laisuat] > -1";
             oleReader = CashDB.genDataReader(sqlStr);
             if (oleReader == null)
                 this.Close();
             rows = 0;
-            laimoi = int.Parse(txtLaisuat.Text);
+            laimoi = laisuat;
             while (oleReader.Read())
             {
                 dtGridCF.Rows.Add();
+                dtGridLaicu.Rows.Add();
                 dtGridCF.Rows[rows].Cells["MaDongTien"].Value = oleReader["MaDT"].ToString();
                 dtGridCF.Rows[rows].Cells["Ngaytra"].Value = oleReader["NgayTra"].ToString();
+                dtGridLaicu.Rows[rows].Cells["MaDT"].Value = oleReader["MaDT"].ToString();
+                dtGridLaicu.Rows[rows].Cells["Ngaytrano"].Value = oleReader["NgayTra"].ToString();
                 laicu = Int64.Parse(oleReader["Laisuat"].ToString());
                 tienchiulai = Int64.Parse(oleReader["Tienchiulai"].ToString());
+                dtGridLaicu.Rows[rows].Cells["Dunogoc"].Value = tienchiulai.ToString();
                 sotienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
-                ngaychiulai = ((sotienlai * 360 * 100 * 100) / (tienchiulai * laicu));
+                dtGridLaicu.Rows[rows].Cells["Laicu"].Value = sotienlai.ToString();
+                ngaychiulai = (int)Math.Round(((decimal)((sotienlai * 360 * 100 * 100))) / (tienchiulai * laicu));
                 sotienlai = (tienchiulai * laimoi * ngaychiulai) / (360 * 100 * 100);
                 dtGridCF.Rows[rows].Cells["Duno"].Value = tienchiulai;
                 dtGridCF.Rows[rows].Cells["Tienlai"].Value = sotienlai;

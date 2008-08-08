@@ -42,6 +42,7 @@ namespace Quanlydongtien
             this.dtGridKH.Location = new System.Drawing.Point(0, 52);
             this.dtGridKH.MultiSelect = false;
             this.dtGridKH.Name = "dtGridKH";
+            this.dtGridKH.ReadOnly = true;
             this.dtGridKH.Size = new System.Drawing.Size(559, 269);
             this.dtGridKH.TabIndex = 0;
             this.dtGridKH.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridKH_CellContentClick);

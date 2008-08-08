@@ -64,6 +64,9 @@ namespace Quanlydongtien
             this.txtMaHD = new System.Windows.Forms.TextBox();
             this.lblContractCode = new System.Windows.Forms.Label();
             this.cmdKytraShow = new System.Windows.Forms.Button();
+            this.lblUythac = new System.Windows.Forms.Label();
+            this.txtPhiUT = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.grBoxKytra.SuspendLayout();
             this.grKytrano.SuspendLayout();
             this.SuspendLayout();
@@ -186,7 +189,6 @@ namespace Quanlydongtien
             this.cbxLoaiHD.Name = "cbxLoaiHD";
             this.cbxLoaiHD.Size = new System.Drawing.Size(121, 21);
             this.cbxLoaiHD.TabIndex = 15;
-            this.cbxLoaiHD.Text = "Cho vay";
             this.cbxLoaiHD.SelectedIndexChanged += new System.EventHandler(this.comboBox6_SelectedIndexChanged);
             // 
             // grBoxKytra
@@ -339,7 +341,7 @@ namespace Quanlydongtien
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 209);
+            this.label10.Location = new System.Drawing.Point(12, 226);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(34, 13);
             this.label10.TabIndex = 18;
@@ -347,7 +349,7 @@ namespace Quanlydongtien
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(107, 206);
+            this.txtDesc.Location = new System.Drawing.Point(107, 223);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(271, 20);
             this.txtDesc.TabIndex = 19;
@@ -442,11 +444,40 @@ namespace Quanlydongtien
             this.cmdKytraShow.UseVisualStyleBackColor = true;
             this.cmdKytraShow.Click += new System.EventHandler(this.cmdKytraShow_Click);
             // 
+            // lblUythac
+            // 
+            this.lblUythac.AutoSize = true;
+            this.lblUythac.Location = new System.Drawing.Point(12, 198);
+            this.lblUythac.Name = "lblUythac";
+            this.lblUythac.Size = new System.Drawing.Size(60, 13);
+            this.lblUythac.TabIndex = 29;
+            this.lblUythac.Text = "Phi uy thac";
+            // 
+            // txtPhiUT
+            // 
+            this.txtPhiUT.Location = new System.Drawing.Point(107, 195);
+            this.txtPhiUT.Name = "txtPhiUT";
+            this.txtPhiUT.Size = new System.Drawing.Size(60, 20);
+            this.txtPhiUT.TabIndex = 30;
+            this.txtPhiUT.Text = "0";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(174, 198);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "% nam";
+            // 
             // NhapthongtinHD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 425);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtPhiUT);
+            this.Controls.Add(this.lblUythac);
             this.Controls.Add(this.cmdKytraShow);
             this.Controls.Add(this.lblContractCode);
             this.Controls.Add(this.txtMaHD);
@@ -524,5 +555,8 @@ namespace Quanlydongtien
         private System.Windows.Forms.Label lblContractCode;
         private System.Windows.Forms.Button cmdPreview;
         private System.Windows.Forms.Button cmdKytraShow;
+        private System.Windows.Forms.Label lblUythac;
+        private System.Windows.Forms.TextBox txtPhiUT;
+        private System.Windows.Forms.Label label15;
     }
 }

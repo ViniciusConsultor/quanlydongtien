@@ -412,18 +412,23 @@ namespace Quanlydongtien
         }
 
 
-        public void Save_Data(Boolean real, string MaHD, string dbname, Boolean chovay, int laisuat)
+        public void Save_Data(Boolean real, string MaHD, string dbname, Boolean chovay, int laisuat, double phiuythac)
         {
-            string sqlStrG, sqlStrL;
+            string sqlStrG, sqlStrL, sqlStrP;
             string tientraG, tientraL;
-            string ngaytra;
             int i;
+            int lephi;
+            double lephiuythac_i, ngaychiulai, dunogoc;
+            TimeSpan difDays;
             CashDB = new db(dbname);
+            lephi = (int)(phiuythac * 100);
             for (i = 0; i < dtGridCF.Rows.Count; i++)
             {
+                string ngaytra;
                 ngaytra = dtGridCF.Rows[i].Cells["Ngaytra"].Value.ToString();
                 tientraG = dtGridCF.Rows[i].Cells["Sotien"].Value.ToString();
                 tientraL = dtGridCF.Rows[i].Cells["Tienlai"].Value.ToString();
+                dunogoc = double.Parse(dtGridCF.Rows[i].Cells["Duno"].Value.ToString());
                 if (chovay == false)
                 {
                     tientraG = "-" + tientraG;
@@ -439,6 +444,39 @@ namespace Quanlydongtien
                 sqlStrL = sqlStrL + ", " + laisuat + ")";
                 CashDB.runSQLCmd(sqlStrG);
                 CashDB.runSQLCmd(sqlStrL);
+
+                if (chovay == false)
+                {
+                    difDays = DateTime.Parse(this.ngaytra).Subtract(DateTime.Parse(ngayvay));
+                    ngaychiulai = (double)(difDays.Days);
+                    lephiuythac_i = (double)Math.Round((decimal)(ngaychiulai * phiuythac * dunogoc) / (360 * 100));
+                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], NoQH, [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchuilai], [Laisuat]) VALUES";
+                    sqlStrP = sqlStrP + "('" + MaHD + "', No, No, " + real.ToString() + ", 'Phi uy thac quan ly von', ";
+                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + Math.Abs(tongtien) + "', " + lephi.ToString() + ")";
+                    CashDB.runSQLCmd(sqlStrP);
+                }
+
+            }
+
+            //Neu la tien cho vay phi se duoc tinh dua tren so tien gui ban dau
+
+            if (chovay == true)
+            {
+                difDays = DateTime.Parse(this.ngaytra).Subtract(DateTime.Parse(ngayvay));
+                ngaychiulai = (double)(difDays.Days);
+                lephiuythac_i = (double)Math.Round((decimal)(ngaychiulai * phiuythac * tongtien) / (360 * 100));
+                lephiuythac_i = Math.Abs(lephiuythac_i);
+                try
+                {
+                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], NoQH, [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchuilai], [Laisuat]) VALUES";
+                    sqlStrP = sqlStrP + "('" + MaHD + "', No, No, " + real.ToString() + ", 'Phi dich vu cho vay bang', ";
+                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + ", " + Math.Abs(tongtien) + "', " + lephi.ToString() + ")";
+                    CashDB.runSQLCmd(sqlStrP);
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
             }
             CashDB.close();
         }

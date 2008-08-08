@@ -30,6 +30,7 @@ namespace Quanlydongtien
         public void init(string dbname, Boolean real, int namtien, Int64 sodu)
         {
             int i;
+            Int64 tiendu;
             CashDB = new db(dbname);
             nam = namtien;
             realdata = real;
@@ -45,6 +46,21 @@ namespace Quanlydongtien
             dunamtruoc = sodu;
             lblDuno.Text = dunamtruoc.ToString();
             Tinh_So_Du();
+
+            //Dua ra nguong canh bao voi dong tien
+            for (i = 0; i < dtGridCash.Rows.Count; i++)
+            {
+                tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Ducuoi"].Value.ToString());
+                if (tiendu < 0)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+                if (tiendu > 1000000000)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
+
             this.ShowDialog();
         }
 
