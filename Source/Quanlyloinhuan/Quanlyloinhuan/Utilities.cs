@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Windows.Forms;
 namespace Quanlyloinhuan
 {
     class Utilities
@@ -82,6 +82,38 @@ namespace Quanlyloinhuan
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        public static void Export_To_Excel(DataGridView dtGridView)
+        {
+            int i, j;
+            Microsoft.Office.Interop.Excel.ApplicationClass excellApp;
+            excellApp = new Microsoft.Office.Interop.Excel.ApplicationClass();
+            excellApp.Application.Workbooks.Add(true);
+            try
+            {
+                // Add columns name to excel file
+                for (i = 0; i < dtGridView.Columns.Count; i++)
+                {
+                    excellApp.Cells[1, i + 1] = dtGridView.Columns[i].Name;
+                }
+                for (i = 0; i < dtGridView.Rows.Count; i++)
+                {
+                    for (j = 0; j < dtGridView.Columns.Count; j++)
+                    {
+                        excellApp.Cells[i + 2, j + 1] = dtGridView.Rows[i].Cells[j].Value;
+                    }
+                }
+                //excellApp.Save(("Loinhuan.xls");
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = (Microsoft.Office.Interop.Excel._Worksheet)excellApp.ActiveSheet;
+                worksheet.Activate();
+                excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
             }
         }
 

@@ -22,3 +22,4 @@ D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.P
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.csproj.GenerateResource.Cache
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.exe
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.pdb
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.csproj.ResolveComReference.cache

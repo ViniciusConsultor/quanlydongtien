@@ -37,6 +37,7 @@ namespace Quanlyloinhuan
             this.dtGridProMonth = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNam = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridProfit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridProMonth)).BeginInit();
             this.SuspendLayout();
@@ -121,11 +122,22 @@ namespace Quanlyloinhuan
             this.lblNam.Size = new System.Drawing.Size(0, 13);
             this.lblNam.TabIndex = 6;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(145, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Export To Excel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 328);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblNam);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridProMonth);
@@ -155,6 +167,7 @@ namespace Quanlyloinhuan
         private System.Windows.Forms.DataGridView dtGridProMonth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNam;
+        private System.Windows.Forms.Button button1;
     }
 }
 
