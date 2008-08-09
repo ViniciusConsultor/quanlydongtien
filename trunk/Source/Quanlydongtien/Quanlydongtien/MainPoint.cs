@@ -17,7 +17,6 @@ namespace Quanlydongtien
         db userdb;
         string username;
         string workingDir;
-        Process Proc;
         public MainPoint()
         {
             InitializeComponent();
@@ -82,7 +81,6 @@ namespace Quanlydongtien
             string sqlString;
             OleDbDataReader oleReader;
             config();
-            Proc = new Process();
             userdb = new db(dbFileName);
             sqlString = "SELECT * FROM QUANLYUSER WHERE [Username] = 'admin'";
             oleReader = userdb.genDataReader(sqlString);
@@ -108,8 +106,6 @@ namespace Quanlydongtien
             if (frmLogin.logined == false)
                 this.Close();
             username = frmLogin.user;
-          //  Proc.StartInfo.FileName = @workingDir + "\\Quanlyloinhuan.exe";
-           // Proc.Start();
             check_role(username);
 //            userdb.Batch_Process();
         }
@@ -271,6 +267,19 @@ namespace Quanlydongtien
         private void chayBatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             userdb.Batch_Process();
+        }
+
+        private void quanLyLoiNhuanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void suaFileCauHinhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process Proc = new Process();
+            Proc.StartInfo.FileName = @"C:\Program Files\Windows NT\Accessories\wordpad.exe";
+            //Proc.StartInfo.EnvironmentVariables.Add("filename", "..\\config\\conf.xml");
+            Proc.Start();
         }
     }
 }
