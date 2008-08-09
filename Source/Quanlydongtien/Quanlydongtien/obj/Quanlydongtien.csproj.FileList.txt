@@ -6,7 +6,6 @@ obj\Debug\Quanlydongtien.ChangeRole.resources
 obj\Debug\Quanlydongtien.CreateCash.resources
 obj\Debug\Quanlydongtien.CreateUser.resources
 obj\Debug\Quanlydongtien.Dongtiennam.resources
-obj\Debug\Quanlydongtien.FillContract.resources
 obj\Debug\Quanlydongtien.Login.resources
 obj\Debug\Quanlydongtien.MainPoint.resources
 obj\Debug\Quanlydongtien.NhapKyTraNo.resources
@@ -22,3 +21,6 @@ obj\Debug\Quanlydongtien.csproj.GenerateResource.Cache
 obj\Debug\Quanlydongtien.exe
 obj\Debug\Quanlydongtien.pdb
 obj\Debug\Quanlydongtien.Dongtienthang.resources
+obj\Debug\Quanlydongtien.Dongchitiet.resources
+obj\Debug\Quanlydongtien.Dongtienngay.resources
+obj\Debug\Quanlydongtien.Quanlyvon.resources

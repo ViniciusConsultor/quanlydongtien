@@ -28,7 +28,6 @@ namespace Quanlydongtien
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.thoatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +38,8 @@ namespace Quanlydongtien
             this.nhapHopDongMoiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nhapThongTinKhachHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nhapThongTinNguoiDungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chayBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suaFileCauHinhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quanLyHopDongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quanLyKhachHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,10 +47,9 @@ namespace Quanlydongtien
             this.quanLyNguoiDungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quanLyVonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capthuHoiQuyenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quanLyLoiNhuanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.chayBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +111,8 @@ namespace Quanlydongtien
             this.nhapHopDongMoiToolStripMenuItem,
             this.nhapThongTinKhachHangToolStripMenuItem,
             this.nhapThongTinNguoiDungToolStripMenuItem,
-            this.chayBatchToolStripMenuItem});
+            this.chayBatchToolStripMenuItem,
+            this.suaFileCauHinhToolStripMenuItem});
             this.nhapDuLieuToolStripMenuItem.Name = "nhapDuLieuToolStripMenuItem";
             this.nhapDuLieuToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.nhapDuLieuToolStripMenuItem.Text = "Nhap du lieu";
@@ -137,6 +138,20 @@ namespace Quanlydongtien
             this.nhapThongTinNguoiDungToolStripMenuItem.Text = "Nhap thong tin nguoi dung";
             this.nhapThongTinNguoiDungToolStripMenuItem.Click += new System.EventHandler(this.nhapThongTinNguoiDungToolStripMenuItem_Click);
             // 
+            // chayBatchToolStripMenuItem
+            // 
+            this.chayBatchToolStripMenuItem.Name = "chayBatchToolStripMenuItem";
+            this.chayBatchToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.chayBatchToolStripMenuItem.Text = "Chay batch";
+            this.chayBatchToolStripMenuItem.Click += new System.EventHandler(this.chayBatchToolStripMenuItem_Click);
+            // 
+            // suaFileCauHinhToolStripMenuItem
+            // 
+            this.suaFileCauHinhToolStripMenuItem.Name = "suaFileCauHinhToolStripMenuItem";
+            this.suaFileCauHinhToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.suaFileCauHinhToolStripMenuItem.Text = "Sua file cau hinh";
+            this.suaFileCauHinhToolStripMenuItem.Click += new System.EventHandler(this.suaFileCauHinhToolStripMenuItem_Click);
+            // 
             // quaToolStripMenuItem
             // 
             this.quaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -145,7 +160,8 @@ namespace Quanlydongtien
             this.quanLyDongTienToolStripMenuItem,
             this.quanLyNguoiDungToolStripMenuItem,
             this.quanLyVonToolStripMenuItem,
-            this.capthuHoiQuyenToolStripMenuItem});
+            this.capthuHoiQuyenToolStripMenuItem,
+            this.quanLyLoiNhuanToolStripMenuItem});
             this.quaToolStripMenuItem.Name = "quaToolStripMenuItem";
             this.quaToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.quaToolStripMenuItem.Text = "Quan tri";
@@ -192,6 +208,13 @@ namespace Quanlydongtien
             this.capthuHoiQuyenToolStripMenuItem.Text = "Cap/thu hoi quyen";
             this.capthuHoiQuyenToolStripMenuItem.Click += new System.EventHandler(this.capthuHoiQuyenToolStripMenuItem_Click);
             // 
+            // quanLyLoiNhuanToolStripMenuItem
+            // 
+            this.quanLyLoiNhuanToolStripMenuItem.Name = "quanLyLoiNhuanToolStripMenuItem";
+            this.quanLyLoiNhuanToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quanLyLoiNhuanToolStripMenuItem.Text = "Quan ly loi nhuan";
+            this.quanLyLoiNhuanToolStripMenuItem.Click += new System.EventHandler(this.quanLyLoiNhuanToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -206,14 +229,6 @@ namespace Quanlydongtien
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // chayBatchToolStripMenuItem
-            // 
-            this.chayBatchToolStripMenuItem.Enabled = true;
-            this.chayBatchToolStripMenuItem.Name = "chayBatchToolStripMenuItem";
-            this.chayBatchToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.chayBatchToolStripMenuItem.Text = "Chay batch";
-            this.chayBatchToolStripMenuItem.Click += new System.EventHandler(this.chayBatchToolStripMenuItem_Click);
             // 
             // MainPoint
             // 
@@ -258,7 +273,8 @@ namespace Quanlydongtien
         private System.Windows.Forms.ToolStripMenuItem nhapThongTinKhachHangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nhapThongTinNguoiDungToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chayBatchToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem quanLyLoiNhuanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suaFileCauHinhToolStripMenuItem;
     }
 }
 
