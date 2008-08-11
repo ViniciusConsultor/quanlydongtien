@@ -15,3 +15,16 @@ bin\Debug\Interop.VBIDE.dll
 obj\Debug\Interop.Excel.dll
 obj\Debug\Interop.Microsoft.Office.Core.dll
 obj\Debug\Interop.VBIDE.dll
+bin\Release\Quanlyloinhuan.exe
+bin\Release\Quanlyloinhuan.pdb
+bin\Release\Interop.Excel.dll
+bin\Release\Interop.Microsoft.Office.Core.dll
+bin\Release\Interop.VBIDE.dll
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\Interop.Excel.dll
+obj\Release\Interop.Microsoft.Office.Core.dll
+obj\Release\Interop.VBIDE.dll
+obj\Release\Quanlyloinhuan.csproj.ResolveComReference.cache
+obj\Release\Quanlyloinhuan.Form1.resources
+obj\Release\Quanlyloinhuan.Properties.Resources.resources
+obj\Release\Quanlyloinhuan.csproj.GenerateResource.Cache
