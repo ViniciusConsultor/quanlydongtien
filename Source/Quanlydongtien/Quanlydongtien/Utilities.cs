@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Office.Interop.Word;
 
 namespace Quanlydongtien
 {
@@ -78,6 +79,31 @@ namespace Quanlydongtien
             {
                 double.Parse(number);
                 return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static Boolean Replace_String_In_Word_File(ref Document doc, string sourceStr, string newStr)
+        {
+            object replaceAll = WdReplace.wdReplaceAll;
+            
+            object missing = Type.Missing;
+            try
+            {                
+                foreach(Range rng in doc.StoryRanges)
+                {
+                    rng.Find.Text = sourceStr;
+                    rng.Find.Replacement.Text = newStr;
+                    rng.Find.Wrap = WdFindWrap.wdFindContinue;
+                    //object replaceAll = Word.WdReplace.wdReplaceAll;
+                    rng.Find.Execute(ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceAll, ref missing, ref missing, ref missing, ref missing);
+                    //rng.Find.Execute(Replace = Word.WdReplace.wdReplaceAll);
+                }
+                return true;
+
             }
             catch (Exception ex)
             {

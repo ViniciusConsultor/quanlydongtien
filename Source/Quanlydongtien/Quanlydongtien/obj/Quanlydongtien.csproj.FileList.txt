@@ -24,3 +24,4 @@ obj\Debug\Quanlydongtien.Dongtienthang.resources
 obj\Debug\Quanlydongtien.Dongchitiet.resources
 obj\Debug\Quanlydongtien.Dongtienngay.resources
 obj\Debug\Quanlydongtien.Quanlyvon.resources
+obj\Debug\Quanlydongtien.csproj.ResolveComReference.cache

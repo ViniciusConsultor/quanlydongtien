@@ -1,0 +1,17 @@
+obj\Release\Quanlyloinhuan.exe
+obj\Release\Quanlyloinhuan.pdb
+obj\Debug\Quanlyloinhuan.exe
+obj\Debug\Quanlyloinhuan.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Quanlyloinhuan.csproj.ResolveComReference.cache
+obj\Debug\Quanlyloinhuan.Form1.resources
+obj\Debug\Quanlyloinhuan.Properties.Resources.resources
+obj\Debug\Quanlyloinhuan.csproj.GenerateResource.Cache
+bin\Debug\Quanlyloinhuan.exe
+bin\Debug\Quanlyloinhuan.pdb
+bin\Debug\Interop.Excel.dll
+bin\Debug\Interop.Microsoft.Office.Core.dll
+bin\Debug\Interop.VBIDE.dll
+obj\Debug\Interop.Excel.dll
+obj\Debug\Interop.Microsoft.Office.Core.dll
+obj\Debug\Interop.VBIDE.dll

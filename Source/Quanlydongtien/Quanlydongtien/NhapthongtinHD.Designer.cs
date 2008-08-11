@@ -67,6 +67,7 @@ namespace Quanlydongtien
             this.lblUythac = new System.Windows.Forms.Label();
             this.txtPhiUT = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.cmdViewContracts = new System.Windows.Forms.Button();
             this.grBoxKytra.SuspendLayout();
             this.grKytrano.SuspendLayout();
             this.SuspendLayout();
@@ -357,7 +358,7 @@ namespace Quanlydongtien
             // cmdAccept
             // 
             this.cmdAccept.Enabled = false;
-            this.cmdAccept.Location = new System.Drawing.Point(180, 381);
+            this.cmdAccept.Location = new System.Drawing.Point(198, 381);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(88, 34);
             this.cmdAccept.TabIndex = 20;
@@ -367,7 +368,7 @@ namespace Quanlydongtien
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(274, 381);
+            this.cmdClose.Location = new System.Drawing.Point(292, 381);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(88, 34);
             this.cmdClose.TabIndex = 21;
@@ -436,7 +437,7 @@ namespace Quanlydongtien
             // 
             // cmdKytraShow
             // 
-            this.cmdKytraShow.Location = new System.Drawing.Point(87, 381);
+            this.cmdKytraShow.Location = new System.Drawing.Point(105, 381);
             this.cmdKytraShow.Name = "cmdKytraShow";
             this.cmdKytraShow.Size = new System.Drawing.Size(88, 34);
             this.cmdKytraShow.TabIndex = 28;
@@ -470,11 +471,22 @@ namespace Quanlydongtien
             this.label15.TabIndex = 31;
             this.label15.Text = "% nam";
             // 
+            // cmdViewContracts
+            // 
+            this.cmdViewContracts.Location = new System.Drawing.Point(11, 381);
+            this.cmdViewContracts.Name = "cmdViewContracts";
+            this.cmdViewContracts.Size = new System.Drawing.Size(88, 34);
+            this.cmdViewContracts.TabIndex = 32;
+            this.cmdViewContracts.Text = "Xem hop dong";
+            this.cmdViewContracts.UseVisualStyleBackColor = true;
+            this.cmdViewContracts.Click += new System.EventHandler(this.cmdViewContracts_Click);
+            // 
             // NhapthongtinHD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 425);
+            this.Controls.Add(this.cmdViewContracts);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtPhiUT);
             this.Controls.Add(this.lblUythac);
@@ -558,5 +570,6 @@ namespace Quanlydongtien
         private System.Windows.Forms.Label lblUythac;
         private System.Windows.Forms.TextBox txtPhiUT;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button cmdViewContracts;
     }
 }

@@ -88,8 +88,9 @@ namespace Quanlyloinhuan
         public static void Export_To_Excel(DataGridView dtGridView)
         {
             int i, j;
-            Microsoft.Office.Interop.Excel.ApplicationClass excellApp;
-            excellApp = new Microsoft.Office.Interop.Excel.ApplicationClass();
+            
+            Excel.ApplicationClass excellApp;
+            excellApp = new Excel.ApplicationClass();
             excellApp.Application.Workbooks.Add(true);
             try
             {
@@ -106,7 +107,7 @@ namespace Quanlyloinhuan
                     }
                 }
                 //excellApp.Save(("Loinhuan.xls");
-                Microsoft.Office.Interop.Excel._Worksheet worksheet = (Microsoft.Office.Interop.Excel._Worksheet)excellApp.ActiveSheet;
+                Excel._Worksheet worksheet = (Excel._Worksheet)excellApp.ActiveSheet;
                 worksheet.Activate();
                 excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");
             }
