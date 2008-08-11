@@ -158,7 +158,14 @@ namespace Quanlyloinhuan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Utilities.Export_To_Excel(dtGridProfit);
+            string filename = @"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls";
+            Utilities.Export_To_Excel(dtGridProfit, filename, "Loinhuan");
+        }
+
+        private void cmdLoiNhuanThang_Click(object sender, EventArgs e)
+        {
+            string filename;
+            string sheetName;
         }
     }
 }

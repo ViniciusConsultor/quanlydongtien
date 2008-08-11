@@ -264,5 +264,12 @@ namespace Quanlydongtien
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = sodu_i;
             }
         }
+
+        private void cmdExport_Click(object sender, EventArgs e)
+        {
+            string filename = "Loi_Nhuan_Nam.xls";
+            string sheetnaem = "Loi_Nhuan_Tong_Hop";
+            //Utilities.Export_To_Excel(dtGridCash, filename, sheetnaem);
+        }
     }
 }

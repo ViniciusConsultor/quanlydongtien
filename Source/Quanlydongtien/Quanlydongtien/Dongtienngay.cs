@@ -77,11 +77,11 @@ namespace Quanlydongtien
                 namtralai = new ArrayList();
                 sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) ";
                 if (realdata)
-                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "') AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'dd')";
+                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "') AND ([Real] = Yes)GROUP BY FORMAT([Ngaytra], 'dd')";
                 else sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "') GROUP BY FORMAT([Ngaytra], 'dd')";
                 sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ") GROUP BY FORMAT([Ngaytra], 'dd')";
+                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = Yes) GROUP BY FORMAT([Ngaytra], 'dd')";
                 else sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);
@@ -134,11 +134,11 @@ namespace Quanlydongtien
                 namtralai = new ArrayList();
                 sqlStrRG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [DONGTIEN] WHERE [SOTIEN] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ") GROUP BY FORMAT([Ngaytra], 'dd')";
+                    sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = Yes) GROUP BY FORMAT([Ngaytra], 'dd')";
                 else sqlStrRG = sqlStrRG + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 sqlStrRL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'dd') AS Ngay from [TIENLAI] WHERE [Sotienlai] < 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'dd')";
+                    sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) AND ([Real] = Yes)GROUP BY FORMAT([Ngaytra], 'dd')";
                 else sqlStrRL = sqlStrRL + " AND ((FORMAT([Ngaytra], 'mm/yyyy') = '" + lblthang.Text + "')) GROUP BY FORMAT([Ngaytra], 'dd')";
                 oleReaderG = CashDB.genDataReader(sqlStrRG);
                 oleReaderL = CashDB.genDataReader(sqlStrRL);

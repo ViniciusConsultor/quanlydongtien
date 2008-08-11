@@ -81,11 +81,11 @@ namespace Quanlydongtien
                 namtralai = new ArrayList();
                 sqlStrVG = "SELECT sum ([Sotien]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [DONGTIEN] WHERE ([SOTIEN] > 0) AND (([NoQH] = 0) OR ([Datra] = Yes)) ";
                 if (realdata)
-                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') AND ([Real] = " + realdata.ToString() + ")GROUP BY FORMAT([Ngaytra], 'mm')";
+                    sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') AND ([Real] = Yes)GROUP BY FORMAT([Ngaytra], 'mm')";
                 else sqlStrVG = sqlStrVG + "AND (FORMAT([Ngaytra], 'yyyy') = '" + nam + "') GROUP BY FORMAT([Ngaytra], 'mm')";
                 sqlStrVL = "SELECT sum ([Sotienlai]) AS Tien, FORMAT([ngaytra], 'mm') AS Thang from [TIENLAI] WHERE [Sotienlai] > 0 AND (([NoQH] = 0) OR ([Datra] = Yes))";
                 if (realdata)
-                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = " +  realdata.ToString() +") GROUP BY FORMAT([Ngaytra], 'mm')";
+                    sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) AND ([Real] = Yes) GROUP BY FORMAT([Ngaytra], 'mm')";
                 else sqlStrVL = sqlStrVL + "  AND ((FORMAT([Ngaytra], 'yyyy') = '" + nam + "')) GROUP BY FORMAT([Ngaytra], 'mm')";
                 oleReaderG = CashDB.genDataReader(sqlStrVG);
                 oleReaderL = CashDB.genDataReader(sqlStrVL);

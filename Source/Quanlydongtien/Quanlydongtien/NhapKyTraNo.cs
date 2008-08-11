@@ -450,9 +450,9 @@ namespace Quanlydongtien
                     difDays = DateTime.Parse(this.ngaytra).Subtract(DateTime.Parse(ngayvay));
                     ngaychiulai = (double)(difDays.Days);
                     lephiuythac_i = (double)Math.Round((decimal)(ngaychiulai * phiuythac * dunogoc) / (360 * 100));
-                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], NoQH, [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchuilai], [Laisuat]) VALUES";
-                    sqlStrP = sqlStrP + "('" + MaHD + "', No, No, " + real.ToString() + ", 'Phi uy thac quan ly von', ";
-                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + Math.Abs(tongtien) + "', " + lephi.ToString() + ")";
+                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], NoQH, [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchiulai], [Laisuat]) VALUES";
+                    sqlStrP = sqlStrP + "('" + MaHD + "', 0, No, " + real.ToString() + ", 'Phi uy thac quan ly von', ";
+                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + "', " + Math.Abs(tongtien) + ", " + lephi.ToString() + ")";
                     CashDB.runSQLCmd(sqlStrP);
                 }
 
@@ -468,9 +468,9 @@ namespace Quanlydongtien
                 lephiuythac_i = Math.Abs(lephiuythac_i);
                 try
                 {
-                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], NoQH, [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchuilai], [Laisuat]) VALUES";
-                    sqlStrP = sqlStrP + "('" + MaHD + "', No, No, " + real.ToString() + ", 'Phi dich vu cho vay bang', ";
-                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + ", " + Math.Abs(tongtien) + "', " + lephi.ToString() + ")";
+                    sqlStrP = "INSERT INTO [TIENLAI] ([MaHD], [NoQH], [Datra], [Real], [Mota], [Sotienlai], [Ngaytra], [Tienchiulai], [Laisuat]) VALUES";
+                    sqlStrP = sqlStrP + "('" + MaHD + "', 0, No, " + real.ToString() + ", 'Phi dich vu cho vay bang', ";
+                    sqlStrP = sqlStrP + lephiuythac_i.ToString() + ", '" + ngaytra + "', " + Math.Abs(tongtien) + ", " + lephi.ToString() + ")";
                     CashDB.runSQLCmd(sqlStrP);
                 }
                 catch (Exception ex)
