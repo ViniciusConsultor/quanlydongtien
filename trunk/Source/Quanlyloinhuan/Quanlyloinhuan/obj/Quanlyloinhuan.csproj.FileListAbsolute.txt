@@ -23,3 +23,16 @@ D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.c
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.exe
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.pdb
 D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Quanlyloinhuan.csproj.ResolveComReference.cache
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Debug\Interop.Excel.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Debug\Interop.Microsoft.Office.Core.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Debug\Interop.VBIDE.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Debug\Interop.Excel.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Debug\Interop.Microsoft.Office.Core.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Debug\Interop.VBIDE.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Debug\Quanlyloinhuan.csproj.ResolveComReference.cache
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Interop.Excel.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Interop.Microsoft.Office.Core.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\obj\Release\Interop.VBIDE.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Release\Interop.Excel.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Release\Interop.Microsoft.Office.Core.dll
+D:\Project\SVN\Source\Quanlyloinhuan\Quanlyloinhuan\bin\Release\Interop.VBIDE.dll

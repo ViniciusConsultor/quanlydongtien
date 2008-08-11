@@ -97,3 +97,5 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Tin
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.csproj.GenerateResource.Cache
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.exe
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.pdb
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.csproj.ResolveComReference.cache
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.csproj.ResolveComReference.cache

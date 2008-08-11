@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupQLDT", "SetupQLDT\SetupQLDT.vdproj", "{9446F7B6-B01B-4782-A099-F1E86EFF8AA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9446F7B6-B01B-4782-A099-F1E86EFF8AA7}.Debug|Default.ActiveCfg = Debug
+		{9446F7B6-B01B-4782-A099-F1E86EFF8AA7}.Debug|Default.Build.0 = Debug
+		{9446F7B6-B01B-4782-A099-F1E86EFF8AA7}.Release|Default.ActiveCfg = Release
+		{9446F7B6-B01B-4782-A099-F1E86EFF8AA7}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

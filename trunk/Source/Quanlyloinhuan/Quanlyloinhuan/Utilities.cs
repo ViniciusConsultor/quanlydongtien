@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+
 namespace Quanlyloinhuan
 {
     class Utilities
@@ -85,13 +86,14 @@ namespace Quanlyloinhuan
             }
         }
 
-        public static void Export_To_Excel(DataGridView dtGridView)
+        public static void Export_To_Excel(DataGridView dtGridView, string filename, string sheetName)
         {
             int i, j;
-            
+            object missing = Type.Missing;
             Excel.ApplicationClass excellApp;
             excellApp = new Excel.ApplicationClass();
             excellApp.Application.Workbooks.Add(true);
+            
             try
             {
                 // Add columns name to excel file
@@ -109,7 +111,9 @@ namespace Quanlyloinhuan
                 //excellApp.Save(("Loinhuan.xls");
                 Excel._Worksheet worksheet = (Excel._Worksheet)excellApp.ActiveSheet;
                 worksheet.Activate();
-                excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");
+                worksheet.Name = sheetName;
+                worksheet.SaveAs(filename, missing, missing, missing, missing, missing, missing, missing, missing, missing);
+                //excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");
             }
             catch (Exception ex)
             {

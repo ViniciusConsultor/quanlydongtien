@@ -37,7 +37,8 @@ namespace Quanlyloinhuan
             this.dtGridProMonth = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNam = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdExpLoiNhuanNam = new System.Windows.Forms.Button();
+            this.cmdLoiNhuanThang = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridProfit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridProMonth)).BeginInit();
             this.SuspendLayout();
@@ -122,30 +123,43 @@ namespace Quanlyloinhuan
             this.lblNam.Size = new System.Drawing.Size(0, 13);
             this.lblNam.TabIndex = 6;
             // 
-            // button1
+            // cmdExpLoiNhuanNam
             // 
-            this.button1.Location = new System.Drawing.Point(145, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Export To Excel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdExpLoiNhuanNam.Enabled = false;
+            this.cmdExpLoiNhuanNam.Location = new System.Drawing.Point(292, 331);
+            this.cmdExpLoiNhuanNam.Name = "cmdExpLoiNhuanNam";
+            this.cmdExpLoiNhuanNam.Size = new System.Drawing.Size(116, 23);
+            this.cmdExpLoiNhuanNam.TabIndex = 7;
+            this.cmdExpLoiNhuanNam.Text = "Export To Excel";
+            this.cmdExpLoiNhuanNam.UseVisualStyleBackColor = true;
+            this.cmdExpLoiNhuanNam.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cmdLoiNhuanThang
+            // 
+            this.cmdLoiNhuanThang.Enabled = false;
+            this.cmdLoiNhuanThang.Location = new System.Drawing.Point(483, 331);
+            this.cmdLoiNhuanThang.MaximumSize = new System.Drawing.Size(116, 23);
+            this.cmdLoiNhuanThang.MinimumSize = new System.Drawing.Size(116, 23);
+            this.cmdLoiNhuanThang.Name = "cmdLoiNhuanThang";
+            this.cmdLoiNhuanThang.Size = new System.Drawing.Size(116, 23);
+            this.cmdLoiNhuanThang.TabIndex = 8;
+            this.cmdLoiNhuanThang.Text = "Export To Excel";
+            this.cmdLoiNhuanThang.UseVisualStyleBackColor = true;
+            this.cmdLoiNhuanThang.Click += new System.EventHandler(this.cmdLoiNhuanThang_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 328);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(602, 361);
+            this.Controls.Add(this.cmdLoiNhuanThang);
+            this.Controls.Add(this.cmdExpLoiNhuanNam);
             this.Controls.Add(this.lblNam);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridProMonth);
             this.Controls.Add(this.chkReal);
             this.Controls.Add(this.dtGridProfit);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(610, 362);
-            this.MinimumSize = new System.Drawing.Size(610, 362);
             this.Name = "Form1";
             this.Text = "Loi nhuan kinh doanh";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -167,7 +181,8 @@ namespace Quanlyloinhuan
         private System.Windows.Forms.DataGridView dtGridProMonth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNam;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdExpLoiNhuanNam;
+        private System.Windows.Forms.Button cmdLoiNhuanThang;
     }
 }
 

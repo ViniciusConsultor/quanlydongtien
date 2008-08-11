@@ -149,8 +149,8 @@ namespace Quanlydongtien
             this.cbxLaisuat.Size = new System.Drawing.Size(62, 21);
             this.cbxLaisuat.TabIndex = 11;
             this.cbxLaisuat.Text = "0";
-            this.cbxLaisuat.Leave += new System.EventHandler(this.cbxLaisuat_Leave);
             this.cbxLaisuat.SelectedIndexChanged += new System.EventHandler(this.cbxLaisuat_SelectedIndexChanged);
+            this.cbxLaisuat.Leave += new System.EventHandler(this.cbxLaisuat_Leave);
             // 
             // chkReal
             // 
@@ -473,12 +473,14 @@ namespace Quanlydongtien
             // 
             // cmdViewContracts
             // 
+            this.cmdViewContracts.Enabled = false;
             this.cmdViewContracts.Location = new System.Drawing.Point(11, 381);
             this.cmdViewContracts.Name = "cmdViewContracts";
             this.cmdViewContracts.Size = new System.Drawing.Size(88, 34);
             this.cmdViewContracts.TabIndex = 32;
             this.cmdViewContracts.Text = "Xem hop dong";
             this.cmdViewContracts.UseVisualStyleBackColor = true;
+            this.cmdViewContracts.Visible = false;
             this.cmdViewContracts.Click += new System.EventHandler(this.cmdViewContracts_Click);
             // 
             // NhapthongtinHD

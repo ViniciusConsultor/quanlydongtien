@@ -272,14 +272,14 @@ namespace Quanlydongtien
         private void quanLyLoiNhuanToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process Proc = new Process();
-            Proc.StartInfo.FileName = @workingDir + "\\Quanlyloinhuan.exe";
+            Proc.StartInfo.FileName = @workingDir + "\\Quanlyloinhuan\\Quanlyloinhuan.exe";
             Proc.Start();
         }
 
         private void suaFileCauHinhToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process Proc = new Process();
-            Proc.StartInfo.FileName = @"C:\Program Files\Windows NT\Accessories\wordpad.exe";
+            Proc.StartInfo.FileName = @"wordpad.exe";
             Proc.StartInfo.Arguments = "..\\config\\conf.xml";
             Proc.Start();
         }

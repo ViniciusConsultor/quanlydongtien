@@ -30,14 +30,15 @@ namespace Quanlydongtien
         {
             this.chkReal = new System.Windows.Forms.CheckBox();
             this.dtGridCash = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,30 +70,6 @@ namespace Quanlydongtien
             this.dtGridCash.TabIndex = 1;
             this.dtGridCash.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentDoubleClick);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Nam";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 54;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tien vao";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Tien ra";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "So du cuoi";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 83;
-            // 
             // Nam
             // 
             this.Nam.HeaderText = "Nam";
@@ -117,11 +94,48 @@ namespace Quanlydongtien
             this.Ducuoi.Name = "Ducuoi";
             this.Ducuoi.Width = 83;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nam";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 54;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tien vao";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 74;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Tien ra";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "So du cuoi";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 83;
+            // 
+            // cmdExport
+            // 
+            this.cmdExport.Enabled = false;
+            this.cmdExport.Location = new System.Drawing.Point(268, 6);
+            this.cmdExport.Name = "cmdExport";
+            this.cmdExport.Size = new System.Drawing.Size(122, 23);
+            this.cmdExport.TabIndex = 2;
+            this.cmdExport.Text = "Xuat file Excel";
+            this.cmdExport.UseVisualStyleBackColor = true;
+            this.cmdExport.Visible = false;
+            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
+            // 
             // Dongtiennam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 477);
+            this.Controls.Add(this.cmdExport);
             this.Controls.Add(this.dtGridCash);
             this.Controls.Add(this.chkReal);
             this.MaximizeBox = false;
@@ -149,5 +163,6 @@ namespace Quanlydongtien
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Button cmdExport;
     }
 }
