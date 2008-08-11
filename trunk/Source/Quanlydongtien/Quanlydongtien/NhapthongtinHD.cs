@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Collections;
+using Microsoft.Office.Interop.Word;
 
 namespace Quanlydongtien
 {
@@ -631,6 +632,36 @@ namespace Quanlydongtien
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        private void cmdViewContracts_Click(object sender, EventArgs e)
+        {
+            ApplicationClass word = new ApplicationClass();
+            Document doc = new Document();
+            System.Diagnostics.Process Proc = new System.Diagnostics.Process();
+            object sourcefile = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Temp\Hopdong\Khachhangcanhan.doc";
+            object destfile = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Contracts\Nguyenvana.doc";
+            object missing = Type.Missing;
+            try
+            {
+                doc = word.Documents.Open(ref sourcefile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
+                doc.Activate();
+                if (Utilities.Replace_String_In_Word_File(ref doc, "BÁO CÁO", "Thongbao"))
+                {
+                    doc.SaveAs(ref destfile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
+                }
+                doc.Close(ref missing, ref missing, ref missing);
+                word.Application.Quit(ref missing, ref missing, ref missing);
+                Proc.StartInfo.FileName = @"WINWORD.EXE";
+                Proc.StartInfo.Arguments = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Contracts\Nguyenvana.doc";
+                Proc.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                doc.Close(ref missing, ref missing, ref missing);
+                word.Application.Quit(ref missing, ref missing, ref missing);
             }
         }
     
