@@ -19,6 +19,7 @@ namespace Quanlydongtien
         Color NegativeC = Color.Pink;
         Boolean rowColor = true;
         Boolean nhapdulieu;
+        string workingdir;
         public Quanlyhopdong()
         {
             InitializeComponent();
@@ -30,14 +31,15 @@ namespace Quanlydongtien
             ContractDB.close();
         }
 
-        public void init(string dbfile, Boolean edit)
+        public void init(string dbfile, string Wdir, Boolean edit)
         {
             string sqlStr;
             OleDbDataReader oleReader;
             lstMaKH = new ArrayList();
             dbname = dbfile;
             ContractDB = new db(dbfile);
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat, [Desc] FROM [HOPDONG] ORDER BY [MaHD]";
+            workingdir = Wdir;
+            sqlStr = "SELECT [MaHD], [MaKH], FORMAT([NgayHD], 'dd/mm/yyyy') AS NgayHD, [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat, [Desc] FROM [HOPDONG] ORDER BY [MaHD]";
             FillDG(sqlStr);
             dtGridContracts.AllowUserToAddRows = false;
             sqlStr = "SELECT [MaKH], [TenKH] FROM [KHACHHANG]";
@@ -58,6 +60,8 @@ namespace Quanlydongtien
             if (nhapdulieu == false)
                 cmdAdd.Enabled = false;
             else cmdAdd.Enabled = true;
+            chk_Denhan();
+            //ShowDialog()
         }
         private void FillDG(string sqlStr)
         {
@@ -106,7 +110,7 @@ namespace Quanlydongtien
             string sqlStr, makh;
             int i;
             clear();
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat FROM [HOPDONG] WHERE";
+            sqlStr = "SELECT [MaHD], [MaKH], FORMAT([NgayHD], 'dd/mm/yyyy') AS NgayHD, [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat]/100 AS LaiSuat FROM [HOPDONG] WHERE";
             if (cbxMoney.Text != "All")
             {
 
@@ -119,12 +123,13 @@ namespace Quanlydongtien
 
             sqlStr = sqlStr + " [MaKH] LIKE '%" + makh + "%'";
             FillDG(sqlStr);
+            chk_Denhan();
         }
 
         private void cmdAdd_Click(object sender, EventArgs e)
         {
             NhapthongtinHD frmNhapHD = new NhapthongtinHD();
-            frmNhapHD.init(dbname);
+            frmNhapHD.init(dbname, workingdir);
             frmNhapHD.ShowDialog();
             clear();
             Refresh_Data();
@@ -151,7 +156,7 @@ namespace Quanlydongtien
             }
             dtGridRow = dtGridContracts.SelectedRows[0];
             mahd = dtGridRow.Cells["MaHD"].Value.ToString();
-            frmEditContracts.init(dbname, mahd);
+            frmEditContracts.init(dbname, mahd, workingdir);
             frmEditContracts.ShowDialog();
 
         }
@@ -161,7 +166,7 @@ namespace Quanlydongtien
             string sqlStr, makh;
             int i;
             clear();
-            sqlStr = "SELECT [MaHD], [MaKH], [NgayHD], [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
+            sqlStr = "SELECT [MaHD], [MaKH], FORMAT([NgayHD], 'dd/mm/yyyy') AS NgayHD, [Tongtien], [Real], [Hoanthanh], [NoQH], [Laisuat] FROM [HOPDONG] WHERE";
             if (cbxMoney.Text != "All")
             {
 
@@ -178,16 +183,49 @@ namespace Quanlydongtien
 
         private void dtGridContracts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string mahd;
-            Quanlydongtien frmQLDT = new Quanlydongtien();
-            mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
-            frmQLDT.init(mahd, dbname);
-            //frmQLDT.ShowDialog();
+            //string mahd;
+            //Quanlydongtien frmQLDT = new Quanlydongtien();
+            //mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
+            //frmQLDT.init(mahd, dbname);
+            ////frmQLDT.ShowDialog();
         }
 
         private void dtGridContracts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dtGridContracts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string mahd;
+            Quanlydongtien frmQLDT = new Quanlydongtien();
+            mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
+            frmQLDT.init(mahd, dbname);
+        }
+
+        private void chk_Denhan()
+        {
+            string today = DateTime.Today.ToShortDateString();
+            OleDbDataReader oleReader;
+            ArrayList ListMaHD = new ArrayList();
+            int i, index;
+            string sqlStr = "SELECT DISTINCT [MaHD] FROM [TIENLAI] WHERE FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + today + "'";
+            try
+            {
+                oleReader = ContractDB.genDataReader(sqlStr);
+                while (oleReader.Read())
+                    ListMaHD.Add(oleReader[0].ToString());
+                for (i = 0; i < dtGridContracts.Rows.Count; i++)
+                {
+                    index = ListMaHD.IndexOf(dtGridContracts.Rows[i].Cells["MaHD"].Value.ToString());
+                    if (index >= 0)
+                        dtGridContracts.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
     }
 }

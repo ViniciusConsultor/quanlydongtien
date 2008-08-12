@@ -18,6 +18,7 @@ namespace Quanlydongtien
         const int TraMotLan = 3;
         int laisuat;
         string oldLS;
+        string dirWork;
         db contractDb;
         string dbfile;
         Boolean edit;
@@ -99,7 +100,7 @@ namespace Quanlydongtien
             contractDb.close();
         }
 
-        public Boolean init(string dbname)
+        public Boolean init(string dbname, string workingdir)
         {
             string sqlStr;
             OleDbDataReader oleReader;
@@ -112,6 +113,7 @@ namespace Quanlydongtien
             dbfile = dbname;
             frmNhapTN = new NhapKyTraNo();
             frmNhapTN.saved = false;
+            dirWork = workingdir;
             if (contractDb == null)
             {
                 MessageBox.Show("Loi ket noi den database");
@@ -150,7 +152,7 @@ namespace Quanlydongtien
                 return false;
             }
         }
-        public void init(string dbname, string maHD)
+        public void init(string dbname, string maHD, string workingdir)
         {
             string sqlStr;
             OleDbDataReader oleReader;
@@ -165,6 +167,9 @@ namespace Quanlydongtien
             cmdKytraShow.Enabled = false;
             frmNhapTN = new NhapKyTraNo(dbname);
             frmNhapTN.saved = false;
+            cmdViewContracts.Enabled = true;
+            cmdViewContracts.Visible = true;
+            dirWork = workingdir;
             if (contractDb == null)
             {
                 MessageBox.Show("Loi ket noi den database");
@@ -426,7 +431,10 @@ namespace Quanlydongtien
                 }
             }
             if (found == false)
+            {
+                lblContractCode.Text = "";
                 return;
+            }
             lblContractCode.Text = ListContracts[i].ToString();
         }
 
@@ -567,6 +575,9 @@ namespace Quanlydongtien
                     return;
                 frmNhapTN.Set_Readonly();
                 frmNhapTN.ShowDialog();
+                cmdViewContracts.Enabled = true;
+
+                cmdViewContracts.Visible = true;
             }
         }
 
@@ -626,6 +637,7 @@ namespace Quanlydongtien
                     return false;
                 }
 
+
                 return true;
             }
 
@@ -637,24 +649,174 @@ namespace Quanlydongtien
 
         private void cmdViewContracts_Click(object sender, EventArgs e)
         {
+            string sotien;
+            string benvay;
+            string identi, ngaycap, noicap, soDT, Diachi, BankAccount, BankName;
+            string makh, ngayhd, kyhan, laisuat;
+            string sqlStr;
+            int maloaiKH, length, i;
+            object sourcefile;
+            object destfile;
+            DateTime ngaydaohan;
+            OleDbDataReader oleReader;
             ApplicationClass word = new ApplicationClass();
             Document doc = new Document();
+
+            if (cbxDonvitinh.Text == "Ngay")
+                ngaydaohan = cbxDateContracts.Value.AddDays(int.Parse(cbxKyhan.Text));
+            else if (cbxDonvitinh.Text == "Thang")
+                ngaydaohan = cbxDateContracts.Value.AddMonths(int.Parse(cbxKyhan.Text));
+            else ngaydaohan = cbxDateContracts.Value.AddYears(int.Parse(cbxKyhan.Text));
+
             System.Diagnostics.Process Proc = new System.Diagnostics.Process();
-            object sourcefile = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Temp\Hopdong\Khachhangcanhan.doc";
-            object destfile = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Contracts\Nguyenvana.doc";
+            makh = cbxMaKH.Text;
+            ngayhd = cbxDateContracts.Value.ToShortDateString();
+            kyhan = cbxKyhan.Text;
+            laisuat = cbxLaisuat.Text;
+            sotien = txtTongtien.Text;
+            length = sotien.Length;
+            benvay = "";
+            Diachi = "";
+            soDT = "";
+            ngaycap = "";
+            identi = "";
+            BankAccount = "";
+            BankName = "";
+            i = 1;
+            while (3*i < length)
+            {
+                sotien = sotien.Insert(length - 3*i, ".");
+                i++;
+            }
+            sqlStr = "SELECT [TenKH], [DinhDanh], FORMAT([Ngaycap], 'dd/mm/yyyy') AS Ngaycap, [Noicap], [SoDT], [Diachi], [TaikhoanNH], [TenNH], [MaLoaiKH] FROM [KHACHHANG] WHERE [MaKH] = '" + makh + "'";
+            maloaiKH = 0;
+            try
+            {
+                oleReader = contractDb.genDataReader(sqlStr);
+                if (oleReader.Read())
+                {
+                    benvay = oleReader["TenKH"].ToString();
+                    identi = oleReader["Dinhdanh"].ToString();
+                    ngaycap = oleReader["Ngaycap"].ToString();
+                    noicap = oleReader["Noicap"].ToString();
+                    soDT = oleReader["SoDT"].ToString();
+                    Diachi = oleReader["Diachi"].ToString();
+                    BankAccount = oleReader["TaikhoanNH"].ToString();
+                    BankName = oleReader["TenNH"].ToString();
+                    maloaiKH = int.Parse(oleReader["MaLoaiKH"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+
+            //Ghi hop dong ra file
+            if (cbxLoaiHD.Text == "Cho vay")
+            {
+                if (maloaiKH == 1)
+                    //Khach hang doanh nghiep
+                    //sourcefile = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Temp\Hopdong\Khachhangdoanhnghiep.doc";
+                    sourcefile = @dirWork + "\\Temp\\Hopdong\\Chovay\\Khachhangdoanhnghiep.doc";
+                else
+                    //Khach hang ca nhan
+                    sourcefile = @dirWork + "\\Temp\\Hopdong\\Chovay\\Khachhangcanhan.doc";
+            }
+            else
+            {
+                if (maloaiKH == 1)
+                    sourcefile = @dirWork + @"\Temp\Hopdong\Huydong\Khachhangdoanhnghiep.doc";
+                else sourcefile = @dirWork + @"\Temp\Hopdong\Huydong\Khachhangcanhan.doc";
+            }
+
+            if (maloaiKH == 1)
+                destfile = @dirWork + @"\Contracts\Chovay\" + "\"" + benvay + ".doc";
+            else destfile = @dirWork + @"\Contracts\Huydong\" + "\"" + benvay + ".doc"; ;
             object missing = Type.Missing;
+
             try
             {
                 doc = word.Documents.Open(ref sourcefile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
                 doc.Activate();
-                if (Utilities.Replace_String_In_Word_File(ref doc, "BÁO CÁO", "Thongbao"))
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#TEN KHACH HANG#", benvay))
                 {
-                    doc.SaveAs(ref destfile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                    return;
+                    //doc.SaveAs(ref destfile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
                 }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Dia chi khach hang#", Diachi))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+                
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Dien thoai#", soDT))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);                    
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Tong so tien#", sotien))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);                    
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Laisuat#", laisuat))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Thoihan#", kyhan))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Donvi#", cbxDonvitinh.Text))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Ngayhopdong#", cbxDonvitinh.Text))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Ngaydaohan#", ngaydaohan.ToShortDateString()))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Phiuythacvon#", txtPhiUT.Text))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Account Numver#", BankAccount))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "##Bank Name##", BankName))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
+                doc.SaveAs(ref destfile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
                 doc.Close(ref missing, ref missing, ref missing);
                 word.Application.Quit(ref missing, ref missing, ref missing);
                 Proc.StartInfo.FileName = @"WINWORD.EXE";
-                Proc.StartInfo.Arguments = @"E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin\Contracts\Nguyenvana.doc";
+                Proc.StartInfo.Arguments = destfile.ToString();
                 Proc.Start();
             }
             catch (Exception ex)
@@ -663,6 +825,12 @@ namespace Quanlydongtien
                 doc.Close(ref missing, ref missing, ref missing);
                 word.Application.Quit(ref missing, ref missing, ref missing);
             }
+        }
+
+        private void txtTongtien_Leave(object sender, EventArgs e)
+        {
+            txtTongtien.Text = txtTongtien.Text.Replace(".", "");
+            txtTongtien.Text = txtTongtien.Text.Replace(",", "");
         }
     
     }

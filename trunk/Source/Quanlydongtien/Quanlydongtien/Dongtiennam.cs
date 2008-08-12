@@ -73,6 +73,19 @@ namespace Quanlydongtien
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = tiendu;
             }
             Tinh_So_Du();
+
+            for (i = 0; i < dtGridCash.Rows.Count; i++)
+            {
+                tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Ducuoi"].Value.ToString());
+                if (tiendu < 0)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+                if (tiendu > 1000000000)
+                {
+                    dtGridCash.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
         }
 
         private Boolean FillDG()
