@@ -10,7 +10,7 @@ using System.Data.OleDb;
 using System.Diagnostics;
 
 namespace Quanlydongtien
-{
+{    
     public partial class MainPoint : Form
     {
         string dbFileName; //Path to datafile
@@ -42,7 +42,7 @@ namespace Quanlydongtien
         private void nhapHopDongMoiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NhapthongtinHD frmNhapHD = new NhapthongtinHD();
-            if (frmNhapHD.init(dbFileName))
+            if (frmNhapHD.init(dbFileName, workingDir))
                 frmNhapHD.ShowDialog();
         }
 
@@ -54,7 +54,7 @@ namespace Quanlydongtien
         private void quanLyHopDongToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Quanlyhopdong frmQLHD = new Quanlyhopdong();
-            frmQLHD.init(dbFileName, true);
+            frmQLHD.init(dbFileName, workingDir, true);
             frmQLHD.ShowDialog();
         }
 

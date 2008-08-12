@@ -105,6 +105,7 @@ namespace Quanlydongtien
             this.txtTongtien.Name = "txtTongtien";
             this.txtTongtien.Size = new System.Drawing.Size(121, 20);
             this.txtTongtien.TabIndex = 7;
+            this.txtTongtien.Leave += new System.EventHandler(this.txtTongtien_Leave);
             // 
             // label5
             // 
@@ -182,9 +183,10 @@ namespace Quanlydongtien
             // 
             // cbxLoaiHD
             // 
+            this.cbxLoaiHD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLoaiHD.FormattingEnabled = true;
             this.cbxLoaiHD.Items.AddRange(new object[] {
-            "Cho Vay",
+            "Cho vay",
             "Huy dong"});
             this.cbxLoaiHD.Location = new System.Drawing.Point(107, 81);
             this.cbxLoaiHD.Name = "cbxLoaiHD";
