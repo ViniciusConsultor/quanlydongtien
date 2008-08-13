@@ -68,7 +68,7 @@ namespace Quanlydongtien
         private void quanLyDongTienToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dongtiennam frmDTN = new Dongtiennam();
-            frmDTN.init(dbFileName);
+            frmDTN.init(dbFileName, workingDir);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

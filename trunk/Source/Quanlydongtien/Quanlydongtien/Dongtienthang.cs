@@ -17,6 +17,7 @@ namespace Quanlydongtien
         int nam;
         string dbfile;
         Int64 dunamtruoc;
+        string workingdir;
         public Dongtienthang()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace Quanlydongtien
 
         }
 
-        public void init(string dbname, Boolean real, int namtien, Int64 sodu)
+        public void init(string dbname, Boolean real, int namtien, Int64 sodu, string wdir)
         {
             int i;
             Int64 tiendu;
@@ -38,6 +39,7 @@ namespace Quanlydongtien
             FillDG();
             lblNam.Text = namtien.ToString();
             dbfile = dbname;
+            workingdir = wdir;
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
                 dtGridCash.Rows[i].Cells["Ducuoi"].Value = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString()) - Int64.Parse(dtGridCash.Rows[i].Cells["Tienra"].Value.ToString());
@@ -239,12 +241,20 @@ namespace Quanlydongtien
             if (e.RowIndex == 0)
                 sodu = dunamtruoc;
             else sodu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
-            frmDTN.init(dbfile, realdata, thang + "/" + nam.ToString(), sodu);
+            frmDTN.init(dbfile, realdata, thang + "/" + nam.ToString(), sodu, workingdir);
         }
 
         private void dtGridCash_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void cmdExport_Click(object sender, EventArgs e)
+        {
+            string filename = "Dongtien_Nam_" + lblNam.Text + ".xls";
+            string sheetnaem = lblNam.Text + ".xls";
+            filename = workingdir + @"\Baocao\Baocaodongtien\" + filename;
+            Utilities.Export_To_Excel(dtGridCash, filename, sheetnaem);
         }        
  
     }

@@ -15,6 +15,7 @@ namespace Quanlyloinhuan
         string dbFileName;
         db userdb;
         Int64 tienvon;
+        string workingdir;
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +44,9 @@ namespace Quanlyloinhuan
             root = xmldoc.DocumentElement;
             xNode = root.SelectSingleNode("/config/dbFile").FirstChild;
             dbFileName = xNode.OuterXml.Trim();
+
+            xNode = root.SelectSingleNode("/config/workingdir").FirstChild;
+            workingdir = xNode.OuterXml.Trim();
         }
 
         private void FillDG()
@@ -55,11 +59,11 @@ namespace Quanlyloinhuan
             Int64 loinhuan;
             if (chkReal.Checked == true)
             {
-                sqlStr = "SELECT SUM([Soluong]) AS Soluong, [Nam] FROM [LOINHUAN] GROUP BY [NAM] ORDER BY [NAM]";
+                sqlStr = "SELECT SUM([Soluong]) AS Loinhuan, [Nam] FROM [LOINHUAN] GROUP BY [NAM] ORDER BY [NAM]";
             }
             else
             {
-                sqlStr = "SELECT SUM([Soluong]) AS Soluong, [Nam] FROM [LOINHUANGIADINH] GROUP BY [NAM] ORDER BY [NAM]";
+                sqlStr = "SELECT SUM([Soluong]) AS Loinhuan, [Nam] FROM [LOINHUANGIADINH] GROUP BY [NAM] ORDER BY [NAM]";
             }
             oleReader = userdb.genDataReader(sqlStr);
 
@@ -68,8 +72,10 @@ namespace Quanlyloinhuan
                 while (oleReader.Read())
                 {
                     nam = int.Parse(oleReader["Nam"].ToString());
-                    loinhuan = Int64.Parse(oleReader["Soluong"].ToString());
-                    tysuat = (double)(Math.Round((decimal)(loinhuan * 100 / tienvon), 2));
+                    loinhuan = Int64.Parse(oleReader["Loinhuan"].ToString());
+                    if (tienvon != 0)
+                        tysuat = (double)(Math.Round((decimal)(loinhuan * 100 / tienvon), 2));
+                    else tysuat = 0;
                     for (i =0; i < dtGridProfit.Rows.Count; i++)
                         if (dtGridProfit.Rows[i].Cells["Nam"].Value.ToString() == nam.ToString())
                         {
@@ -145,6 +151,12 @@ namespace Quanlyloinhuan
             else
                 sqlStr = "SELECT [Soluong] AS Loinhuan, [Thang] FROM [LOINHUAN] WHERE [Nam] = " + nam;
             sqlStr = sqlStr + " ORDER BY [Thang]";
+            clear_DataGrid(dtGridProMonth);
+            if (dtGridProMonth.Columns.Count > 0)
+            {
+                dtGridProMonth.Columns.RemoveAt(1);
+                dtGridProMonth.Columns.RemoveAt(0);
+            }
             userdb.fillDtGridView(sqlStr, dtGridProMonth);
             for (i = 0; i < dtGridProMonth.Rows.Count; i++)
             {
@@ -158,7 +170,7 @@ namespace Quanlyloinhuan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls";
+            string filename = @workingdir + @"\Baocao\Loinhuan\" + "Loinhuan.xls";
             Utilities.Export_To_Excel(dtGridProfit, filename, "Loinhuan");
         }
 
@@ -166,6 +178,25 @@ namespace Quanlyloinhuan
         {
             string filename;
             string sheetName;
+            filename = @workingdir + @"\Baocao\Loinhuan\" + "Loinhuan_" + lblNam.Text + ".xsl";
+            sheetName = lblNam.Text;
+            Utilities.Export_To_Excel(dtGridProMonth, filename, sheetName);
+        }
+
+
+        private void chkReal_CheckedChanged(object sender, EventArgs e)
+        {
+            clear_DataGrid(dtGridProfit);
+            clear_DataGrid(dtGridProMonth);
+            create_dtGrid();
+            FillDG();
+        }
+
+        private void clear_DataGrid(DataGridView dtGrid)
+        {
+            int i;
+            while (dtGrid.Rows.Count > 0)
+                dtGrid.Rows.RemoveAt(dtGrid.Rows.Count - 1);
         }
     }
 }

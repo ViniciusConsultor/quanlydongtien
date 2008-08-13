@@ -16,6 +16,7 @@ namespace Quanlydongtien
         Boolean realdata;
         string dbfile;
         Int64 duthangtruoc;
+        string workingdir;
         public Dongtienngay()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace Quanlydongtien
 
         }
 
-        public void init(string dbname, Boolean real, string ngaythang, Int64 sodu)
+        public void init(string dbname, Boolean real, string ngaythang, Int64 sodu, string wdir)
         {
             int i;
             Int64 tiendu;
@@ -36,6 +37,7 @@ namespace Quanlydongtien
             lblthang.Text = ngaythang;
             create_dtGrid();
             lblDuno.Text = sodu.ToString();
+            workingdir = wdir;
             FillDG();
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
@@ -277,6 +279,17 @@ namespace Quanlydongtien
             else soducu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
             duno = Int64.Parse(dtGridCash.Rows[e.RowIndex].Cells["Ducuoi"].Value.ToString());
             frmDongchitiet.init(dbfile, ngay, soducu, duno, realdata);
+        }
+
+        private void cmdExport_Click(object sender, EventArgs e)
+        {
+            string filename;
+            string sheetname = lblthang.Text;
+            string thang = lblthang.Text.Replace('/', '_');
+            filename = "Dongtien_Thang_" + thang + ".xls";
+            sheetname = thang;
+            filename = workingdir + @"\Baocao\Baocaodongtien\" + filename;
+            Utilities.Export_To_Excel(dtGridCash, filename, sheetname);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace Quanlydongtien
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDuno = new System.Windows.Forms.Label();
+            this.cmdExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@ namespace Quanlydongtien
             this.Ducuoi});
             this.dtGridCash.Location = new System.Drawing.Point(2, 37);
             this.dtGridCash.Name = "dtGridCash";
-            this.dtGridCash.Size = new System.Drawing.Size(345, 442);
+            this.dtGridCash.Size = new System.Drawing.Size(359, 442);
             this.dtGridCash.TabIndex = 2;
             this.dtGridCash.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtGridCash_CellMouseDoubleClick);
             // 
@@ -88,7 +89,7 @@ namespace Quanlydongtien
             // lblthang
             // 
             this.lblthang.AutoSize = true;
-            this.lblthang.Location = new System.Drawing.Point(121, 9);
+            this.lblthang.Location = new System.Drawing.Point(86, 9);
             this.lblthang.Name = "lblthang";
             this.lblthang.Size = new System.Drawing.Size(29, 13);
             this.lblthang.TabIndex = 6;
@@ -99,9 +100,9 @@ namespace Quanlydongtien
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(2, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 13);
+            this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Bao cao dong tien ngay:";
+            this.label1.Text = "Bao cao chi tiet:";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -130,7 +131,7 @@ namespace Quanlydongtien
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 9);
+            this.label2.Location = new System.Drawing.Point(147, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 7;
@@ -139,25 +140,34 @@ namespace Quanlydongtien
             // lblDuno
             // 
             this.lblDuno.AutoSize = true;
-            this.lblDuno.Location = new System.Drawing.Point(227, 9);
+            this.lblDuno.Location = new System.Drawing.Point(198, 9);
             this.lblDuno.Name = "lblDuno";
             this.lblDuno.Size = new System.Drawing.Size(29, 13);
             this.lblDuno.TabIndex = 8;
             this.lblDuno.Text = "Nam";
             // 
+            // cmdExport
+            // 
+            this.cmdExport.Location = new System.Drawing.Point(297, 4);
+            this.cmdExport.Name = "cmdExport";
+            this.cmdExport.Size = new System.Drawing.Size(63, 23);
+            this.cmdExport.TabIndex = 9;
+            this.cmdExport.Text = "Export";
+            this.cmdExport.UseVisualStyleBackColor = true;
+            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
+            // 
             // Dongtienngay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 477);
+            this.ClientSize = new System.Drawing.Size(365, 477);
+            this.Controls.Add(this.cmdExport);
             this.Controls.Add(this.lblDuno);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblthang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtGridCash);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(356, 511);
-            this.MinimumSize = new System.Drawing.Size(356, 511);
             this.Name = "Dongtienngay";
             this.Text = "Dongtienngay";
             this.Load += new System.EventHandler(this.Dongtienngay_Load);
@@ -182,5 +192,6 @@ namespace Quanlydongtien
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblDuno;
+        private System.Windows.Forms.Button cmdExport;
     }
 }

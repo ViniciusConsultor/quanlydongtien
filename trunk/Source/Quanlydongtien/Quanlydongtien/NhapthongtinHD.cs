@@ -221,7 +221,7 @@ namespace Quanlydongtien
                 }
                 txtTongtien.Enabled = false;
                 cbxLoaiHD.Enabled = false;
-                cbxMaKH.Text = cbxMaKH.Items[0].ToString();
+//                cbxMaKH.Text = cbxMaKH.Items[0].ToString();
                 grBoxKytra.Enabled = false;
                 sqlStr = "SELECT [LaiSuat], [LoaiLS] FROM [LAISUAT]";
                 oleReader = contractDb.genDataReader(sqlStr);
@@ -652,8 +652,8 @@ namespace Quanlydongtien
             string sotien;
             string benvay;
             string identi, ngaycap, noicap, soDT, Diachi, BankAccount, BankName;
-            string makh, ngayhd, kyhan, laisuat;
-            string sqlStr;
+            string makh, ngayhd, kyhan, laisuat, mahd;
+            string sqlStr, strDate;
             int maloaiKH, length, i;
             object sourcefile;
             object destfile;
@@ -682,6 +682,10 @@ namespace Quanlydongtien
             identi = "";
             BankAccount = "";
             BankName = "";
+            mahd = txtMaHD.Text.Replace("\\", "_");
+            mahd = mahd.Replace("/", "_");
+            mahd = mahd.Replace(":", "_");
+            strDate = cbxDateContracts.Value.ToShortDateString().Replace("/", "_");
             i = 1;
             while (3*i < length)
             {
@@ -704,6 +708,7 @@ namespace Quanlydongtien
                     BankAccount = oleReader["TaikhoanNH"].ToString();
                     BankName = oleReader["TenNH"].ToString();
                     maloaiKH = int.Parse(oleReader["MaLoaiKH"].ToString());
+                    benvay = benvay.Replace(" ", "");
                 }
             }
             catch (Exception ex)
@@ -730,8 +735,8 @@ namespace Quanlydongtien
             }
 
             if (maloaiKH == 1)
-                destfile = @dirWork + @"\Contracts\Chovay\" + "\"" + benvay + ".doc";
-            else destfile = @dirWork + @"\Contracts\Huydong\" + "\"" + benvay + ".doc"; ;
+                destfile = @dirWork + @"\Contracts\Chovay\" + mahd + "_" + strDate + ".doc";
+            else destfile = @dirWork + @"\Contracts\Huydong\" + mahd + "_" + strDate + ".doc"; ;
             object missing = Type.Missing;
 
             try

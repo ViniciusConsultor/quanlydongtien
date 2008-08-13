@@ -56,6 +56,7 @@ namespace Quanlyloinhuan
             this.Tysuat});
             this.dtGridProfit.Location = new System.Drawing.Point(2, 34);
             this.dtGridProfit.Name = "dtGridProfit";
+            this.dtGridProfit.ReadOnly = true;
             this.dtGridProfit.Size = new System.Drawing.Size(406, 291);
             this.dtGridProfit.TabIndex = 2;
             this.dtGridProfit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridProfit_CellDoubleClick);
@@ -94,6 +95,7 @@ namespace Quanlyloinhuan
             this.chkReal.TabIndex = 3;
             this.chkReal.Text = "Du lieu that";
             this.chkReal.UseVisualStyleBackColor = true;
+            this.chkReal.CheckedChanged += new System.EventHandler(this.chkReal_CheckedChanged);
             // 
             // dtGridProMonth
             // 
@@ -103,6 +105,7 @@ namespace Quanlyloinhuan
             this.dtGridProMonth.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGridProMonth.Location = new System.Drawing.Point(414, 34);
             this.dtGridProMonth.Name = "dtGridProMonth";
+            this.dtGridProMonth.ReadOnly = true;
             this.dtGridProMonth.Size = new System.Drawing.Size(185, 291);
             this.dtGridProMonth.TabIndex = 4;
             // 
@@ -125,7 +128,6 @@ namespace Quanlyloinhuan
             // 
             // cmdExpLoiNhuanNam
             // 
-            this.cmdExpLoiNhuanNam.Enabled = false;
             this.cmdExpLoiNhuanNam.Location = new System.Drawing.Point(292, 331);
             this.cmdExpLoiNhuanNam.Name = "cmdExpLoiNhuanNam";
             this.cmdExpLoiNhuanNam.Size = new System.Drawing.Size(116, 23);
@@ -136,7 +138,6 @@ namespace Quanlyloinhuan
             // 
             // cmdLoiNhuanThang
             // 
-            this.cmdLoiNhuanThang.Enabled = false;
             this.cmdLoiNhuanThang.Location = new System.Drawing.Point(483, 331);
             this.cmdLoiNhuanThang.MaximumSize = new System.Drawing.Size(116, 23);
             this.cmdLoiNhuanThang.MinimumSize = new System.Drawing.Size(116, 23);
