@@ -71,9 +71,11 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.T
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.csproj.GenerateResource.Cache
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.exe
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.pdb
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.csproj.ResolveComReference.cache
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\bin\Debug\Quanlydongtien.exe
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\bin\Debug\Quanlydongtien.pdb
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.csproj.ResolveComReference.cache
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.ChangePass.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.ChangeRole.resources
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.CreateCash.resources
@@ -97,5 +99,3 @@ D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.Tin
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.csproj.GenerateResource.Cache
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.exe
 D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.pdb
-D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Debug\Quanlydongtien.csproj.ResolveComReference.cache
-D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\obj\Release\Quanlydongtien.csproj.ResolveComReference.cache

@@ -29,6 +29,10 @@ namespace Quanlydongtien
         private void InitializeComponent()
         {
             this.dtGridCash = new System.Windows.Forms.DataGridView();
+            this.Thang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNam = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,10 +41,7 @@ namespace Quanlydongtien
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Thang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tienvao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tienra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ducuoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCash)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,6 +66,30 @@ namespace Quanlydongtien
             this.dtGridCash.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentDoubleClick);
             this.dtGridCash.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCash_CellContentClick);
             // 
+            // Thang
+            // 
+            this.Thang.HeaderText = "Thang";
+            this.Thang.Name = "Thang";
+            this.Thang.Width = 63;
+            // 
+            // Tienvao
+            // 
+            this.Tienvao.HeaderText = "Tien vao";
+            this.Tienvao.Name = "Tienvao";
+            this.Tienvao.Width = 74;
+            // 
+            // Tienra
+            // 
+            this.Tienra.HeaderText = "Tien ra";
+            this.Tienra.Name = "Tienra";
+            this.Tienra.Width = 65;
+            // 
+            // Ducuoi
+            // 
+            this.Ducuoi.HeaderText = "So du cuoi";
+            this.Ducuoi.Name = "Ducuoi";
+            this.Ducuoi.Width = 83;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -77,7 +102,7 @@ namespace Quanlydongtien
             // lblNam
             // 
             this.lblNam.AutoSize = true;
-            this.lblNam.Location = new System.Drawing.Point(122, 10);
+            this.lblNam.Location = new System.Drawing.Point(118, 10);
             this.lblNam.Name = "lblNam";
             this.lblNam.Size = new System.Drawing.Size(29, 13);
             this.lblNam.TabIndex = 4;
@@ -86,7 +111,7 @@ namespace Quanlydongtien
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 10);
+            this.label2.Location = new System.Drawing.Point(149, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 5;
@@ -95,7 +120,7 @@ namespace Quanlydongtien
             // lblDuno
             // 
             this.lblDuno.AutoSize = true;
-            this.lblDuno.Location = new System.Drawing.Point(236, 10);
+            this.lblDuno.Location = new System.Drawing.Point(198, 10);
             this.lblDuno.Name = "lblDuno";
             this.lblDuno.Size = new System.Drawing.Size(35, 13);
             this.lblDuno.TabIndex = 6;
@@ -125,35 +150,22 @@ namespace Quanlydongtien
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 83;
             // 
-            // Thang
+            // cmdExport
             // 
-            this.Thang.HeaderText = "Thang";
-            this.Thang.Name = "Thang";
-            this.Thang.Width = 63;
-            // 
-            // Tienvao
-            // 
-            this.Tienvao.HeaderText = "Tien vao";
-            this.Tienvao.Name = "Tienvao";
-            this.Tienvao.Width = 74;
-            // 
-            // Tienra
-            // 
-            this.Tienra.HeaderText = "Tien ra";
-            this.Tienra.Name = "Tienra";
-            this.Tienra.Width = 65;
-            // 
-            // Ducuoi
-            // 
-            this.Ducuoi.HeaderText = "So du cuoi";
-            this.Ducuoi.Name = "Ducuoi";
-            this.Ducuoi.Width = 83;
+            this.cmdExport.Location = new System.Drawing.Point(272, 6);
+            this.cmdExport.Name = "cmdExport";
+            this.cmdExport.Size = new System.Drawing.Size(63, 23);
+            this.cmdExport.TabIndex = 7;
+            this.cmdExport.Text = "Export";
+            this.cmdExport.UseVisualStyleBackColor = true;
+            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
             // 
             // Dongtienthang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 334);
+            this.Controls.Add(this.cmdExport);
             this.Controls.Add(this.lblDuno);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblNam);
@@ -184,5 +196,6 @@ namespace Quanlydongtien
         private System.Windows.Forms.Label lblNam;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblDuno;
+        private System.Windows.Forms.Button cmdExport;
     }
 }

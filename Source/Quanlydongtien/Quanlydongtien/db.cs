@@ -234,8 +234,8 @@ namespace Quanlydongtien
             {
                 Tinhloinhuan();
                 Tinhloinhuan_Giadinh();
-                //Delete_Un_Real_Data();
-                //Update_Overdue_Debt();
+                Delete_Un_Real_Data();
+                Update_Overdue_Debt();
                 return true;
             }
             catch (Exception ex)
@@ -306,6 +306,8 @@ namespace Quanlydongtien
                     ngaytra = DateTime.Parse(oleReader["Ngaytratien"].ToString());
                     tienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
                     laisuat = Int64.Parse(oleReader["Laisuat"].ToString());
+                    if (tienchiulai == 0 || laisuat == 0)
+                        continue;
                     ngaychiulai = (Int64)Math.Round((decimal)(tienlai * 360 * 100 * 100) / (tienchiulai * laisuat));
                     ngayvay = ngaytra.AddDays(0 - Math.Abs(ngaychiulai));
                     if (ngayvay > nextMonth.AddDays(-1))
@@ -396,7 +398,7 @@ namespace Quanlydongtien
                     ngaytratien = DateTime.Parse(ngaytra);
                     diffDay = today.Subtract(ngaytratien);
                     noqh = diffDay.Days;
-                    sqlStr = "UPDATE [HOPDONG] SET [NoQH] = Yes WHER [MaHD] = '" + mahd + "'";
+                    sqlStr = "UPDATE [HOPDONG] SET [NoQH] = Yes WHERE [MaHD] = '" + mahd + "'";
                     runSQLCmd(sqlStr);
                     sqlStr = "UPDATE [DONGTIEN] SET [NoQH] = " + noqh.ToString() + " WHERE [MaDT] = " + madt.ToString();
                     runSQLCmd(sqlStr);
@@ -481,6 +483,8 @@ namespace Quanlydongtien
                 ngaytra = DateTime.Parse(oleReader["Ngaytratien"].ToString());
                 tienlai = Int64.Parse(oleReader["Sotienlai"].ToString());
                 laisuat = Int64.Parse(oleReader["Laisuat"].ToString());
+                if (tienchiulai == 0 || laisuat == 0)
+                    continue;
                 ngaychiulai = (Int64)Math.Round((decimal)(tienlai * 360 * 100 * 100) / (tienchiulai * laisuat));
                 ngayvay = ngaytra.AddDays(0 - Math.Abs(ngaychiulai));
                 if (ngayvay > nextMonth.AddDays(-1))

@@ -14,6 +14,7 @@ namespace Quanlydongtien
         db CashDB;
         Boolean realdata;
         string dbfile;
+        string workingdir;
         public Dongtiennam()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace Quanlydongtien
             
         }
 
-        public void init(string dbname)
+        public void init(string dbname, string wdir)
         {
             int i;
             Int64 tiendu;
@@ -33,6 +34,7 @@ namespace Quanlydongtien
             if (FillDG() == false) return;
             dbfile = dbname;
             realdata = false;
+            workingdir = wdir;
             for (i = 0; i < dtGridCash.Rows.Count; i++)
             {
                 tiendu = Int64.Parse(dtGridCash.Rows[i].Cells["Tienvao"].Value.ToString());
@@ -249,7 +251,7 @@ namespace Quanlydongtien
             if (e.RowIndex == 0)
                 sodu = 0;
             else sodu = Int64.Parse(dtGridCash.Rows[e.RowIndex - 1].Cells["Ducuoi"].Value.ToString());
-            frmDongTienThang.init(dbfile, realdata, nam, sodu);
+            frmDongTienThang.init(dbfile, realdata, nam, sodu, workingdir);
         }
 
         private void Tinh_So_Du()
@@ -280,9 +282,10 @@ namespace Quanlydongtien
 
         private void cmdExport_Click(object sender, EventArgs e)
         {
-            string filename = "Loi_Nhuan_Nam.xls";
-            string sheetnaem = "Loi_Nhuan_Tong_Hop";
-            //Utilities.Export_To_Excel(dtGridCash, filename, sheetnaem);
+            string filename = "Dongtien_Nam.xls";
+            string sheetnaem = "DongTienTongHop";
+            filename = workingdir + @"\Baocao\Baocaodongtien\" + filename;
+            Utilities.Export_To_Excel(dtGridCash, filename, sheetnaem);
         }
     }
 }

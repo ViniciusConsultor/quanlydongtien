@@ -120,14 +120,12 @@ namespace Quanlydongtien
             // 
             // cmdExport
             // 
-            this.cmdExport.Enabled = false;
             this.cmdExport.Location = new System.Drawing.Point(268, 6);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(122, 23);
             this.cmdExport.TabIndex = 2;
             this.cmdExport.Text = "Xuat file Excel";
             this.cmdExport.UseVisualStyleBackColor = true;
-            this.cmdExport.Visible = false;
             this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
             // 
             // Dongtiennam
