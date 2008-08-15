@@ -418,7 +418,7 @@ namespace Quanlydongtien
                     noqh = diffDay.Days;
                     sqlStr = "UPDATE [HOPDONG] SET [NoQH] = Yes WHERE [MaHD] = '" + mahd + "'";
                     runSQLCmd(sqlStr);
-                    sqlStr = "UPDATE [TIENLAI] SET [NoQH] = " + noqh.ToString() + "WHERE [MaDT] = " + madt.ToString();
+                    sqlStr = "UPDATE [TIENLAI] SET [NoQH] = " + noqh.ToString() + " WHERE [MaDT] = " + madt.ToString();
                     runSQLCmd(sqlStr);
                 }
             }

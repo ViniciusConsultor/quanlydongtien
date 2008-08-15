@@ -22,7 +22,7 @@ namespace Quanlydongtien
         {
 
         }
-        public void init(string database)
+        public void init(string database, string username)
         {
             DataSet ds;
             DataGridViewButtonColumn dtGridBt = new DataGridViewButtonColumn();
@@ -50,6 +50,8 @@ namespace Quanlydongtien
                 dtGridUser.Rows[i].Cells[cullCount - 1].Value = "Cap nhat";
             }
             dtGridUser.AllowUserToAddRows = false;
+            if (username != "admin")
+                cmdDelete.Enabled = false;
         }
 
         private void cmdClose_Click(object sender, EventArgs e)

@@ -44,7 +44,7 @@ namespace Quanlydongtien
                 return;
             if (check_validate() == false)
                 return;
-            if (cbxLoaiHD.Text == "Cho Vay")
+            if (cbxLoaiHD.Text == "Cho vay")
             {
                 tongtien = "-" + txtTongtien.Text;
                 chovay = true;
@@ -682,11 +682,17 @@ namespace Quanlydongtien
             identi = "";
             BankAccount = "";
             BankName = "";
-            mahd = txtMaHD.Text.Replace("\\", "_");
+            mahd = txtMaHD.Text.Replace("\\", "");
             mahd = mahd.Replace("/", "_");
             mahd = mahd.Replace(":", "_");
+            mahd = mahd.Replace(" ", "_");
+            mahd = mahd.Replace("*", "");
+            mahd = mahd.Replace("<", "");
+            mahd = mahd.Replace("|", "");
+            mahd = mahd.Replace(">", "");
             strDate = cbxDateContracts.Value.ToShortDateString().Replace("/", "_");
             i = 1;
+
             while (3*i < length)
             {
                 sotien = sotien.Insert(length - 3*i, ".");
@@ -734,11 +740,11 @@ namespace Quanlydongtien
                 else sourcefile = @dirWork + @"\Temp\Hopdong\Huydong\Khachhangcanhan.doc";
             }
 
-            if (maloaiKH == 1)
+            if (cbxLoaiHD.Text == "Cho vay")
                 destfile = @dirWork + @"\Contracts\Chovay\" + mahd + "_" + strDate + ".doc";
             else destfile = @dirWork + @"\Contracts\Huydong\" + mahd + "_" + strDate + ".doc"; ;
             object missing = Type.Missing;
-
+           
             try
             {
                 doc = word.Documents.Open(ref sourcefile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
@@ -811,7 +817,7 @@ namespace Quanlydongtien
                     word.Application.Quit(ref missing, ref missing, ref missing);
                 }
 
-                if (!Utilities.Replace_String_In_Word_File(ref doc, "##Bank Name##", BankName))
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Bank Name#", BankName))
                 {
                     doc.Close(ref missing, ref missing, ref missing);
                     word.Application.Quit(ref missing, ref missing, ref missing);

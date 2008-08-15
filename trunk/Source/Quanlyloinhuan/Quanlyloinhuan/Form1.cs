@@ -142,29 +142,36 @@ namespace Quanlyloinhuan
             string nam;
             string sqlStr;
             int i;
-            nam = dtGridProfit.Rows[e.RowIndex].Cells["Nam"].Value.ToString();
-            lblNam.Text = nam;          
-            if (chkReal.Checked)
+            try
             {
-                sqlStr = "SELECT [Thang], [Soluong] AS Loinhuan FROM [LOINHUAN] WHERE [Nam] = " + nam;
+                nam = dtGridProfit.Rows[e.RowIndex].Cells["Nam"].Value.ToString();
+                lblNam.Text = nam;
+                if (chkReal.Checked)
+                {
+                    sqlStr = "SELECT [Thang], [Soluong] AS Loinhuan FROM [LOINHUAN] WHERE [Nam] = " + nam;
+                }
+                else
+                    sqlStr = "SELECT [Soluong] AS Loinhuan, [Thang] FROM [LOINHUAN] WHERE [Nam] = " + nam;
+                sqlStr = sqlStr + " ORDER BY [Thang]";
+                clear_DataGrid(dtGridProMonth);
+                if (dtGridProMonth.Columns.Count > 0)
+                {
+                    dtGridProMonth.Columns.RemoveAt(1);
+                    dtGridProMonth.Columns.RemoveAt(0);
+                }
+                userdb.fillDtGridView(sqlStr, dtGridProMonth);
+                for (i = 0; i < dtGridProMonth.Rows.Count; i++)
+                {
+                    Int64 loinhuan;
+                    loinhuan = Int64.Parse(dtGridProMonth.Rows[i].Cells["Loinhuan"].Value.ToString());
+                    if (loinhuan <= 0)
+                        dtGridProMonth.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                    else dtGridProMonth.Rows[i].DefaultCellStyle.ForeColor = Color.Blue;
+                }
             }
-            else
-                sqlStr = "SELECT [Soluong] AS Loinhuan, [Thang] FROM [LOINHUAN] WHERE [Nam] = " + nam;
-            sqlStr = sqlStr + " ORDER BY [Thang]";
-            clear_DataGrid(dtGridProMonth);
-            if (dtGridProMonth.Columns.Count > 0)
+            catch (Exception ex)
             {
-                dtGridProMonth.Columns.RemoveAt(1);
-                dtGridProMonth.Columns.RemoveAt(0);
-            }
-            userdb.fillDtGridView(sqlStr, dtGridProMonth);
-            for (i = 0; i < dtGridProMonth.Rows.Count; i++)
-            {
-                Int64 loinhuan;
-                loinhuan = Int64.Parse(dtGridProMonth.Rows[i].Cells["Loinhuan"].Value.ToString());
-                if (loinhuan <= 0)
-                    dtGridProMonth.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
-                else dtGridProMonth.Rows[i].DefaultCellStyle.ForeColor = Color.Blue;
+                return;
             }
         }
 
@@ -178,7 +185,7 @@ namespace Quanlyloinhuan
         {
             string filename;
             string sheetName;
-            filename = @workingdir + @"\Baocao\Loinhuan\" + "Loinhuan_" + lblNam.Text + ".xsl";
+            filename = @workingdir + @"\Baocao\Loinhuan\" + "Loinhuan_" + lblNam.Text + ".xls";
             sheetName = lblNam.Text;
             Utilities.Export_To_Excel(dtGridProMonth, filename, sheetName);
         }
@@ -197,6 +204,16 @@ namespace Quanlyloinhuan
             int i;
             while (dtGrid.Rows.Count > 0)
                 dtGrid.Rows.RemoveAt(dtGrid.Rows.Count - 1);
+        }
+
+        private void dtGridProfit_AllowUserToOrderColumnsChanged(object sender, EventArgs e)
+        {
+            return;
+        }
+
+        private void dtGridProfit_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            return;
         }
     }
 }

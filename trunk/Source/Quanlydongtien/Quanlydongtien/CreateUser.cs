@@ -72,7 +72,11 @@ namespace Quanlydongtien
                 }
                 created = true;
             }
-            else created = false;
+            else
+            {
+                created = false;
+                MessageBox.Show("UserName ban nhap da ton tai\n Vui long nhap lai user!");
+            }
         }
 
         private void cmdSubmit_Click_1(object sender, EventArgs e)
