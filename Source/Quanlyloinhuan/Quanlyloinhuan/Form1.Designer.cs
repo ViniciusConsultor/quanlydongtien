@@ -46,6 +46,10 @@ namespace Quanlyloinhuan
             // dtGridProfit
             // 
             this.dtGridProfit.AllowUserToAddRows = false;
+            this.dtGridProfit.AllowUserToDeleteRows = false;
+            this.dtGridProfit.AllowUserToOrderColumns = true;
+            this.dtGridProfit.AllowUserToResizeColumns = false;
+            this.dtGridProfit.AllowUserToResizeRows = false;
             this.dtGridProfit.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridProfit.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtGridProfit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -60,23 +64,28 @@ namespace Quanlyloinhuan
             this.dtGridProfit.Size = new System.Drawing.Size(406, 291);
             this.dtGridProfit.TabIndex = 2;
             this.dtGridProfit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridProfit_CellDoubleClick);
+            this.dtGridProfit.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtGridProfit_ColumnHeaderMouseClick);
+            this.dtGridProfit.AllowUserToOrderColumnsChanged += new System.EventHandler(this.dtGridProfit_AllowUserToOrderColumnsChanged);
             // 
             // Nam
             // 
             this.Nam.HeaderText = "Nam";
             this.Nam.Name = "Nam";
+            this.Nam.ReadOnly = true;
             this.Nam.Width = 54;
             // 
             // LoiNhuan
             // 
             this.LoiNhuan.HeaderText = "Loi nhuan";
             this.LoiNhuan.Name = "LoiNhuan";
+            this.LoiNhuan.ReadOnly = true;
             this.LoiNhuan.Width = 73;
             // 
             // Tienvon
             // 
             this.Tienvon.HeaderText = "Tien von";
             this.Tienvon.Name = "Tienvon";
+            this.Tienvon.ReadOnly = true;
             this.Tienvon.Width = 69;
             // 
             // Tysuat
@@ -84,6 +93,7 @@ namespace Quanlyloinhuan
             this.Tysuat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Tysuat.HeaderText = "Ty suat loi nhuan tren von";
             this.Tysuat.Name = "Tysuat";
+            this.Tysuat.ReadOnly = true;
             this.Tysuat.Width = 106;
             // 
             // chkReal

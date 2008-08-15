@@ -476,7 +476,7 @@ namespace Quanlydongtien
             // cmdViewContracts
             // 
             this.cmdViewContracts.Enabled = false;
-            this.cmdViewContracts.Location = new System.Drawing.Point(11, 381);
+            this.cmdViewContracts.Location = new System.Drawing.Point(15, 381);
             this.cmdViewContracts.Name = "cmdViewContracts";
             this.cmdViewContracts.Size = new System.Drawing.Size(88, 34);
             this.cmdViewContracts.TabIndex = 32;

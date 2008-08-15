@@ -142,6 +142,7 @@ namespace Quanlydongtien
                     this.quanLyKhachHangToolStripMenuItem.Enabled = true;
                     this.quanLyVonToolStripMenuItem.Enabled = true;
                     this.capthuHoiQuyenToolStripMenuItem.Enabled = true;
+                    this.quanLyNguoiDungToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
@@ -238,7 +239,7 @@ namespace Quanlydongtien
         private void quanLyNguoiDungToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Quanlynguoidung frmQLND = new Quanlynguoidung();
-            frmQLND.init(dbFileName);
+            frmQLND.init(dbFileName, username);
             frmQLND.ShowDialog();
         }
 

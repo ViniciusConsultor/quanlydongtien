@@ -113,7 +113,8 @@ namespace Quanlyloinhuan
                 worksheet.Activate();
                 worksheet.Name = sheetName;
                 worksheet.SaveAs(filename, missing, missing, missing, missing, missing, missing, missing, missing, missing);
-                //excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");
+                //excellApp.Workbooks[1].SaveCopyAs(@"D:\Project\SVN\Source\Quanlyloinhuan\Loinhuan.xls");                
+                excellApp.Quit();
             }
             catch (Exception ex)
             {
