@@ -655,9 +655,12 @@ namespace Quanlydongtien
             string makh, ngayhd, kyhan, laisuat, mahd;
             string sqlStr, strDate;
             int maloaiKH, length, i;
+            double loinhuan;
+            string strLoinhuan;
             object sourcefile;
             object destfile;
             DateTime ngaydaohan;
+            TimeSpan ngaychiulai;
             OleDbDataReader oleReader;
             ApplicationClass word = new ApplicationClass();
             Document doc = new Document();
@@ -667,7 +670,7 @@ namespace Quanlydongtien
             else if (cbxDonvitinh.Text == "Thang")
                 ngaydaohan = cbxDateContracts.Value.AddMonths(int.Parse(cbxKyhan.Text));
             else ngaydaohan = cbxDateContracts.Value.AddYears(int.Parse(cbxKyhan.Text));
-
+            ngaychiulai = ngaydaohan.Subtract(cbxDateContracts.Value);
             System.Diagnostics.Process Proc = new System.Diagnostics.Process();
             makh = cbxMaKH.Text;
             ngayhd = cbxDateContracts.Value.ToShortDateString();
@@ -692,12 +695,22 @@ namespace Quanlydongtien
             mahd = mahd.Replace(">", "");
             strDate = cbxDateContracts.Value.ToShortDateString().Replace("/", "_");
             i = 1;
-
+            loinhuan = Tinhloi(ngaychiulai, sotien, laisuat);
+            strLoinhuan = loinhuan.ToString();
             while (3*i < length)
             {
                 sotien = sotien.Insert(length - 3*i, ".");
                 i++;
             }
+
+            length = strLoinhuan.Length;
+            i = 1;
+            while (3 * i < length)
+            {
+                strLoinhuan = strLoinhuan.Insert(length - 3 * i, ".");
+                i++;
+            }
+
             sqlStr = "SELECT [TenKH], [DinhDanh], FORMAT([Ngaycap], 'dd/mm/yyyy') AS Ngaycap, [Noicap], [SoDT], [Diachi], [TaikhoanNH], [TenNH], [MaLoaiKH] FROM [KHACHHANG] WHERE [MaKH] = '" + makh + "'";
             maloaiKH = 0;
             try
@@ -793,7 +806,7 @@ namespace Quanlydongtien
                     word.Application.Quit(ref missing, ref missing, ref missing);
                 }
 
-                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Ngayhopdong#", cbxDonvitinh.Text))
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Ngayhopdong#", cbxDateContracts.Value.ToShortDateString()))
                 {
                     doc.Close(ref missing, ref missing, ref missing);
                     word.Application.Quit(ref missing, ref missing, ref missing);
@@ -823,6 +836,12 @@ namespace Quanlydongtien
                     word.Application.Quit(ref missing, ref missing, ref missing);
                 }
 
+                if (!Utilities.Replace_String_In_Word_File(ref doc, "#Loinhuan#", strLoinhuan))
+                {
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
+
                 doc.SaveAs(ref destfile, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
                 doc.Close(ref missing, ref missing, ref missing);
                 word.Application.Quit(ref missing, ref missing, ref missing);
@@ -842,6 +861,17 @@ namespace Quanlydongtien
         {
             txtTongtien.Text = txtTongtien.Text.Replace(".", "");
             txtTongtien.Text = txtTongtien.Text.Replace(",", "");
+        }
+
+        private double Tinhloi(TimeSpan ngaychiulai, string strTien, string strLaisuat)
+        {
+            decimal laisuat;
+            double loinhuan;
+            double sotien;
+            laisuat = decimal.Parse(strLaisuat);
+            sotien = double.Parse(strTien);
+            loinhuan = (double)(Math.Round((laisuat * (decimal)(sotien) * laisuat) / (100 * 360)));
+            return loinhuan;
         }
     
     }
