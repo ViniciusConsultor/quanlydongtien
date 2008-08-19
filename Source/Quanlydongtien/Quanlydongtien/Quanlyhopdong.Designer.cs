@@ -77,16 +77,16 @@ namespace Quanlydongtien
             // 
             this.cbxCusName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCusName.FormattingEnabled = true;
-            this.cbxCusName.Location = new System.Drawing.Point(118, 12);
+            this.cbxCusName.Location = new System.Drawing.Point(104, 11);
             this.cbxCusName.Name = "cbxCusName";
-            this.cbxCusName.Size = new System.Drawing.Size(121, 21);
+            this.cbxCusName.Size = new System.Drawing.Size(138, 21);
             this.cbxCusName.TabIndex = 10;
             this.cbxCusName.SelectedIndexChanged += new System.EventHandler(this.cbxCusName_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(6, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
             this.label1.TabIndex = 9;
@@ -106,7 +106,7 @@ namespace Quanlydongtien
             "100000000000",
             "1000000000000",
             "All"});
-            this.cbxMoney.Location = new System.Drawing.Point(382, 12);
+            this.cbxMoney.Location = new System.Drawing.Point(382, 11);
             this.cbxMoney.Name = "cbxMoney";
             this.cbxMoney.Size = new System.Drawing.Size(121, 21);
             this.cbxMoney.TabIndex = 12;
@@ -114,7 +114,7 @@ namespace Quanlydongtien
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 15);
+            this.label2.Location = new System.Drawing.Point(260, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 11;
@@ -122,9 +122,9 @@ namespace Quanlydongtien
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(524, 8);
+            this.button1.Location = new System.Drawing.Point(524, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 27);
+            this.button1.Size = new System.Drawing.Size(86, 46);
             this.button1.TabIndex = 13;
             this.button1.Text = "Tim kiem";
             this.button1.UseVisualStyleBackColor = true;

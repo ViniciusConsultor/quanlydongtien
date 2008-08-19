@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-  <dbFile>E:\Project\SVN\quanlydongtien\Database\Quanlydongtien.mdb</dbFile>
-  <workingdir>E:\Project\SVN\quanlydongtien\Source\Quanlydongtien\Quanlydongtien\bin</workingdir>
+  <dbFile>D:\Project\SVN\Database\Quanlydongtien.mdb</dbFile>
+  <workingdir>D:\Project\SVN\Source\Quanlydongtien\Quanlydongtien\bin</workingdir>
 </config>

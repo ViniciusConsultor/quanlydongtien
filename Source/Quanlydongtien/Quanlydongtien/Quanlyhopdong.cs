@@ -147,6 +147,7 @@ namespace Quanlydongtien
             string mahd;
             DataGridViewRow dtGridRow;
             NhapthongtinHD frmEditContracts = new NhapthongtinHD();
+            Boolean datra;
             if (dtGridContracts.RowCount == 0)
                 return;
             if (dtGridContracts.SelectedRows.Count == 0)
@@ -154,7 +155,14 @@ namespace Quanlydongtien
                 MessageBox.Show("Ban phai chon hang can sua...");
                 return;
             }
+
             dtGridRow = dtGridContracts.SelectedRows[0];
+            datra = (Boolean)dtGridRow.Cells["Hoanthanh"].Value;
+            if (datra == true)
+            {
+                MessageBox.Show("Hop dong da hoan thanh ban khong the chinh sua duoc!");
+                return;
+            }
             mahd = dtGridRow.Cells["MaHD"].Value.ToString();
             frmEditContracts.init(dbname, mahd, workingdir);
             frmEditContracts.ShowDialog();
@@ -198,9 +206,11 @@ namespace Quanlydongtien
         private void dtGridContracts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string mahd;
+            Boolean datra;
             Quanlydongtien frmQLDT = new Quanlydongtien();
             mahd = dtGridContracts.Rows[e.RowIndex].Cells["MaHD"].Value.ToString();
             frmQLDT.init(mahd, dbname);
+            Refresh_Data();
         }
 
         private void chk_Denhan()
@@ -209,7 +219,7 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             ArrayList ListMaHD = new ArrayList();
             int i, index;
-            string sqlStr = "SELECT DISTINCT [MaHD] FROM [TIENLAI] WHERE FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + today + "'";
+            string sqlStr = "SELECT DISTINCT [MaHD] FROM [TIENLAI] WHERE FORMAT([Ngaytra], 'dd/mm/yyyy') = '" + today + "' AND [Datra] = No";
             try
             {
                 oleReader = ContractDB.genDataReader(sqlStr);

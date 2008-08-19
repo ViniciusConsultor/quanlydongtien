@@ -58,6 +58,12 @@ namespace Quanlydongtien
             string sqlStr;
             Int64 vonmoi;
             Int64 tienmat;
+            if (Utilities.isInt64(txtTienvon.Text) == false)
+            {
+                MessageBox.Show("Tien von ban nhap chua dung");
+                txtTienvon.Focus();
+                return;
+            }
             vonmoi = Int64.Parse(txtTienvon.Text);
             if (vonmoi != voncu)
             {
@@ -78,6 +84,11 @@ namespace Quanlydongtien
         {
             CashDB.close();
             this.Close();
+        }
+
+        private void txtTienvon_Leave(object sender, EventArgs e)
+        {
+            txtTienvon.Text = txtTienvon.Text.Replace(".", "");
         }
 
 
