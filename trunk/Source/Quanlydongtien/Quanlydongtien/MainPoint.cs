@@ -274,6 +274,7 @@ namespace Quanlydongtien
         {
             Process Proc = new Process();
             Proc.StartInfo.FileName = @workingDir + "\\Quanlyloinhuan\\Quanlyloinhuan.exe";
+            Proc.StartInfo.Arguments = "Yes";
             Proc.Start();
         }
 

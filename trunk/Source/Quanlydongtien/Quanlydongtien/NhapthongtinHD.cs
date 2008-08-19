@@ -868,9 +868,10 @@ namespace Quanlydongtien
             decimal laisuat;
             double loinhuan;
             double sotien;
+            int ngay = ngaychiulai.Days;
             laisuat = decimal.Parse(strLaisuat);
             sotien = double.Parse(strTien);
-            loinhuan = (double)(Math.Round((laisuat * (decimal)(sotien) * laisuat) / (100 * 360)));
+            loinhuan = (double)(Math.Round(((decimal)(sotien) * laisuat * ngay) / (100 * 360)));
             return loinhuan;
         }
     

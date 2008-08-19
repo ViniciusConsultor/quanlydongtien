@@ -282,7 +282,7 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             string month;
             TimeSpan diffDays;
-            DateTime ngayvay, ngaytra, nextMonth;
+            DateTime ngayvay, ngaytra, nextMonth, crrMonth;
             string theFirstOfMonth = "01";
             string accMonth; //using in access
             string maLN;
@@ -291,6 +291,7 @@ namespace Quanlydongtien
             else month = thang.ToString();
             theFirstOfMonth = theFirstOfMonth + "/" + month + "/" + nam.ToString();
             accMonth = month + "/" + "01" + "/" + nam.ToString();
+            crrMonth = DateTime.Parse(theFirstOfMonth);
             nextMonth = DateTime.Parse(theFirstOfMonth).AddMonths(1);
             sqlStr = "SELECT [Sotienlai], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [Tienchiulai], [Laisuat] FROM [TIENLAI]WHERE (([Ngaytra] > #" + accMonth + "#)) AND [Real] = Yes";
             oleReader = this.genDataReader(sqlStr);
@@ -312,7 +313,7 @@ namespace Quanlydongtien
                     ngayvay = ngaytra.AddDays(0 - Math.Abs(ngaychiulai));
                     if (ngayvay > nextMonth.AddDays(-1))
                         continue;
-                    diffDays = Utilities.minDate(nextMonth.AddDays(-1), ngaytra) - Utilities.maxDate(ngayvay, nextMonth.AddMonths(-1));
+                    diffDays = Utilities.minDate(nextMonth.AddDays(-1), ngaytra) - Utilities.maxDate(ngayvay, crrMonth.AddDays(-1));
                     laithuc = (tienchiulai * laisuat * diffDays.Days) / (360 * 100 * 100);
                     if (tienlai >= 0)
                         Loinhuan = Loinhuan + laithuc;
@@ -461,7 +462,7 @@ namespace Quanlydongtien
             OleDbDataReader oleReader;
             string month;
             TimeSpan diffDays;
-            DateTime ngayvay, ngaytra, nextMonth;
+            DateTime ngayvay, ngaytra, nextMonth, crrMonth;
             string theFirstOfMonth = "01";
             string accMonth; //using in access
             string maLN;
@@ -470,6 +471,7 @@ namespace Quanlydongtien
             else month = thang.ToString();
             theFirstOfMonth = theFirstOfMonth + "/" + month + "/" + nam.ToString();
             accMonth = month + "/" + "01" + "/" + nam.ToString();
+            crrMonth = DateTime.Parse(theFirstOfMonth);
             nextMonth = DateTime.Parse(theFirstOfMonth).AddMonths(1);
             sqlStr = "SELECT [Sotienlai], FORMAT([NgayTra], 'dd/mm/yyyy') AS Ngaytratien, [Tienchiulai], [Laisuat] FROM [TIENLAI]WHERE (([Ngaytra] > #" + accMonth + "#))";
             oleReader = this.genDataReader(sqlStr);
@@ -489,7 +491,7 @@ namespace Quanlydongtien
                 ngayvay = ngaytra.AddDays(0 - Math.Abs(ngaychiulai));
                 if (ngayvay > nextMonth.AddDays(-1))
                     continue;
-                diffDays = Utilities.minDate(nextMonth.AddDays(-1), ngaytra) - Utilities.maxDate(ngayvay, nextMonth.AddMonths(-1));
+                diffDays = Utilities.minDate(nextMonth.AddDays(-1), ngaytra) - Utilities.maxDate(ngayvay, crrMonth.AddDays(-1));
                 laithuc = (tienchiulai * laisuat * diffDays.Days) / (360 * 100 * 100);
                 if (tienlai >= 0)
                     Loinhuan = Loinhuan + laithuc;

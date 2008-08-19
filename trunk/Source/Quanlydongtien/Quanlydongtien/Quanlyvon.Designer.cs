@@ -71,6 +71,7 @@ namespace Quanlydongtien
             this.txtTienvon.Name = "txtTienvon";
             this.txtTienvon.Size = new System.Drawing.Size(123, 20);
             this.txtTienvon.TabIndex = 3;
+            this.txtTienvon.Leave += new System.EventHandler(this.txtTienvon_Leave);
             // 
             // txtTienmat
             // 
