@@ -16,7 +16,7 @@ namespace Quanlyloinhuan
             if (args.Length == 0)
             {
                 Application.Exit();
-                //return;
+                return;
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
