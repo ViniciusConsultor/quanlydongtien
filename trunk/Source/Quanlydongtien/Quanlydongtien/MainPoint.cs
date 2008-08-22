@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Data.OleDb;
 using System.Diagnostics;
+using System.Collections;
 
 namespace Quanlydongtien
 {    
@@ -17,6 +18,9 @@ namespace Quanlydongtien
         db userdb;
         string username;
         string workingDir;
+        ArrayList Content_ID_List;
+        ArrayList Content_Text_List;
+        int languageID;
         public MainPoint()
         {
             InitializeComponent();
@@ -114,13 +118,48 @@ namespace Quanlydongtien
             XmlDocument xmldoc = new XmlDocument();
             XmlElement root;
             XmlNode xNode;
-            xmldoc.Load("..\\config\\conf.xml");
-            root = xmldoc.DocumentElement;
-            xNode = root.SelectSingleNode("/config/dbFile").FirstChild;
-            dbFileName = xNode.OuterXml.Trim();
-
-            xNode = root.SelectSingleNode("/config/workingdir").FirstChild;
-            workingDir = xNode.OuterXml.Trim();
+            string contentID;
+            string contentText;
+            try
+            {
+                xmldoc.Load("..\\config\\conf.xml");
+                root = xmldoc.DocumentElement;
+                xNode = root.SelectSingleNode("/config/dbFile").FirstChild;
+                dbFileName = xNode.OuterXml.Trim();
+                xNode = root.SelectSingleNode("/config/workingdir").FirstChild;
+                workingDir = xNode.OuterXml.Trim();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            //Doc file config noi dung cac menu
+            try
+            {
+                int order_Node;
+                xmldoc.Load("..\\config\\config_content.xml"); //Thay bang ten file anh muon dat
+                root = xmldoc.DocumentElement;
+                contentText = "";
+                Content_ID_List = new ArrayList();
+                Content_Text_List = new ArrayList();
+                foreach (XmlNode Node in root.ChildNodes)
+                {
+                    contentText = "";
+                    contentID = Node.ChildNodes[0].FirstChild.Value.ToString();
+                    for (order_Node = 1; order_Node < Node.ChildNodes.Count; order_Node++)
+                    {
+                        if (contentText == "")
+                            contentText = Node.ChildNodes[order_Node].FirstChild.Value.ToString();
+                        else contentText = contentText + ";" + Node.ChildNodes[order_Node].FirstChild.Value.ToString();
+                    }
+                    Content_ID_List.Add(contentID);
+                    Content_Text_List.Add(contentText);                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Application.Exit();
+            }
         }
         private void check_role(string username)
         {
@@ -284,6 +323,103 @@ namespace Quanlydongtien
             Proc.StartInfo.FileName = @"wordpad.exe";
             Proc.StartInfo.Arguments = "..\\config\\conf.xml";
             Proc.Start();
+        }
+
+        private string Content_Retrieve(string contentID, int languageID)
+        {            
+            int index;
+            index = Content_ID_List.IndexOf(contentID);
+            string[] content = Content_Text_List[index].ToString().Split(';');
+            return content[languageID-1];
+        }
+
+        private void ngonNguToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tiengVietToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            languageID = 1;
+            string contentID;
+            //foreach (Control ctr in this.Controls)
+            //{
+            //    //contentID = ctr.Tag.ToString();
+            //    //ctr.Text = Content_Retrieve(contentID, languageID);
+            //    ctr.Text = "Test";
+            //}
+
+
+            foreach (ToolStripMenuItem TSMenu in MainMenu.Items)
+            {
+                Explorer_Sub_Menu(TSMenu);
+               // TSMenu.ToString();
+                //TSMenu.Text = "Test";
+            }
+
+        }
+
+        private void Explorer_Sub_Menu(ToolStripMenuItem TSMenu)
+        {
+            string contentID;
+            if (TSMenu.Tag == null)
+                return;
+            if (TSMenu.DropDownItems.Count == 0)
+            {
+                contentID = TSMenu.Tag.ToString();
+                TSMenu.Text = Content_Retrieve(contentID, languageID);
+                //TSMenu.Text = "Test";
+                return;                
+            }
+            else
+            {
+                foreach (ToolStripMenuItem TS_Sub_Item in TSMenu.DropDownItems)
+                    Explorer_Sub_Menu(TS_Sub_Item);
+                contentID = TSMenu.Tag.ToString();
+                TSMenu.Text = Content_Retrieve(contentID, languageID);
+                //TSMenu.Text = "Test";
+            }
+        }
+
+        private void tiengNhatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            languageID = 3;
+            string contentID;
+            //foreach (Control ctr in this.Controls)
+            //{
+            //    //contentID = ctr.Tag.ToString();
+            //    //ctr.Text = Content_Retrieve(contentID, languageID);
+            //    ctr.Text = "Test";
+            //}
+
+
+            foreach (ToolStripMenuItem TSMenu in MainMenu.Items)
+            {
+                Explorer_Sub_Menu(TSMenu);
+                // TSMenu.ToString();
+                //TSMenu.Text = "Test";
+            }
+        }
+
+        private void tiengAnhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            languageID = 2;
+            string contentID;
+            //foreach (Control ctr in this.Controls)
+            //{
+            //    //contentID = ctr.Tag.ToString();
+            //    //ctr.Text = Content_Retrieve(contentID, languageID);
+            //    ctr.Text = "Test";
+            //}
+
+
+            foreach (ToolStripMenuItem TSMenu in MainMenu.Items)
+            {
+                Explorer_Sub_Menu(TSMenu);
+                // TSMenu.ToString();
+                //TSMenu.Text = "Test";
+            }
         }
     }
 }
